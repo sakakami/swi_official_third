@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".info.view.InfoFragment">
+
+    <View
+        android:id="@+id/viewBarInInfo"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorBlue"/>
+    <TextView
+        android:id="@+id/textBackInInfo"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:textColor="@color/colorWord"
+        android:text="Back"/>
+    <TextView
+        android:id="@+id/textTitleInfo"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_toEndOf="@id/textBackInInfo"
+        android:layout_marginEnd="50dp"
+        android:gravity="center"
+        android:textColor="@color/colorWord"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerInInfo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/viewBarInInfo"/>
+</RelativeLayout>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/textTitleAInItemSelected"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:paddingEnd="30dp"
+        android:paddingStart="8dp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/colorWord"
+        android:background="@color/colorGrayForTag"/>
+    <ImageView
+        android:id="@+id/imageCleanAInItemSelected"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignEnd="@+id/textTitleAInItemSelected"
+        android:layout_alignTop="@+id/textTitleAInItemSelected"
+        android:contentDescription="@string/content_description"
+        app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+    <TextView
+        android:id="@+id/textTitleBInItemSelected"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:paddingEnd="30dp"
+        android:paddingStart="8dp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/colorWord"
+        android:background="@color/colorGrayForTag"
+        android:layout_toEndOf="@+id/textTitleAInItemSelected"/>
+    <ImageView
+        android:id="@+id/imageCleanBInItemSelected"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignEnd="@+id/textTitleBInItemSelected"
+        android:layout_alignTop="@+id/textTitleBInItemSelected"
+        android:contentDescription="@string/content_description"
+        app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+</RelativeLayout>

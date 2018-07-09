@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/layoutMediaInfo">
+
+    <ImageView
+        android:id="@+id/imagePhotoInMediaInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/content_description"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/none_4" />
+    <View
+        android:id="@+id/viewInMediaInfo"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/imagePhotoInMediaInfo"
+        android:background="@color/colorBackground"/>
+    <TextView
+        android:id="@+id/textWatchMoreInMediaInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/viewInMediaInfo"
+        android:layout_alignEnd="@+id/viewInMediaInfo"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/background_gray_surround"
+        android:textColor="@color/colorWordGray"
+        android:padding="4dp"
+        android:text="SHOW MORE"/>
+    <TextView
+        android:id="@+id/textNameInMediaInfo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignStart="@+id/viewInMediaInfo"
+        android:layout_alignTop="@+id/viewInMediaInfo"
+        android:layout_alignBottom="@+id/viewInMediaInfo"
+        android:layout_toStartOf="@+id/textWatchMoreInMediaInfo"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:text="大叔又怎樣？我是真心喜歡春田田君啊！"
+        android:textColor="@color/colorWordBlack"/>
+
+</RelativeLayout>

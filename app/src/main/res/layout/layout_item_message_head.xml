@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/layoutMessageHead">
+
+    <ImageView
+        android:id="@+id/imageHeadInMessageHead"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/content_description"
+        app:srcCompat="@drawable/com_facebook_profile_picture_blank_square" />
+    <TextView
+        android:id="@+id/textIDInMessageHead"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_toEndOf="@+id/imageHeadInMessageHead"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:text="蔡旻岳"/>
+    <TextView
+        android:id="@+id/textDateInMessageHead"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_below="@+id/textIDInMessageHead"
+        android:layout_alignStart="@+id/textIDInMessageHead"
+        android:gravity="center_vertical"
+        android:text="12月14日 上午3:13"/>
+    <TextView
+        android:id="@+id/textMessageInMessageHead"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/imageHeadInMessageHead"
+        android:maxLines="4"
+        android:text="@string/message_head"/>
+    <TextView
+        android:id="@+id/textShowMoreInMessageHead"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_below="@+id/textMessageInMessageHead"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="24dp"
+        android:gravity="center"
+        android:text="SHOW MORE"/>
+
+    <ImageView
+        android:id="@+id/imagePhotoInMessageHead"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textShowMoreInMessageHead"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/content_description"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/none_4" />
+    <ImageView
+        android:id="@+id/imageMoreInMessageHead"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/imagePhotoInMessageHead"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/content_description"
+        app:srcCompat="@android:drawable/ic_menu_gallery" />
+</RelativeLayout>
