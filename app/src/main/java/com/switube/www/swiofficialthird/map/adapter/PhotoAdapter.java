@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +53,7 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
                 .load(Uri.fromFile(imageFile))
                 .into(holder.mImageView);
         if (mSelectedPhoto.contains(mPhotoItem.get(position).getData())) {
-            holder.mTextView.setBackground(mContext.getDrawable(R.drawable.background_red_surround));
+            holder.mTextView.setBackground(mContext.getDrawable(R.drawable.bg_red_surround));
         } else {
             holder.mTextView.setBackground(null);
         }

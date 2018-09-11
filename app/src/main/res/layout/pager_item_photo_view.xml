@@ -32,7 +32,7 @@
         android:layout_alignTop="@+id/imageHeadInItemPhotoView"
         android:layout_toEndOf="@+id/imageHeadInItemPhotoView"
         android:layout_marginStart="16dp"
-        android:textColor="@color/colorWord"
+        android:textColor="@color/colorWhiteForWord"
         android:gravity="center"
         android:textStyle="bold"
         android:text="柯宗慶"/>
@@ -43,7 +43,7 @@
         android:layout_below="@+id/textNameInItemPhotoView"
         android:layout_toEndOf="@+id/imageHeadInItemPhotoView"
         android:layout_marginStart="16dp"
-        android:textColor="@color/colorWord"
+        android:textColor="@color/colorWhiteForWord"
         android:gravity="center_vertical"
         android:text="Images may be subject to copyright."/>
 </RelativeLayout>

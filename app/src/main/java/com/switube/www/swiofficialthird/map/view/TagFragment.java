@@ -4,7 +4,6 @@ package com.switube.www.swiofficialthird.map.view;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -13,27 +12,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.android.flexbox.FlexDirection;
-import com.google.android.flexbox.FlexboxLayout;
 import com.google.android.flexbox.FlexboxLayoutManager;
 import com.google.android.flexbox.JustifyContent;
-import com.jakewharton.rxbinding2.support.v7.widget.RxRecyclerView;
-import com.jakewharton.rxbinding2.support.v7.widget.RxRecyclerViewAdapter;
 import com.jakewharton.rxbinding2.support.v7.widget.RxSearchView;
 import com.jakewharton.rxbinding2.view.RxView;
-import com.jakewharton.rxbinding2.widget.RxAdapter;
-import com.jakewharton.rxbinding2.widget.RxAdapterView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.switube.www.swiofficialthird.R;
 import com.switube.www.swiofficialthird.map.InterfaceTag;
 import com.switube.www.swiofficialthird.map.adapter.TagAdapter;
 import com.switube.www.swiofficialthird.map.adapter.TagSelectedAdapter;
 import com.switube.www.swiofficialthird.map.adapter.TagTypeAdapter;
-import com.switube.www.swiofficialthird.map.presenter.TagFragmentPresenter;
-import com.switube.www.swiofficialthird.util.SharePreferencesUtil;
+import com.switube.www.swiofficialthird.map.presenter.TagPresenter;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -50,9 +41,9 @@ import io.reactivex.disposables.Disposable;
  */
 public class TagFragment extends Fragment implements InterfaceTag {
 
-    private TagFragmentPresenter mTagFragmentPresenter;
+    private TagPresenter mTagFragmentPresenter;
     public TagFragment() {
-        mTagFragmentPresenter = new TagFragmentPresenter();
+        mTagFragmentPresenter = new TagPresenter();
     }
 
     private TagSelectedAdapter mTagSelectedAdapter;

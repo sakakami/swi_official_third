@@ -2,4 +2,51 @@
 <resources>
     <string name="network_error_message">請檢查您的網路連線狀態，再嘗試重新開啟App</string>
     <string name="network_error_ok">確定</string>
+
+    <string name="title_map">準備出發</string>
+
+    <string name="ebike_rent_directions">導航</string>
+    <string name="ebike_rent_rent">租車</string>
+    <string name="ebike_rent_count">尚有 3 輛可租</string>
+    <string name="ebike_return_return">還車</string>
+    <string name="ebike_retrun_count">尚可停 3 輛</string>
+    <string name="ebike_power">電力</string>
+    <string name="ebike_distance">支援里數</string>
+    <string name="ebike_cost">每1台幣</string>
+    <string name="ebike_select_title">選擇車輛</string>
+    <string name="ebike_cost_1">2.4分鐘</string>
+    <string name="ebike_cost_2">2.7分鐘</string>
+    <string name="ebike_cost_3">3分鐘</string>
+    <string name="ebike_pay_title">選擇付款方式</string>
+    <string name="ebike_pay_1">信用卡</string>
+    <string name="ebike_pay_3">其他付款方式</string>
+    <string name="ebike_ok">確認</string>
+    <string name="ebike_cancel">取消</string>
+    <string name="ebike_credit_number">信用卡卡號</string>
+    <string name="ebike_credit_name">持卡人姓名</string>
+    <string name="ebike_credit_date">到期日</string>
+    <string name="ebike_credit_code">授權碼</string>
+    <string name="ebike_buletooth_title">藍牙權限要求</string>
+    <string name="ebike_buletooth_message">應用程式想要開啟此裝置的藍芽連線。</string>
+    <string name="ebike_lock">上鎖</string>
+    <string name="ebike_unlock">解鎖</string>
+    <string name="ebike_lock_message">臨時上鎖期間照常計費</string>
+    <string name="ebike_unlock_message">您要結束臨時上鎖嗎？\n確認請點選OK</string>
+    <string name="ebike_return_title">還車</string>
+    <string name="ebike_return_message">還車後即結束此次旅程\n確認請點選按鈕</string>
+    <string name="ebike_calculate_title_down">騎行時間：</string>
+    <string name="ebike_calculate_title_up">預計消費：</string>
+    <string name="ebike_calculate_title_center">元</string>
+    <string name="ebike_confirm">確認</string>
+    <string name="ebike_finish_title">恭喜您完成了旅程！</string>
+    <string name="ebike_memory_title">下一步</string>
+    <string name="ebike_detail_title">消費明細</string>
+    <string name="ebike_detail_message">標題：</string>
+    <string name="ebike_detail_cost">消費金額</string>
+    <string name="ebike_detail_duration">使用時間</string>
+    <string name="ebike_detail_bike">單車</string>
+    <string name="ebike_detail_from">租車點</string>
+    <string name="ebike_detail_to">還車區</string>
+
+    <string name="map_search_hint">搜尋地標名稱</string>
 </resources>

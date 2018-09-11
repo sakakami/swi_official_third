@@ -18,7 +18,7 @@ import com.jakewharton.rxbinding2.view.RxView;
 import com.switube.www.swiofficialthird.R;
 import com.switube.www.swiofficialthird.home.view.IMainActivity;
 import com.switube.www.swiofficialthird.map.adapter.PhotoAdapter;
-import com.switube.www.swiofficialthird.map.presenter.PhotoFragmentPresenter;
+import com.switube.www.swiofficialthird.map.presenter.PhotoPresenter;
 import com.switube.www.swiofficialthird.util.ItemDecorationUtil;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
@@ -38,9 +38,9 @@ import io.reactivex.disposables.Disposable;
 public class PhotoFragment extends Fragment implements IPhotoFragment {
     public static boolean isTakePhoto = false;
     public static String imagePath;
-    private PhotoFragmentPresenter mPhotoFragmentPresenter;
+    private PhotoPresenter mPhotoFragmentPresenter;
     public PhotoFragment() {
-        mPhotoFragmentPresenter = new PhotoFragmentPresenter();
+        mPhotoFragmentPresenter = new PhotoPresenter();
     }
 
     @BindViews({R.id.textBackInPhoto, R.id.textConfirmInPhoto})

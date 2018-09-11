@@ -12,5 +12,5 @@
         android:textSize="20sp"
         android:layout_margin="4dp"
         android:textColor="@color/colorGrayForTag"
-        android:background="@drawable/background_gray_surround"/>
+        android:background="@drawable/bg_gray_surround"/>
 </LinearLayout>

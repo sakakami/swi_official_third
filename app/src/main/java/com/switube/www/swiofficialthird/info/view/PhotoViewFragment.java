@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.switube.www.swiofficialthird.R;
 import com.switube.www.swiofficialthird.info.adapter.PhotoViewAdapter;
-import com.switube.www.swiofficialthird.info.presenter.PhotoViewFragmentPresenter;
+import com.switube.www.swiofficialthird.info.presenter.PhotoViewPresenter;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.util.ArrayList;
@@ -33,9 +33,9 @@ import io.reactivex.disposables.Disposable;
  */
 public class PhotoViewFragment extends Fragment implements IPhotoViewFragment {
     public static boolean isShowCamera = true;
-    private PhotoViewFragmentPresenter mPhotoViewFragmentPresenter;
+    private PhotoViewPresenter mPhotoViewPresenter;
     public PhotoViewFragment() {
-        mPhotoViewFragmentPresenter = new PhotoViewFragmentPresenter(this);
+        mPhotoViewPresenter = new PhotoViewPresenter(this);
     }
 
     @BindView(R.id.textBackInPhotoView)
@@ -85,7 +85,7 @@ public class PhotoViewFragment extends Fragment implements IPhotoViewFragment {
                     @Override
                     public void onNext(Boolean aBoolean) {
                         if (aBoolean) {
-                            mPhotoViewFragmentPresenter.handleOpenCamera(getActivity());
+                            mPhotoViewPresenter.handleOpenCamera(getActivity());
                         }
                     }
 

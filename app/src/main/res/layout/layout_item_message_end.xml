@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:id="@+id/layoutMessageEnd">
     <ImageView
-        android:id="@+id/imagePhotoOneInItemMessageEnd"
+        android:id="@+id/imagePhotoOneInMessageEnd"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
@@ -15,37 +15,37 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_toEndOf="@+id/imagePhotoOneInItemMessageEnd"
-        android:layout_alignEnd="@+id/textNameOneInItemMessageEnd"
+        android:layout_toEndOf="@+id/imagePhotoOneInMessageEnd"
+        android:layout_alignEnd="@+id/textNameOneInMessageEnd"
         android:layout_marginStart="4dp"
-        android:layout_alignTop="@id/imagePhotoOneInItemMessageEnd"
-        android:background="@drawable/background_white_message_full"/>
+        android:layout_alignTop="@id/imagePhotoOneInMessageEnd"
+        android:background="@drawable/bg_white_message_full"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_toEndOf="@+id/imagePhotoOneInItemMessageEnd"
-        android:layout_alignEnd="@+id/textMessageOneInItemMessageEnd"
+        android:layout_toEndOf="@+id/imagePhotoOneInMessageEnd"
+        android:layout_alignEnd="@+id/textMessageOneInMessageEnd"
         android:layout_marginStart="4dp"
-        android:layout_alignTop="@id/imagePhotoOneInItemMessageEnd"
-        android:background="@drawable/background_white_message_full"/>
+        android:layout_alignTop="@id/imagePhotoOneInMessageEnd"
+        android:background="@drawable/bg_white_message_full"/>
     <TextView
-        android:id="@+id/textNameOneInItemMessageEnd"
+        android:id="@+id/textNameOneInMessageEnd"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
-        android:layout_toEndOf="@+id/imagePhotoOneInItemMessageEnd"
+        android:layout_toEndOf="@+id/imagePhotoOneInMessageEnd"
         android:textStyle="bold"
         android:gravity="center_vertical"
         android:paddingStart="1dp"
         android:paddingEnd="16dp"
         android:layout_marginStart="16dp"
-        android:layout_alignTop="@+id/imagePhotoOneInItemMessageEnd"
+        android:layout_alignTop="@+id/imagePhotoOneInMessageEnd"
         android:text="Yuki Komo"/>
     <TextView
-        android:id="@+id/textMessageOneInItemMessageEnd"
+        android:id="@+id/textMessageOneInMessageEnd"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
-        android:layout_below="@+id/textNameOneInItemMessageEnd"
-        android:layout_alignStart="@+id/textNameOneInItemMessageEnd"
+        android:layout_below="@+id/textNameOneInMessageEnd"
+        android:layout_alignStart="@+id/textNameOneInMessageEnd"
         android:maxLines="1"
         android:ellipsize="end"
         android:gravity="center_vertical"
@@ -53,44 +53,44 @@
         android:paddingEnd="8dp"
         android:text="Is the right guy your dad??"/>
     <TextView
-        android:id="@+id/textMoreOneInItemMessageEnd"
+        android:id="@+id/textMoreOneInMessageEnd"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:gravity="center_vertical"
-        android:layout_below="@+id/textMessageOneInItemMessageEnd"
-        android:layout_alignStart="@+id/textNameOneInItemMessageEnd"
+        android:layout_below="@+id/textMessageOneInMessageEnd"
+        android:layout_alignStart="@+id/textNameOneInMessageEnd"
         android:text="View 6 previous replies"/>
 
     <ImageView
-        android:id="@+id/imagePhotoTwoInItemMessageEnd"
+        android:id="@+id/imagePhotoTwoInMessageEnd"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_below="@+id/textMoreOneInItemMessageEnd"
+        android:layout_below="@+id/textMoreOneInMessageEnd"
         android:layout_marginStart="16dp"
         android:contentDescription="@string/content_description"
         app:srcCompat="@drawable/a0005" />
     <View
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_toEndOf="@+id/imagePhotoTwoInItemMessageEnd"
-        android:layout_alignEnd="@+id/textNameTwoInItemMessageEnd"
+        android:layout_toEndOf="@+id/imagePhotoTwoInMessageEnd"
+        android:layout_alignEnd="@+id/textNameTwoInMessageEnd"
         android:layout_marginStart="4dp"
-        android:layout_alignTop="@+id/imagePhotoTwoInItemMessageEnd"
-        android:background="@drawable/background_white_message_full"/>
+        android:layout_alignTop="@+id/imagePhotoTwoInMessageEnd"
+        android:background="@drawable/bg_white_message_full"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_toEndOf="@+id/imagePhotoTwoInItemMessageEnd"
-        android:layout_alignEnd="@+id/textMessageTwoInItemMessageEnd"
+        android:layout_toEndOf="@+id/imagePhotoTwoInMessageEnd"
+        android:layout_alignEnd="@+id/textMessageTwoInMessageEnd"
         android:layout_marginStart="4dp"
-        android:layout_alignTop="@+id/imagePhotoTwoInItemMessageEnd"
-        android:background="@drawable/background_white_message_full"/>
+        android:layout_alignTop="@+id/imagePhotoTwoInMessageEnd"
+        android:background="@drawable/bg_white_message_full"/>
     <TextView
-        android:id="@+id/textNameTwoInItemMessageEnd"
+        android:id="@+id/textNameTwoInMessageEnd"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
-        android:layout_toEndOf="@+id/imagePhotoTwoInItemMessageEnd"
-        android:layout_alignTop="@+id/imagePhotoTwoInItemMessageEnd"
+        android:layout_toEndOf="@+id/imagePhotoTwoInMessageEnd"
+        android:layout_alignTop="@+id/imagePhotoTwoInMessageEnd"
         android:textStyle="bold"
         android:paddingStart="1dp"
         android:paddingEnd="16dp"
@@ -98,11 +98,11 @@
         android:layout_marginStart="16dp"
         android:text="Yuki Komo"/>
     <TextView
-        android:id="@+id/textMessageTwoInItemMessageEnd"
+        android:id="@+id/textMessageTwoInMessageEnd"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
-        android:layout_below="@+id/textNameTwoInItemMessageEnd"
-        android:layout_alignStart="@+id/textNameTwoInItemMessageEnd"
+        android:layout_below="@+id/textNameTwoInMessageEnd"
+        android:layout_alignStart="@+id/textNameTwoInMessageEnd"
         android:maxLines="1"
         android:ellipsize="end"
         android:paddingStart="1dp"
@@ -110,43 +110,43 @@
         android:gravity="center_vertical"
         android:text="Is the right guy your dad??"/>
     <TextView
-        android:id="@+id/textMoreTwoInItemMessageEnd"
+        android:id="@+id/textMoreTwoInMessageEnd"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:gravity="center_vertical"
-        android:layout_below="@+id/textMessageTwoInItemMessageEnd"
-        android:layout_alignStart="@+id/textNameTwoInItemMessageEnd"
+        android:layout_below="@+id/textMessageTwoInMessageEnd"
+        android:layout_alignStart="@+id/textNameTwoInMessageEnd"
         android:text="View 6 previous replies"/>
     <ImageView
-        android:id="@+id/imagePhotoThreeInItemMessageEnd"
+        android:id="@+id/imagePhotoThreeInMessageEnd"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_below="@+id/textMoreTwoInItemMessageEnd"
+        android:layout_below="@+id/textMoreTwoInMessageEnd"
         android:layout_marginStart="16dp"
         android:contentDescription="@string/content_description"
         app:srcCompat="@drawable/a0004" />
     <View
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_toEndOf="@+id/imagePhotoThreeInItemMessageEnd"
-        android:layout_alignEnd="@+id/textNameThreeInItemMessageEnd"
+        android:layout_toEndOf="@+id/imagePhotoThreeInMessageEnd"
+        android:layout_alignEnd="@+id/textNameThreeInMessageEnd"
         android:layout_marginStart="4dp"
-        android:layout_alignTop="@+id/imagePhotoThreeInItemMessageEnd"
-        android:background="@drawable/background_white_message_full"/>
+        android:layout_alignTop="@+id/imagePhotoThreeInMessageEnd"
+        android:background="@drawable/bg_white_message_full"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_toEndOf="@+id/imagePhotoThreeInItemMessageEnd"
-        android:layout_alignEnd="@+id/textMessageThreeInItemMessageEnd"
+        android:layout_toEndOf="@+id/imagePhotoThreeInMessageEnd"
+        android:layout_alignEnd="@+id/textMessageThreeInMessageEnd"
         android:layout_marginStart="4dp"
-        android:layout_alignTop="@+id/imagePhotoThreeInItemMessageEnd"
-        android:background="@drawable/background_white_message_full"/>
+        android:layout_alignTop="@+id/imagePhotoThreeInMessageEnd"
+        android:background="@drawable/bg_white_message_full"/>
     <TextView
-        android:id="@+id/textNameThreeInItemMessageEnd"
+        android:id="@+id/textNameThreeInMessageEnd"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
-        android:layout_toEndOf="@+id/imagePhotoThreeInItemMessageEnd"
-        android:layout_alignTop="@+id/imagePhotoThreeInItemMessageEnd"
+        android:layout_toEndOf="@+id/imagePhotoThreeInMessageEnd"
+        android:layout_alignTop="@+id/imagePhotoThreeInMessageEnd"
         android:textStyle="bold"
         android:paddingStart="1dp"
         android:paddingEnd="16dp"
@@ -154,11 +154,11 @@
         android:layout_marginStart="16dp"
         android:text="Yuki Komo"/>
     <TextView
-        android:id="@+id/textMessageThreeInItemMessageEnd"
+        android:id="@+id/textMessageThreeInMessageEnd"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
-        android:layout_below="@+id/textNameThreeInItemMessageEnd"
-        android:layout_alignStart="@+id/textNameThreeInItemMessageEnd"
+        android:layout_below="@+id/textNameThreeInMessageEnd"
+        android:layout_alignStart="@+id/textNameThreeInMessageEnd"
         android:maxLines="1"
         android:ellipsize="end"
         android:paddingStart="1dp"
@@ -166,51 +166,51 @@
         android:gravity="center_vertical"
         android:text="Is the right guy your dad??"/>
     <TextView
-        android:id="@+id/textMoreThreeInItemMessageEnd"
+        android:id="@+id/textMoreThreeInMessageEnd"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:gravity="center_vertical"
-        android:layout_below="@+id/textMessageThreeInItemMessageEnd"
-        android:layout_alignStart="@+id/textNameThreeInItemMessageEnd"
+        android:layout_below="@+id/textMessageThreeInMessageEnd"
+        android:layout_alignStart="@+id/textNameThreeInMessageEnd"
         android:text="View 6 previous replies"/>
     <ImageView
-        android:id="@+id/imagePhotoFourInItemMessageEnd"
+        android:id="@+id/imagePhotoFourInMessageEnd"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_below="@+id/textMoreThreeInItemMessageEnd"
+        android:layout_below="@+id/textMoreThreeInMessageEnd"
         android:layout_marginBottom="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:contentDescription="@string/content_description"
         app:srcCompat="@drawable/a0001" />
     <View
-        android:id="@+id/viewBarInItemMessageEnd"
+        android:id="@+id/viewBarInMessageEnd"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_alignTop="@+id/imagePhotoFourInItemMessageEnd"
-        android:layout_toEndOf="@+id/imagePhotoFourInItemMessageEnd"
+        android:layout_alignTop="@+id/imagePhotoFourInMessageEnd"
+        android:layout_toEndOf="@+id/imagePhotoFourInMessageEnd"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/background_white_message_full"/>
+        android:background="@drawable/bg_white_message_full"/>
     <EditText
-        android:id="@+id/editMessageInItemMessageEnd"
+        android:id="@+id/editMessageInMessageEnd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imagePhotoFourInItemMessageEnd"
-        android:layout_toEndOf="@+id/imagePhotoFourInItemMessageEnd"
+        android:layout_alignBottom="@+id/imagePhotoFourInMessageEnd"
+        android:layout_toEndOf="@+id/imagePhotoFourInMessageEnd"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="6dp"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
         android:focusable="true"
-        android:background="@drawable/background_white_message_full"/>
+        android:background="@drawable/bg_white_message_full"/>
     <ImageView
-        android:id="@+id/imageSendInItemMessageEnd"
+        android:id="@+id/imageSendInMessageEnd"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_alignBottom="@+id/viewBarInItemMessageEnd"
-        android:layout_alignEnd="@+id/viewBarInItemMessageEnd"
+        android:layout_alignBottom="@+id/viewBarInMessageEnd"
+        android:layout_alignEnd="@+id/viewBarInMessageEnd"
         android:layout_marginBottom="4dp"
         android:layout_marginEnd="8dp"
         android:contentDescription="@string/content_description"

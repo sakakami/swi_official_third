@@ -47,7 +47,7 @@
         android:layout_toEndOf="@+id/imageHeadInMessageList"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/background_white_message_full"/>
+        android:background="@drawable/bg_white_message_full"/>
     <EditText
         android:id="@+id/editMessageInMessageList"
         android:layout_width="match_parent"
@@ -61,7 +61,7 @@
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
         android:focusable="true"
-        android:background="@drawable/background_white_message_full"/>
+        android:background="@drawable/bg_white_message_full"/>
     <ImageView
         android:id="@+id/imageSendInMessageList"
         android:layout_width="30dp"
@@ -70,5 +70,6 @@
         android:layout_alignTop="@+id/viewBarOneInMessageList"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="5dp"
-        android:src="@android:drawable/ic_menu_send" />
+        android:src="@android:drawable/ic_menu_send"
+        android:contentDescription="@string/content_description"/>
 </RelativeLayout>

@@ -1,266 +1,195 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="32dp"
     android:id="@+id/layoutGoodsTag">
     <TextView
-        android:id="@+id/textTagA1InGoodsTag"
-        android:layout_width="150dp"
-        android:layout_height="25dp"
+        android:id="@+id/textTitleInGoodsTag"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
         android:gravity="center_vertical"
-        android:text="Dog"/>
+        android:text="最多評價"/>
+    <ImageView
+        android:id="@+id/imagePicture1InGoodsTag"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/textTitleInGoodsTag"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/content_description"
+        app:srcCompat="@drawable/a0001" />
+    <TextView
+        android:id="@+id/textTagA1InGoodsTag"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:gravity="center_vertical"
+        android:layout_toEndOf="@+id/imagePicture1InGoodsTag"
+        android:layout_marginStart="8dp"
+        android:layout_alignTop="@+id/imagePicture1InGoodsTag"
+        android:text="完美"/>
     <TextView
         android:id="@+id/textTagB1InGoodsTag"
-        android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:layout_toStartOf="@+id/textCount1InGoodsTag"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
         android:layout_toEndOf="@+id/textTagA1InGoodsTag"
         android:gravity="center_vertical"
-        android:text="Large"/>
-    <TextView
-        android:id="@+id/textCount1InGoodsTag"
+        android:layout_marginStart="8dp"
+        android:layout_alignTop="@+id/imagePicture1InGoodsTag"
+        android:text="地點" />
+    <ImageView
+        android:id="@+id/imagePicture2InGoodsTag"
         android:layout_width="30dp"
-        android:layout_height="25dp"
-        android:layout_alignParentEnd="true"
-        android:gravity="center"
-        android:text="5"/>
+        android:layout_height="30dp"
+        android:layout_alignStart="@+id/imagePicture1InGoodsTag"
+        android:layout_below="@+id/imagePicture1InGoodsTag"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/content_description"
+        app:srcCompat="@drawable/a0001" />
     <TextView
         android:id="@+id/textTagA2InGoodsTag"
-        android:layout_width="150dp"
-        android:layout_height="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
         android:gravity="center_vertical"
-        android:text="Dog"
-        android:layout_below="@+id/textTagA1InGoodsTag"/>
+        android:layout_marginStart="8dp"
+        android:layout_toEndOf="@+id/imagePicture2InGoodsTag"
+        android:layout_alignTop="@+id/imagePicture2InGoodsTag"
+        android:text="超級友善" />
     <TextView
         android:id="@+id/textTagB2InGoodsTag"
-        android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:layout_toStartOf="@+id/textCount2InGoodsTag"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
         android:layout_toEndOf="@+id/textTagA2InGoodsTag"
         android:gravity="center_vertical"
-        android:text="Large"
-        android:layout_alignTop="@+id/textTagA2InGoodsTag"/>
-    <TextView
-        android:id="@+id/textCount2InGoodsTag"
+        android:layout_marginStart="8dp"
+        android:text="工作人員"
+        android:layout_alignTop="@+id/imagePicture2InGoodsTag"/>
+    <ImageView
+        android:id="@+id/imagePicture3InGoodsTag"
         android:layout_width="30dp"
-        android:layout_height="25dp"
-        android:layout_alignParentEnd="true"
-        android:gravity="center"
-        android:text="5"
-        android:layout_alignTop="@+id/textTagA2InGoodsTag"/>
+        android:layout_height="30dp"
+        android:layout_alignStart="@+id/imagePicture1InGoodsTag"
+        android:layout_below="@+id/imagePicture2InGoodsTag"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="@string/content_description"
+        app:srcCompat="@drawable/a0001" />
     <TextView
         android:id="@+id/textTagA3InGoodsTag"
-        android:layout_width="150dp"
-        android:layout_height="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
         android:gravity="center_vertical"
-        android:text="Dog"
-        android:layout_below="@+id/textTagA2InGoodsTag"/>
+        android:layout_toEndOf="@+id/imagePicture3InGoodsTag"
+        android:layout_alignTop="@+id/imagePicture3InGoodsTag"
+        android:layout_marginStart="8dp"
+        android:text="乾淨"/>
     <TextView
         android:id="@+id/textTagB3InGoodsTag"
-        android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:layout_toStartOf="@+id/textCount3InGoodsTag"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
         android:layout_toEndOf="@+id/textTagA3InGoodsTag"
         android:gravity="center_vertical"
-        android:text="Large"
-        android:layout_alignTop="@+id/textTagA3InGoodsTag"/>
-    <TextView
-        android:id="@+id/textCount3InGoodsTag"
+        android:layout_marginStart="8dp"
+        android:text="環境"
+        android:layout_alignTop="@+id/imagePicture3InGoodsTag"/>
+    <ImageView
+        android:id="@+id/imagePicture4InGoodsTag"
         android:layout_width="30dp"
-        android:layout_height="25dp"
-        android:layout_alignParentEnd="true"
-        android:gravity="center"
-        android:text="5"
-        android:layout_alignTop="@+id/textTagA3InGoodsTag"/>
+        android:layout_height="30dp"
+        android:layout_alignStart="@+id/imagePicture1InGoodsTag"
+        android:layout_below="@+id/imagePicture3InGoodsTag"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/content_description"
+        app:srcCompat="@drawable/a0001"
+        android:visibility="gone"/>
     <TextView
-        android:id="@+id/textTagA4InGoodsTag"
-        android:layout_width="150dp"
-        android:layout_height="25dp"
-        android:gravity="center_vertical"
-        android:text="Dog"
-        android:layout_below="@+id/textTagA3InGoodsTag"/>
-    <TextView
-        android:id="@+id/textTagB4InGoodsTag"
+        android:id="@+id/textContentInGoodsTag"
         android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:layout_toStartOf="@+id/textCount4InGoodsTag"
-        android:layout_toEndOf="@+id/textTagA4InGoodsTag"
-        android:gravity="center_vertical"
-        android:text="Large"
-        android:layout_alignTop="@+id/textTagA4InGoodsTag"/>
-    <TextView
-        android:id="@+id/textCount4InGoodsTag"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/imagePicture4InGoodsTag"
+        android:layout_toEndOf="@+id/imagePicture4InGoodsTag"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:visibility="gone"/>
+    <ImageView
+        android:id="@+id/imageHead1InGoodsTag"
         android:layout_width="30dp"
-        android:layout_height="25dp"
-        android:layout_alignParentEnd="true"
-        android:gravity="center"
-        android:text="5"
-        android:layout_alignTop="@+id/textTagA4InGoodsTag"/>
-    <TextView
-        android:id="@+id/textTagA5InGoodsTag"
-        android:layout_width="150dp"
-        android:layout_height="25dp"
-        android:gravity="center_vertical"
-        android:text="Dog"
-        android:layout_below="@+id/textTagA4InGoodsTag"/>
-    <TextView
-        android:id="@+id/textTagB5InGoodsTag"
-        android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:layout_toStartOf="@+id/textCount5InGoodsTag"
-        android:layout_toEndOf="@+id/textTagA5InGoodsTag"
-        android:gravity="center_vertical"
-        android:text="Large"
-        android:layout_alignTop="@+id/textTagA5InGoodsTag"/>
-    <TextView
-        android:id="@+id/textCount5InGoodsTag"
+        android:layout_height="30dp"
+        android:layout_alignStart="@+id/textContentInGoodsTag"
+        android:layout_below="@+id/imagePicture4InGoodsTag"
+        android:contentDescription="@string/content_description"
+        app:srcCompat="@drawable/a0001"
+        android:visibility="gone"/>
+    <ImageView
+        android:id="@+id/imageHead2InGoodsTag"
         android:layout_width="30dp"
-        android:layout_height="25dp"
-        android:layout_alignParentEnd="true"
-        android:gravity="center"
-        android:text="5"
-        android:layout_alignTop="@+id/textTagA5InGoodsTag"/>
-    <TextView
-        android:id="@+id/textTagA6InGoodsTag"
-        android:layout_width="150dp"
-        android:layout_height="25dp"
-        android:gravity="center_vertical"
-        android:text="Dog"
-        android:layout_below="@+id/textTagA5InGoodsTag"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/imageHead1InGoodsTag"
+        android:layout_marginStart="4dp"
+        android:layout_toEndOf="@+id/imageHead1InGoodsTag"
+        android:contentDescription="@string/content_description"
+        app:srcCompat="@drawable/a0001"
         android:visibility="gone"/>
-    <TextView
-        android:id="@+id/textTagB6InGoodsTag"
-        android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:layout_toStartOf="@+id/textCount6InGoodsTag"
-        android:layout_toEndOf="@+id/textTagA6InGoodsTag"
-        android:gravity="center_vertical"
-        android:text="Large"
-        android:layout_alignTop="@+id/textTagA6InGoodsTag"
-        android:visibility="gone"/>
-    <TextView
-        android:id="@+id/textCount6InGoodsTag"
+    <ImageView
+        android:id="@+id/imageHead3InGoodsTag"
         android:layout_width="30dp"
-        android:layout_height="25dp"
-        android:layout_alignParentEnd="true"
-        android:gravity="center"
-        android:text="5"
-        android:layout_alignTop="@+id/textTagA6InGoodsTag"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/imageHead1InGoodsTag"
+        android:layout_marginStart="4dp"
+        android:layout_toEndOf="@+id/imageHead2InGoodsTag"
+        android:contentDescription="@string/content_description"
+        app:srcCompat="@drawable/a0001"
         android:visibility="gone"/>
-    <TextView
-        android:id="@+id/textTagA7InGoodsTag"
-        android:layout_width="150dp"
-        android:layout_height="25dp"
-        android:gravity="center_vertical"
-        android:text="Dog"
-        android:layout_below="@+id/textTagA6InGoodsTag"
-        android:visibility="gone"/>
-    <TextView
-        android:id="@+id/textTagB7InGoodsTag"
-        android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:layout_toStartOf="@+id/textCount7InGoodsTag"
-        android:layout_toEndOf="@+id/textTagA7InGoodsTag"
-        android:gravity="center_vertical"
-        android:text="Large"
-        android:layout_alignTop="@+id/textTagA7InGoodsTag"
-        android:visibility="gone"/>
-    <TextView
-        android:id="@+id/textCount7InGoodsTag"
+    <ImageView
+        android:id="@+id/imageHead4InGoodsTag"
         android:layout_width="30dp"
-        android:layout_height="25dp"
-        android:layout_alignParentEnd="true"
-        android:gravity="center"
-        android:text="5"
-        android:layout_alignTop="@+id/textTagA7InGoodsTag"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/imageHead1InGoodsTag"
+        android:layout_marginStart="4dp"
+        android:layout_toEndOf="@+id/imageHead3InGoodsTag"
+        android:contentDescription="@string/content_description"
+        app:srcCompat="@drawable/a0001"
         android:visibility="gone"/>
-    <TextView
-        android:id="@+id/textTagA8InGoodsTag"
-        android:layout_width="150dp"
-        android:layout_height="25dp"
-        android:gravity="center_vertical"
-        android:text="Dog"
-        android:layout_below="@+id/textTagA7InGoodsTag"
-        android:visibility="gone"/>
-    <TextView
-        android:id="@+id/textTagB8InGoodsTag"
-        android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:layout_toStartOf="@+id/textCount8InGoodsTag"
-        android:layout_toEndOf="@+id/textTagA8InGoodsTag"
-        android:gravity="center_vertical"
-        android:text="Large"
-        android:layout_alignTop="@+id/textTagA8InGoodsTag"
-        android:visibility="gone"/>
-    <TextView
-        android:id="@+id/textCount8InGoodsTag"
+    <ImageView
+        android:id="@+id/imageHead5InGoodsTag"
         android:layout_width="30dp"
-        android:layout_height="25dp"
-        android:layout_alignParentEnd="true"
-        android:gravity="center"
-        android:text="5"
-        android:layout_alignTop="@+id/textTagA8InGoodsTag"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/imageHead1InGoodsTag"
+        android:layout_marginStart="4dp"
+        android:layout_toEndOf="@+id/imageHead4InGoodsTag"
+        android:contentDescription="@string/content_description"
+        app:srcCompat="@drawable/a0001"
         android:visibility="gone"/>
-    <TextView
-        android:id="@+id/textTagA9InGoodsTag"
-        android:layout_width="150dp"
-        android:layout_height="25dp"
-        android:gravity="center_vertical"
-        android:text="Dog"
-        android:layout_below="@+id/textTagA8InGoodsTag"
-        android:visibility="gone"/>
-    <TextView
-        android:id="@+id/textTagB9InGoodsTag"
-        android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:layout_toStartOf="@+id/textCount9InGoodsTag"
-        android:layout_toEndOf="@+id/textTagA9InGoodsTag"
-        android:gravity="center_vertical"
-        android:text="Large"
-        android:layout_alignTop="@+id/textTagA9InGoodsTag"
-        android:visibility="gone"/>
-    <TextView
-        android:id="@+id/textCount9InGoodsTag"
+    <ImageView
+        android:id="@+id/imageHead6InGoodsTag"
         android:layout_width="30dp"
-        android:layout_height="25dp"
-        android:layout_alignParentEnd="true"
-        android:gravity="center"
-        android:text="5"
-        android:layout_alignTop="@+id/textTagA9InGoodsTag"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/imageHead1InGoodsTag"
+        android:layout_marginStart="4dp"
+        android:layout_toEndOf="@+id/imageHead5InGoodsTag"
+        android:contentDescription="@string/content_description"
+        app:srcCompat="@drawable/a0001"
         android:visibility="gone"/>
-    <TextView
-        android:id="@+id/textTagA10InGoodsTag"
-        android:layout_width="150dp"
-        android:layout_height="25dp"
-        android:gravity="center_vertical"
-        android:text="Dog"
-        android:layout_below="@+id/textTagA9InGoodsTag"
-        android:visibility="gone"/>
-    <TextView
-        android:id="@+id/textTagB10InGoodsTag"
-        android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:layout_toStartOf="@+id/textCount10InGoodsTag"
-        android:layout_toEndOf="@+id/textTagA10InGoodsTag"
-        android:gravity="center_vertical"
-        android:text="Large"
-        android:layout_alignTop="@+id/textTagA10InGoodsTag"
-        android:visibility="gone"/>
-    <TextView
-        android:id="@+id/textCount10InGoodsTag"
+    <ImageView
+        android:id="@+id/imageHead7InGoodsTag"
         android:layout_width="30dp"
-        android:layout_height="25dp"
-        android:layout_alignParentEnd="true"
-        android:gravity="center"
-        android:text="5"
-        android:layout_alignTop="@+id/textTagA10InGoodsTag"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/imageHead1InGoodsTag"
+        android:layout_marginStart="4dp"
+        android:layout_toEndOf="@+id/imageHead6InGoodsTag"
+        android:contentDescription="@string/content_description"
+        app:srcCompat="@drawable/a0001"
         android:visibility="gone"/>
-    <TextView
-        android:id="@+id/textShowMoreInGoodsTag"
-        android:layout_width="wrap_content"
-        android:layout_height="25dp"
-        android:layout_below="@+id/textTagA10InGoodsTag"
-        android:gravity="center"
-        android:text="SHOW MORE"/>
+    <ImageView
+        android:id="@+id/imageHead8InGoodsTag"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/imageHead1InGoodsTag"
+        android:layout_marginStart="4dp"
+        android:layout_toEndOf="@+id/imageHead7InGoodsTag"
+        android:contentDescription="@string/content_description"
+        app:srcCompat="@drawable/a0001"
+        android:visibility="gone"/>
 </RelativeLayout>

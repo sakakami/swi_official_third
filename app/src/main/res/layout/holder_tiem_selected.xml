@@ -14,7 +14,7 @@
         android:gravity="center_vertical"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:textColor="@color/colorWord"
+        android:textColor="@color/colorWhiteForWord"
         android:background="@color/colorGrayForTag"/>
     <ImageView
         android:id="@+id/imageCleanAInItemSelected"
@@ -35,7 +35,7 @@
         android:gravity="center_vertical"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:textColor="@color/colorWord"
+        android:textColor="@color/colorWhiteForWord"
         android:background="@color/colorGrayForTag"
         android:layout_toEndOf="@+id/textTitleAInItemSelected"/>
     <ImageView

@@ -2,4 +2,51 @@
 <resources>
     <string name="network_error_message">Please check your connection and try again.</string>
     <string name="network_error_ok">OK</string>
+
+    <string name="title_map">Let\'s Go</string>
+
+    <string name="ebike_rent_directions">Directions</string>
+    <string name="ebike_rent_rent">Rent</string>
+    <string name="ebike_rent_count">3 available</string>
+    <string name="ebike_return_return">Return</string>
+    <string name="ebike_retrun_count">3 spots available</string>
+    <string name="ebike_power">Battery life</string>
+    <string name="ebike_distance">Distance</string>
+    <string name="ebike_cost">Per&#160;1&#160;TWD</string>
+    <string name="ebike_select_title">Pick Your Bike</string>
+    <string name="ebike_cost_1">2.4min</string>
+    <string name="ebike_cost_2">2.7min</string>
+    <string name="ebike_cost_3">3min</string>
+    <string name="ebike_pay_title">Payment Method</string>
+    <string name="ebike_pay_1">Credit Card</string>
+    <string name="ebike_pay_3">More</string>
+    <string name="ebike_ok">OK</string>
+    <string name="ebike_cancel">Cancel</string>
+    <string name="ebike_credit_number">Card Number</string>
+    <string name="ebike_credit_name">Name on Card</string>
+    <string name="ebike_credit_date">Exp Date</string>
+    <string name="ebike_credit_code">Security Code</string>
+    <string name="ebike_buletooth_title">Bluetooth Permission Request</string>
+    <string name="ebike_buletooth_message">An app wants to turn Bluetooth ON for this device.</string>
+    <string name="ebike_lock">Lock</string>
+    <string name="ebike_unlock">Unlock</string>
+    <string name="ebike_lock_message">Please note charges will be applied during lock time.</string>
+    <string name="ebike_unlock_message">Would you like to unlock the bike?</string>
+    <string name="ebike_return_title">Return</string>
+    <string name="ebike_return_message">Would you like to return the bike?</string>
+    <string name="ebike_calculate_title_down">Duration:</string>
+    <string name="ebike_calculate_title_up">Est Cost:</string>
+    <string name="ebike_calculate_title_center">TWD</string>
+    <string name="ebike_confirm">Confirm</string>
+    <string name="ebike_finish_title">Congrats!\nYou\'ve finished your ride!</string>
+    <string name="ebike_memory_title">Next</string>
+    <string name="ebike_detail_title">Your Receipt</string>
+    <string name="ebike_detail_message">Title:</string>
+    <string name="ebike_detail_cost">Cost</string>
+    <string name="ebike_detail_duration">Duration</string>
+    <string name="ebike_detail_bike">Bike</string>
+    <string name="ebike_detail_from">Rent from</string>
+    <string name="ebike_detail_to">Return to</string>
+
+    <string name="map_search_hint">Search a place</string>
 </resources>

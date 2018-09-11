@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".map.view.AttractionSelectFragment">
-
     <View
         android:id="@+id/viewBarInAttractionSelect"
         android:layout_width="match_parent"
@@ -15,7 +14,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:text="Back"
-        android:textColor="@color/colorWord"
+        android:textColor="@color/colorWhiteForWord"
         android:gravity="center"/>
     <TextView
         android:id="@+id/textTitleInAttractionSelect"
@@ -26,7 +25,7 @@
         android:gravity="center"
         android:text="標題"
         android:textSize="20sp"
-        android:textColor="@color/colorWord"/>
+        android:textColor="@color/colorWhiteForWord"/>
     <android.support.v7.widget.SearchView
         android:id="@+id/searchInAttractionSelect"
         android:layout_width="match_parent"
@@ -47,11 +46,10 @@
         android:layout_alignParentBottom="true"
         android:gravity="center_vertical"
         android:text="找不到搜尋的地標？按這裡新增"
-        android:textColor="@color/colorWord"
+        android:textColor="@color/colorWhiteForWord"
         android:background="@color/colorGray"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"/>
-
     <ImageView
         android:id="@+id/imageCancelInAttractionSelect"
         android:layout_width="40dp"
@@ -61,5 +59,4 @@
         android:contentDescription="@string/content_description"
         android:padding="4dp"
         android:src="@android:drawable/ic_menu_close_clear_cancel" />
-
 </RelativeLayout>

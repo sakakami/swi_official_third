@@ -1,10 +1,13 @@
 package com.switube.www.swiofficialthird.home.model;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.switube.www.swiofficialthird.database.AppDatabase;
 import com.switube.www.swiofficialthird.database.entity.LanguageEntity;
 import com.switube.www.swiofficialthird.home.presenter.IMainActivityPresenter;
+
+import javax.inject.Inject;
 
 import io.reactivex.MaybeObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -14,6 +17,7 @@ import io.reactivex.schedulers.Schedulers;
 public class MainActivityModel {
     private IMainActivityPresenter mIMainActivityPresenter;
     public MainActivityModel(IMainActivityPresenter iMainActivityPresenter) {
+        Log.e("model", "start");
         mIMainActivityPresenter = iMainActivityPresenter;
     }
 
@@ -38,5 +42,9 @@ public class MainActivityModel {
                     @Override
                     public void onComplete() {}
                 });
+    }
+
+    public void handleTest() {
+        Log.e("model", "test");
     }
 }

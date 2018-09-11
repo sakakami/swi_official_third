@@ -37,7 +37,8 @@ public class LogoFragment extends Fragment implements ILogoFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if (mLogoPresenter.checkNetworkState(container.getContext().getApplicationContext())) {
-            mLogoPresenter.getData(container.getContext().getApplicationContext());
+            //mLogoPresenter.getData(container.getContext().getApplicationContext());
+            handleFinishUpdate();
         } else {
             showNetworkMessage();
         }

@@ -10,5 +10,69 @@
     <string name="permission">This item does not ship to Taichung, taiwan;Republic of China.Please check other sellers who may ship internationally.</string>
     <string name="tag">#性別：公\n#年齡：7歲7個月\n#外觀：四眼混種狗\n#體型：20.17公斤(2018&#8211;03&#8211;21)#個性：害羞，個性很好，少與人爭</string>
     <string name="message_head">『文長，請大家給我一些建議』我在美國工作後這幾年，因為真的很忙碌！下班回家後或是週末真的只想宅在家裡，感覺真的變得越來越自閉＋宅。前幾個星期赫然發現自己在『文長，請大家給我一些建議』我在美國工作後這幾年，因為真的很忙碌！下班回家後或是週末真的只想宅在家裡，感覺真的變得越來越自閉＋宅。前幾個星期赫然發現自己在</string>
-    <string name="introduce">Brand new luxury apartment centrally located in the heart of Taipei Short 5&#8211;10 min walk between 4 MRT stations: Taipei Main Ximen.Brand new luxury apartment centrally located in the heart of Taipei Short 5&#8211;10 min walk between 4 MRT stations: Taipei Main Ximen.Brand new luxury apartment centrally located in the heart of Taipei Short 5&#8211;10 min walk between 4 MRT stations: Taipei Main Ximen.</string>
+    <string name="introduce">美國愛護動物協會（英語：American Society for the Prevention of Cruelty to Animals (ASPCA) ），於1866年由享利·貝格赫創立，而總部位於紐約市，而捐款是來自美國市民和其他，目的是防止虐待動物和宣傳教育的[1]。總裁為Edwin J. Sayres。除此之外，美國愛護動物協會還與Hartville Group, Inc（赫特威樂集團股份有限公司），於2008年組成美護寵物保險（ASPCA Pet Insurance）。該協會設有人道執法部門（Humane Law Enforcement），制度與美國警方相同，並由州議會授予執法權，所屬成員經槍械訓練合格後，可攜帶槍枝、手銬等警用配備，依該州法律如執法人員能目視動物遭受虐待或健康狀況不良時，有權直接進入私人領域救援及安置動物，並傳喚飼主按違法情節裁處罰金或移送法辦，因此稱為「動物警察」。最大棘手是由於開支龐大，加上動物溝通困難，因此對調查和入罪便會增加難度，故該部門亦設置有臥底探員，深入夜店等場所蒐集有關賽狗等虐待動物行為之情報。</string>
+
+    <string name="title_map">Let\'s Go</string>
+
+    <string name="ebike_nchu_801" translatable="false">801</string>
+    <string name="ebike_nchu_802" translatable="false">802</string>
+    <string name="ebike_nchu_803" translatable="false">803</string>
+    <string name="ebike_office_810" translatable="false">810</string>
+    <string name="ebike_office_812" translatable="false">812</string>
+    <string name="ebike_office_836" translatable="false">836</string>
+    <string name="ebike_power_100" translatable="false">100%</string>
+    <string name="ebike_power_80" translatable="false">80%</string>
+    <string name="ebike_power_60" translatable="false">60%</string>
+    <string name="ebike_distance_1" translatable="false">60km</string>
+    <string name="ebike_distance_2" translatable="false">54km</string>
+    <string name="ebike_distance_3" translatable="false">48km</string>
+
+    <string name="ebike_rent_directions">Directions</string>
+    <string name="ebike_rent_rent">Rent</string>
+    <string name="ebike_rent_count">3 available</string>
+    <string name="ebike_return_return">Return</string>
+    <string name="ebike_retrun_count">3 spots available</string>
+    <string name="ebike_power">Battery life</string>
+    <string name="ebike_distance">Distance</string>
+    <string name="ebike_cost">Per&#160;1&#160;TWD</string>
+    <string name="ebike_select_title">Pick Your Bike</string>
+    <string name="ebike_cost_1">2.4min</string>
+    <string name="ebike_cost_2">2.7min</string>
+    <string name="ebike_cost_3">3min</string>
+    <string name="ebike_pay_title">Payment Method</string>
+    <string name="ebike_pay_1">Credit Card</string>
+    <string name="ebike_pay_2" translatable="false">Android Pay</string>
+    <string name="ebike_pay_3">More</string>
+    <string name="ebike_ok">OK</string>
+    <string name="ebike_cancel">Cancel</string>
+    <string name="ebike_credit_number">Card Number</string>
+    <string name="ebike_credit_name">Name on Card</string>
+    <string name="ebike_credit_date">Exp Date</string>
+    <string name="ebike_credit_date_exp" translatable="false">mm/yyyy</string>
+    <string name="ebike_credit_code">Security Code</string>
+    <string name="ebike_credit_ccv" translatable="false">CCV</string>
+    <string name="ebike_back" translatable="false">〈</string>
+    <string name="ebike_buletooth_title">Bluetooth Permission Request</string>
+    <string name="ebike_buletooth_message">An app wants to turn Bluetooth ON for this device.</string>
+    <string name="ebike_lock">Lock</string>
+    <string name="ebike_unlock">Unlock</string>
+    <string name="ebike_lock_message">Please note charges will be applied during lock time.</string>
+    <string name="ebike_unlock_message">Would you like to unlock the bike?</string>
+    <string name="ebike_return_title">Return</string>
+    <string name="ebike_return_message">Would you like to return the bike?</string>
+    <string name="ebike_calculate_title_down">Duration:</string>
+    <string name="ebike_calculate_title_up">Est Cost:</string>
+    <string name="ebike_calculate_title_center">TWD</string>
+    <string name="ebike_confirm">Confirm</string>
+    <string name="ebike_finish_title">Congrats!\nYou\'ve finished your ride!</string>
+    <string name="ebike_memory_title">Next</string>
+    <string name="ebike_detail_title">Your Receipt</string>
+    <string name="ebike_detail_message">Title:</string>
+    <string name="ebike_detail_cost">Cost</string>
+    <string name="ebike_detail_duration">Duration</string>
+    <string name="ebike_detail_bike">Bike</string>
+    <string name="ebike_detail_from">Rent from</string>
+    <string name="ebike_detail_to">Return to</string>
+
+    <string name="map_search_hint">Search a place</string>
 </resources>

@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/layoutMessageHead">
-
     <ImageView
         android:id="@+id/imageHeadInMessageHead"
         android:layout_width="60dp"
@@ -50,7 +49,6 @@
         android:layout_marginStart="24dp"
         android:gravity="center"
         android:text="SHOW MORE"/>
-
     <ImageView
         android:id="@+id/imagePhotoInMessageHead"
         android:layout_width="match_parent"

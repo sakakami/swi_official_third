@@ -1,18 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#1d1d1d</color>
-    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorPrimary">#BEBEBE</color>
+    <color name="colorPrimaryDark">#BEBEBE</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="colorSearch">#a0ffffff</color>
-    <color name="colorWord">#fbfbfb</color>
-    <color name="colorBackground">#F2F3F5</color>
-    <color name="colorBlue">#6398d9</color>
+
+    <color name="colorWhiteForWord">#fbfbfb</color>
+    <color name="colorWhiteForBg">#F2F3F5</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorWhiteForEdit">#E8EBEF</color>
+    <color name="colorWhiteForCancel">#E3E3E3</color>
+    <color name="colorWhiteForFull">#EFEFEF</color>
+    <color name="colorGrayForSearch">#a0ffffff</color>
     <color name="colorGray">#5f5f5f</color>
     <color name="colorRatingNormal">#808080</color>
-    <color name="colorRatingActivated">#ff8000</color>
-    <color name="colorWordBlack">#303339</color>
-    <color name="colorWordGray">#676B70</color>
+    <color name="colorGrayForWord">#676B70</color>
     <color name="colorGrayForTag">#6f6f6f</color>
-    <color name="colorTagTypeSelected">#555555</color>
-    <color name="colorTagType">#B5B5B5</color>
+    <color name="colorGrayForTagType">#B5B5B5</color>
+    <color name="colorGrayForSurround">#969DA6</color>
+    <color name="colorGrayForFull">#6F6F6F</color>
+    <color name="colorBlue">#6398d9</color>
+    <color name="colorGreenLight">#96E7A5</color>
+    <color name="colorBlackForTranslucent">#99000000</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorBlackForWord">#303339</color>
+    <color name="colorRed">#ff2d2d</color>
+
+    <color name="colorOrangeForRating">#ff8000</color>
+    <color name="colorGrayForRating">#555555</color>
 </resources>

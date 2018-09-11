@@ -45,7 +45,7 @@ public class TagTypeAdapter extends RecyclerView.Adapter<TagTypeAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.mTextTitle.setText(type[position]);
         if (selected.get(position)) {
-            holder.mTextTitle.setBackgroundResource(R.drawable.background_white_full);
+            holder.mTextTitle.setBackgroundResource(R.drawable.bg_white_full);
         } else {
             holder.mTextTitle.setBackground(null);
         }

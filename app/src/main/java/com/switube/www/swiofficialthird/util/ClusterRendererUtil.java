@@ -39,7 +39,11 @@ public class ClusterRendererUtil extends DefaultClusterRenderer<ClusterItemUtil>
     @Override
     protected void onBeforeClusterItemRendered(ClusterItemUtil item, MarkerOptions markerOptions) {
         super.onBeforeClusterItemRendered(item, markerOptions);
-        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.gps_v1_2));
+        if (item.getMsid().equals("ca") || item.getMsid().equals("cb")) {
+            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.bike_pin));
+        } else {
+            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.gps_v1_3));
+        }
     }
 
     @Override

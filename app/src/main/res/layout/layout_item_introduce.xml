@@ -4,21 +4,21 @@
     android:layout_height="wrap_content"
     android:id="@+id/layoutIntroduce">
     <TextView
+        android:id="@+id/textTitleInIntroduce"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:gravity="center_vertical"
+        android:text="關於"/>
+    <TextView
         android:id="@+id/textIntroduceInIntroduce"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginTop="4dp"
-        android:maxLines="5"
-        android:text="@string/introduce"/>
-    <TextView
-        android:id="@+id/textMoreInIntroduce"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:text="SHOW MORE"
-        android:layout_below="@+id/textIntroduceInIntroduce"/>
+        android:layout_marginBottom="8dp"
+        android:maxLines="5"
+        android:text="@string/introduce"
+        android:layout_below="@+id/textTitleInIntroduce"/>
 </RelativeLayout>

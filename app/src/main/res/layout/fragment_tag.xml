@@ -16,7 +16,7 @@
         android:text="Back"
         android:gravity="center"
         android:textSize="20sp"
-        android:textColor="@color/colorWord"/>
+        android:textColor="@color/colorWhiteForWord"/>
     <TextView
         android:id="@+id/textNextInTag"
         android:layout_width="50dp"
@@ -24,7 +24,7 @@
         android:layout_alignParentEnd="true"
         android:text="NEXT"
         android:gravity="center"
-        android:textColor="@color/colorWord"/>
+        android:textColor="@color/colorWhiteForWord"/>
     <TextView
         android:id="@+id/textTitleInTag"
         android:layout_width="match_parent"
@@ -47,7 +47,7 @@
         android:layout_height="2dp"
         android:layout_marginTop="4dp"
         android:layout_below="@+id/recyclerSelectedInTag"
-        android:background="@color/colorBackground"/>
+        android:background="@color/colorWhiteForBg"/>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerTypeInTag"
         android:layout_width="match_parent"
@@ -58,7 +58,7 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_below="@+id/recyclerTypeInTag"
-        android:background="@color/colorBackground" />
+        android:background="@color/colorWhiteForBg" />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerTagInTag"
         android:layout_width="match_parent"
