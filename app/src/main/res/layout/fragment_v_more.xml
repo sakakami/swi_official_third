@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.VMore"
+    android:background="@color/colorBlackFor000000">
+    <TextView
+        android:id="@+id/textTitleInMore"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textColor="@color/colorWhiteForFFFFFF"
+        android:gravity="center"
+        android:text="@string/music_title_more"
+        android:textSize="20sp"/>
+    <TextView
+        android:id="@+id/textBackInMore"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text="@string/global_back"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textColor="@color/colorWhiteForFFFFFF"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerInMore"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/textTitleInMore"/>
+</RelativeLayout>

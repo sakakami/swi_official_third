@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menuCollectInStrokeAttractionList"
+        android:title="@string/stroke_collect_add"/>
+    <item
+        android:id="@+id/menuSaveInStrokeAttractionList"
+        android:title="@string/stroke_menu_save_trip"/>
+</menu>

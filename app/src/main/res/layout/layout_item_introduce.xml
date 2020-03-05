@@ -2,14 +2,33 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/layoutIntroduce">
+    android:id="@+id/layoutIntroduce"
+    android:background="@color/colorWhiteForFFFFFF"
+    android:visibility="gone">
     <TextView
         android:id="@+id/textTitleInIntroduce"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginStart="8dp"
         android:gravity="center_vertical"
-        android:text="關於"/>
+        android:text="@string/info_place"
+        android:layout_marginTop="8dp"/>
+    <ImageView
+        android:id="@+id/imageEditInIntroduce"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:contentDescription="@string/content_description"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/edit_v1_1"
+        android:padding="6dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/colorWhiteForD0D0D0"
+        android:layout_below="@+id/textTitleInIntroduce"/>
     <TextView
         android:id="@+id/textIntroduceInIntroduce"
         android:layout_width="match_parent"
@@ -19,6 +38,5 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:maxLines="5"
-        android:text="@string/introduce"
         android:layout_below="@+id/textTitleInIntroduce"/>
 </RelativeLayout>

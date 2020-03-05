@@ -2,20 +2,23 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
-    
     <ImageView
         android:id="@+id/imagePhotoInSpinner"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:contentDescription="@string/content_description"
-        android:padding="6dp"
-        android:layout_marginStart="4dp"/>
+        android:padding="4dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"/>
     <TextView
         android:id="@+id/textTitleInSpinner"
         android:layout_width="wrap_content"
         android:layout_height="25dp"
-        android:layout_gravity="center"
+        android:layout_gravity="center_vertical"
         android:layout_toEndOf="@+id/imagePhotoInSpinner"
-        android:layout_marginEnd="10dp"/>
-    
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"/>
 </RelativeLayout>

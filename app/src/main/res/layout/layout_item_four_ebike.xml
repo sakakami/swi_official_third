@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/layoutItemFourEbike"
-    android:background="@color/colorBlackForTranslucent"
+    android:background="@color/colorBlackFor99000000"
+    android:elevation="20dp"
     android:visibility="gone">
     <View
         android:id="@+id/viewBarInItemFourEbike"
@@ -12,7 +13,9 @@
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_centerInParent="true"
-        android:background="@drawable/bg_white_message_map_full"/>
+        android:background="@drawable/bg_white_message_map_full"
+        android:clickable="true"
+        android:focusable="true"/>
     <TextView
         android:id="@+id/textTitleInItemFourEbike"
         android:layout_width="wrap_content"
@@ -42,12 +45,12 @@
         android:layout_alignEnd="@+id/viewBarInItemFourEbike"
         android:layout_marginEnd="24dp"
         android:layout_marginTop="24dp"
-        android:text="@string/ebike_ok"
+        android:text="@string/global_ok"
         android:gravity="center"
         android:textStyle="bold"
         android:textSize="18sp"
-        android:textColor="@color/colorWhite"
-        android:background="@color/colorBlack" />
+        android:textColor="@color/colorWhiteForFFFFFF"
+        android:background="@color/colorBlackFor000000" />
     <TextView
         android:id="@+id/textLeftInItemFourEbike"
         android:layout_width="120dp"
@@ -57,7 +60,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:gravity="center"
-        android:text="@string/ebike_cancel"
+        android:text="@string/global_cancel"
         android:textSize="18sp"
         android:textStyle="bold"
         android:background="@drawable/bg_white_buttom_surround"/>

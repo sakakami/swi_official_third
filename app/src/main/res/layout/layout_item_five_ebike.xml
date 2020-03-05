@@ -4,17 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/layoutItemFiveEbike"
-    android:background="@color/colorBlackForTranslucent"
+    android:background="@color/colorBlackFor99000000"
+    android:elevation="20dp"
     android:visibility="gone">
     <View
         android:id="@+id/viewBarInItemFiveEbike"
         android:layout_width="match_parent"
-        android:layout_height="190dp"
+        android:layout_height="210dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="16dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:background="@drawable/bg_white_message_map_full"/>
+        android:background="@drawable/bg_white_message_map_full"
+        android:clickable="true"
+        android:focusable="true"/>
     <TextView
         android:id="@+id/textTitleInItemFiveEbike"
         android:layout_width="match_parent"
@@ -33,14 +36,13 @@
     <TextView
         android:id="@+id/textMessageInItemFiveEbike"
         android:layout_width="match_parent"
-        android:layout_height="20dp"
+        android:layout_height="40dp"
         android:layout_below="@+id/textTitleInItemFiveEbike"
         android:layout_toStartOf="@+id/imageCancelInItemFiveEbike"
         android:layout_marginEnd="16dp"
         android:layout_alignStart="@+id/textTitleInItemFiveEbike"
         android:gravity="center_vertical"
         android:textSize="16sp"
-        android:maxLines="1"
         android:ellipsize="end"/>
     <TextView
         android:id="@+id/textContentInItemFiveEbike"
@@ -51,7 +53,7 @@
         android:layout_marginTop="8dp"
         android:gravity="center_vertical"
         android:textSize="16sp"
-        android:textColor="@color/colorGreenLight"/>
+        android:textColor="@color/colorGreenFor96E7A5"/>
     <TextView
         android:id="@+id/textLeftInItemFiveEbike"
         android:layout_width="120dp"
@@ -63,7 +65,8 @@
         android:gravity="center"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:background="@drawable/bg_white_buttom_surround"/>
+        android:textColor="@color/colorWhiteForFFFFFF"
+        android:background="@color/colorBlackFor000000"/>
     <TextView
         android:id="@+id/textRightInItemFiveEbike"
         android:layout_width="120dp"
@@ -71,8 +74,8 @@
         android:layout_alignTop="@+id/textLeftInItemFiveEbike"
         android:layout_alignEnd="@+id/viewBarInItemFiveEbike"
         android:layout_marginEnd="24dp"
-        android:textColor="@color/colorWhite"
-        android:background="@color/colorBlack"
+        android:textColor="@color/colorWhiteForFFFFFF"
+        android:background="@color/colorBlackFor000000"
         android:gravity="center"
         android:textStyle="bold"
         android:textSize="18sp" />

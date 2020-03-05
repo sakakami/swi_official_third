@@ -3,15 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageHeadInNavigationViewItem"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:contentDescription="@string/content_description"
-        app:srcCompat="@drawable/a0001" />
+        android:contentDescription="@string/content_description" />
     <TextView
         android:id="@+id/textNameInNavigationViewItem"
         android:layout_width="wrap_content"
@@ -21,8 +19,7 @@
         android:layout_marginTop="8dp"
         android:textStyle="bold"
         android:textSize="20sp"
-        android:gravity="center_vertical"
-        android:text="Wen Wen"/>
+        android:gravity="center_vertical"/>
     <TextView
         android:id="@+id/textAreaInNavigationViewItem"
         android:layout_width="wrap_content"
@@ -32,10 +29,28 @@
         android:layout_marginTop="4dp"
         android:layout_marginBottom="8dp"
         android:gravity="center_vertical"
-        android:text="taiwan"/>
+        android:text="@string/map_slide_country"/>
+    <TextView
+        android:id="@+id/textBackInNavigationViewItem"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text="@string/global_back"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp"
+        android:visibility="gone"/>
+    <TextView
+        android:id="@+id/textTitleInNavigationViewItem"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignTop="@+id/textBackInNavigationViewItem"
+        android:layout_toEndOf="@+id/textBackInNavigationViewItem"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:visibility="gone"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_below="@+id/textAreaInNavigationViewItem"
-        android:background="@color/colorGrayForTagType"/>
+        android:background="@color/colorGrayForB5B5B5"/>
 </RelativeLayout>

@@ -3,15 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/layoutRating">
+    android:id="@+id/layoutRating"
+    android:background="@color/colorWhiteForFFFFFF"
+    android:visibility="gone">
     <ImageView
         android:id="@+id/imageHeadInRating"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:contentDescription="@string/content_description"
-        app:srcCompat="@drawable/a0001" />
+        android:contentDescription="@string/content_description" />
     <TextView
         android:id="@+id/textMessage1InRating"
         android:layout_width="wrap_content"
@@ -20,7 +21,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="評分"
+        android:text="@string/info_rate"
         android:textStyle="bold"
         android:textSize="20sp"/>
     <TextView
@@ -29,18 +30,18 @@
         android:layout_height="30dp"
         android:layout_below="@+id/textMessage1InRating"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="8dp"
+
         android:gravity="center"
-        android:text="分享你的經驗幫助更多人"
+        android:text="@string/info_rate_message"
         android:textSize="16sp"/>
     <RatingBar
         android:id="@+id/ratingInRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:theme="@style/RatingBar"
-        style="@style/Widget.AppCompat.RatingBar"
+        style="@style/Widget.AppCompat.RatingBar.Indicator"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
         android:layout_marginBottom="8dp"
         android:layout_below="@+id/textMessage2InRating"/>
 </RelativeLayout>

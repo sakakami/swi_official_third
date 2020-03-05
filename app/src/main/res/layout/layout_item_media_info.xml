@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/layoutMediaInfo">
+    android:id="@+id/layoutMediaInfo"
+    android:background="@color/colorWhiteForFFFFFF"
+    android:visibility="gone">
     <TextView
         android:id="@+id/textTitleInMediaInfo"
         android:layout_width="wrap_content"
@@ -13,43 +15,60 @@
         android:gravity="center_vertical"
         android:text="影片"/>
     <ImageView
+        android:id="@+id/imageEditInMediaInfo"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/edit_v1_1"
+        android:padding="6dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="@string/content_description"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/textTitleInMediaInfo"
+        android:background="@color/colorWhiteForD0D0D0"/>
+    <View
+        android:id="@+id/viewInMediaInfo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_alignTop="@+id/imagePhotoInMediaInfo"
+        android:layout_alignBottom="@+id/textNameInMediaInfo"
+        android:background="@drawable/bg_gray_3_surround"/>
+    <ImageView
         android:id="@+id/imagePhotoInMediaInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:contentDescription="@string/content_description"
-        android:scaleType="centerCrop"
-        app:srcCompat="@drawable/none_4"
+        android:scaleType="fitXY"
         android:layout_marginTop="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_below="@+id/textTitleInMediaInfo"/>
-    <View
-        android:id="@+id/viewInMediaInfo"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_below="@+id/imagePhotoInMediaInfo" />
     <TextView
         android:id="@+id/textNameInMediaInfo"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignStart="@+id/viewInMediaInfo"
-        android:layout_alignTop="@+id/viewInMediaInfo"
-        android:layout_alignBottom="@+id/viewInMediaInfo"
+        android:layout_height="60dp"
+        android:layout_below="@+id/imagePhotoInMediaInfo"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="6dp"
         android:layout_marginBottom="6dp"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
-        android:text="Kemper Wants to Wrap You Up!"
-        android:textColor="@color/colorBlackForWord"/>
+        android:textColor="@color/colorBlackFor303339"/>
     <TextView
         android:id="@+id/textWatchMoreInMediaInfo"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_below="@+id/textNameInMediaInfo"
         android:gravity="center"
-        android:textColor="@color/colorGrayForWord"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/colorGrayFor676B70"
         android:layout_marginBottom="8dp"
         android:text="顯示全部 >"/>
 </RelativeLayout>

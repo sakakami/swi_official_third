@@ -9,15 +9,35 @@
         android:contentDescription="@string/content_description"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginBottom="8dp"
+        android:padding="4dp"/>
     <TextView
         android:id="@+id/textTitleInListItemMain"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_alignTop="@+id/imageIconInListItemMain"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
         android:layout_toEndOf="@+id/imageIconInListItemMain"
+        android:layout_toStartOf="@+id/textNextInListItemMain"
         android:layout_marginStart="16dp"
         android:gravity="center_vertical"
         android:maxLines="1"
         android:layout_marginEnd="16dp"/>
+    <TextView
+        android:id="@+id/textNextInListItemMain"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/imageIconInListItemMain"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        android:text="〉"
+        android:gravity="center"
+        android:textSize="16sp"/>
+    <View
+        android:id="@+id/viewBarInListItemMain"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/imageIconInListItemMain"
+        android:background="@color/colorWhiteForD9D9D9"
+        android:visibility="invisible"/>
 </RelativeLayout>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menuDeleteInComment"
+        android:title="@string/info_float_message_delete"/>
+    <item
+        android:id="@+id/menuEditCommentInComment"
+        android:title="@string/info_float_message_post"/>
+    <item
+        android:id="@+id/menuEditTagInComment"
+        android:title="@string/info_float_message_tag"/>
+</menu>

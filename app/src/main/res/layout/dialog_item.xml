@@ -5,6 +5,6 @@
     <EditText
         android:id="@+id/editInDialogItem"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:maxLength="21"/>
+        android:layout_height="wrap_content"
+        android:maxLength="30"/>
 </LinearLayout>

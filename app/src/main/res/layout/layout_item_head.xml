@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/layoutHead">
+    android:id="@+id/layoutHead"
+    android:background="@color/colorWhiteForFFFFFF"
+    android:visibility="gone">
     <TextView
         android:id="@+id/textTitleSubInHead"
         android:layout_width="wrap_content"
@@ -13,8 +15,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginTop="8dp"
         android:maxLines="1"
-        android:ellipsize="end"
-        android:text="營業中，獸醫院"/>
+        android:ellipsize="end"/>
     <TextView
         android:id="@+id/textSendInHead"
         android:layout_width="match_parent"
@@ -25,84 +26,82 @@
         android:layout_marginEnd="8dp"
         android:gravity="center"
         android:textSize="16sp"
-        android:textColor="@color/colorWhiteForWord"
+        android:textColor="@color/colorWhiteForFBFBFB"
         android:background="@drawable/bg_blue_full"
-        android:text="打卡"/>
-    <View
-        android:id="@+id/viewBarInHead"
-        android:layout_width="1dp"
-        android:layout_height="1dp"
-        android:layout_centerHorizontal="true"/>
+        android:text="@string/map_hotkey_checkin"/>
     <ImageView
-        android:id="@+id/imageTrackInHead"
-        android:layout_width="40dp"
+        android:id="@+id/imageDirectionInHead"
+        android:layout_width="60dp"
         android:layout_height="40dp"
         android:layout_below="@+id/textSendInHead"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
-        android:layout_toStartOf="@+id/viewBarInHead"
+        android:layout_toStartOf="@+id/imageCollectInHead"
         android:contentDescription="@string/content_description"
-        app:srcCompat="@drawable/speech_bubble_1" />
+        app:srcCompat="@drawable/gpsgo_off_v11"
+        android:padding="6dp"/>
     <TextView
-        android:id="@+id/textTrackInHead"
+        android:id="@+id/textDirectionInHead"
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:layout_below="@+id/imageTrackInHead"
-        android:layout_alignStart="@+id/imageTrackInHead"
-        android:layout_alignEnd="@+id/imageTrackInHead"
+        android:layout_below="@+id/imageDirectionInHead"
+        android:layout_alignStart="@+id/imageDirectionInHead"
+        android:layout_alignEnd="@+id/imageDirectionInHead"
         android:gravity="center"
         android:maxLines="1"
         android:ellipsize="end"
-        android:text="編輯"/>
+        android:text="@string/info_direction"/>
     <ImageView
-        android:id="@+id/imageLikeInHead"
-        android:layout_width="40dp"
+        android:id="@+id/imagePhotoInHead"
+        android:layout_width="60dp"
         android:layout_height="40dp"
-        android:layout_alignTop="@id/imageTrackInHead"
-        android:layout_marginEnd="32dp"
-        android:layout_toStartOf="@+id/imageTrackInHead"
+        android:layout_alignTop="@id/imageDirectionInHead"
+        android:layout_marginEnd="16dp"
+        android:layout_toStartOf="@+id/imageDirectionInHead"
         android:contentDescription="@string/content_description"
-        app:srcCompat="@drawable/like_on_v1_2" />
+        app:srcCompat="@drawable/camera_off_v11"
+        android:padding="8dp"/>
     <TextView
-        android:id="@+id/textLikeInHead"
+        android:id="@+id/textPhotoInHead"
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:layout_below="@+id/imageLikeInHead"
-        android:layout_alignStart="@+id/imageLikeInHead"
-        android:layout_alignEnd="@+id/imageLikeInHead"
+        android:layout_below="@+id/imagePhotoInHead"
+        android:layout_alignStart="@+id/imagePhotoInHead"
+        android:layout_alignEnd="@+id/imagePhotoInHead"
         android:gravity="center"
         android:maxLines="1"
         android:ellipsize="end"
-        android:text="上傳"/>
+        android:text="@string/info_upload"/>
     <ImageView
-        android:id="@+id/imageRecommendInHead"
-        android:layout_width="40dp"
+        android:id="@+id/imageCollectInHead"
+        android:layout_width="60dp"
         android:layout_height="40dp"
-        android:layout_alignTop="@+id/imageTrackInHead"
-        android:layout_marginStart="16dp"
-        android:layout_toEndOf="@+id/viewBarInHead"
+        android:layout_alignTop="@+id/imageDirectionInHead"
+        android:layout_centerHorizontal="true"
         android:contentDescription="@string/content_description"
-        app:srcCompat="@drawable/speech_bubble" />
+        app:srcCompat="@drawable/mark_off_v12"
+        android:padding="8dp"/>
     <TextView
-        android:id="@+id/textRecommendInHead"
+        android:id="@+id/textCollectInHead"
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:layout_below="@+id/imageRecommendInHead"
-        android:layout_alignStart="@+id/imageRecommendInHead"
-        android:layout_alignEnd="@+id/imageRecommendInHead"
+        android:layout_below="@+id/imageCollectInHead"
+        android:layout_alignStart="@+id/imageCollectInHead"
+        android:layout_alignEnd="@+id/imageCollectInHead"
         android:gravity="center"
         android:maxLines="1"
         android:ellipsize="end"
-        android:text="導航"/>
+        android:text="@string/info_save"/>
     <ImageView
         android:id="@+id/imageSaveInHead"
-        android:layout_width="40dp"
+        android:layout_width="60dp"
         android:layout_height="40dp"
-        android:layout_alignTop="@+id/imageTrackInHead"
-        android:layout_marginStart="32dp"
-        android:layout_toEndOf="@+id/imageRecommendInHead"
+        android:layout_alignTop="@+id/imageDirectionInHead"
+        android:layout_marginStart="16dp"
+        android:layout_toEndOf="@+id/imageCollectInHead"
         android:contentDescription="@string/content_description"
-        app:srcCompat="@drawable/push_pin" />
+        app:srcCompat="@drawable/add_v1_2"
+        android:padding="8dp"/>
     <TextView
         android:id="@+id/textSaveInHead"
         android:layout_width="match_parent"
@@ -113,24 +112,53 @@
         android:gravity="center"
         android:maxLines="1"
         android:ellipsize="end"
-        android:text="儲存"/>
+        android:text="@string/info_add"/>
+    <ImageView
+        android:id="@+id/imageShareInHead"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_alignTop="@+id/imageDirectionInHead"
+        android:layout_marginStart="16dp"
+        android:layout_toEndOf="@+id/imageSaveInHead"
+        android:contentDescription="@string/content_description"
+        app:srcCompat="@drawable/share_v1_1"
+        android:padding="8dp"/>
+    <TextView
+        android:id="@+id/textShareInHead"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_below="@+id/imageShareInHead"
+        android:layout_alignStart="@+id/imageShareInHead"
+        android:layout_alignEnd="@+id/imageShareInHead"
+        android:gravity="center"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:text="@string/info_share"/>
     <TextView
         android:id="@+id/textServiceInfoInHead"
         android:layout_width="wrap_content"
         android:layout_height="25dp"
-        android:layout_below="@+id/imageTrackInHead"
+        android:layout_below="@+id/imageDirectionInHead"
         android:layout_centerHorizontal="true"
         android:maxLines="1"
         android:gravity="center"
         android:layout_marginTop="32dp"
-        android:text="貓狗．24小時急診．只收信用卡"
         android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/textServiceInfoSubInHead"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignTop="@+id/textServiceInfoInHead"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="8dp"
+        android:gravity="center"
+        android:text="@string/global_next2"/>
     <RatingBar
         android:id="@+id/ratingInHead"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:theme="@style/RatingBar"
-        style="@style/Widget.AppCompat.RatingBar.Small"
+        style="@style/Widget.AppCompat.RatingBar.Indicator"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/textServiceInfoInHead"
         android:layout_marginTop="8dp"
@@ -138,25 +166,24 @@
     <TextView
         android:id="@+id/textRatioInHead"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="40dp"
         android:layout_marginStart="40dp"
         android:gravity="center"
         android:textStyle="bold"
-        android:textColor="@color/colorBlue"
-        android:text="4.8"
+        android:textColor="@color/colorBlueFor6398D9"
         android:layout_toStartOf="@+id/ratingInHead"
         android:layout_alignTop="@+id/ratingInHead"
         android:layout_marginEnd="8dp"/>
     <TextView
         android:id="@+id/textStateInHead"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="40dp"
         android:layout_toEndOf="@+id/ratingInHead"
         android:layout_alignTop="@+id/ratingInHead"
         android:layout_marginStart="8dp"
-        android:text="營業中"
-        android:textColor="@color/colorGreenLight"
+        android:textColor="@color/colorGreenFor96E7A5"
         android:maxLines="1"
         android:ellipsize="end"
-        android:gravity="center_vertical"/>
+        android:gravity="center_vertical"
+        android:visibility="gone"/>
 </RelativeLayout>

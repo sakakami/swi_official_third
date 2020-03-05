@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/layoutAttractionInfo">
+    android:id="@+id/layoutAttractionInfo"
+    android:background="@color/colorWhiteForFFFFFF"
+    android:visibility="gone">
     <TextView
         android:id="@+id/textTitleInAttractionInfo"
         android:layout_width="wrap_content"
@@ -11,17 +13,33 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:gravity="center_vertical"
-        android:text="資訊"/>
-
+        android:text="@string/info_about"/>
+    <ImageView
+        android:id="@+id/imageEditInAttractionInfo"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:contentDescription="@string/content_description"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/edit_v1_1"
+        android:padding="6dp"/>
+    <View
+        android:id="@+id/viewBarInAttractionInfo"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorWhiteForD0D0D0"
+        android:layout_below="@+id/textTitleInAttractionInfo"
+        android:layout_marginTop="4dp"/>
     <ImageView
         android:id="@+id/imageHead1InAttractionInfo"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_below="@+id/textTitleInAttractionInfo"
+        android:layout_below="@+id/viewBarInAttractionInfo"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:contentDescription="@string/content_description"
-        app:srcCompat="@android:drawable/ic_menu_mapmode" />
+        app:srcCompat="@drawable/a_add_v11" />
     <TextView
         android:id="@+id/textAddressInAttractionInfo"
         android:layout_width="match_parent"
@@ -30,18 +48,16 @@
         android:layout_toEndOf="@+id/imageHead1InAttractionInfo"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="32dp"
-        android:layout_alignTop="@+id/imageHead1InAttractionInfo"
-        android:text="407台灣台中市西屯區遼東路二段101號" />
-
+        android:layout_alignTop="@+id/imageHead1InAttractionInfo" />
     <ImageView
         android:id="@+id/imageHead2InAttractionInfo"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_below="@+id/imageHead1InAttractionInfo"
+        android:layout_below="@+id/textAddressInAttractionInfo"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:contentDescription="@string/content_description"
-        app:srcCompat="@android:drawable/ic_menu_call" />
+        app:srcCompat="@drawable/a_ad_phone_v11" />
     <TextView
         android:id="@+id/textPhoneInAttractionInfo"
         android:layout_width="wrap_content"
@@ -53,18 +69,16 @@
         android:gravity="center_vertical"
         android:maxLines="1"
         android:ellipsize="end"
-        android:text="+886 4 2251 1777"
         android:layout_below="@+id/textAddressInAttractionInfo"/>
-
     <ImageView
         android:id="@+id/imageHead3InAttractionInfo"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_below="@+id/imageHead2InAttractionInfo"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:contentDescription="@string/content_description"
-        app:srcCompat="@android:drawable/ic_menu_compass" />
+        app:srcCompat="@drawable/a_message_v11" />
     <TextView
         android:id="@+id/textNetInAttractionInfo"
         android:layout_width="wrap_content"
@@ -76,18 +90,18 @@
         android:gravity="center_vertical"
         android:maxLines="1"
         android:ellipsize="end"
-        android:text="http://www.ncoc-ntt.org/"
+        android:autoLink="web"
+        android:textColorLink="@android:color/holo_blue_dark"
         android:layout_below="@+id/textPhoneInAttractionInfo"/>
-
     <ImageView
         android:id="@+id/imageHead4InAttractionInfo"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_below="@+id/imageHead3InAttractionInfo"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:contentDescription="@string/content_description"
-        app:srcCompat="@android:drawable/ic_menu_recent_history" />
+        app:srcCompat="@drawable/a_time_v11" />
     <TextView
         android:id="@+id/textStateInAttractionInfo"
         android:layout_width="wrap_content"
@@ -96,7 +110,6 @@
         android:layout_marginStart="8dp"
         android:gravity="center"
         android:textStyle="bold"
-        android:text="營業中"
         android:layout_toEndOf="@+id/imageHead4InAttractionInfo"
         android:layout_alignTop="@+id/imageHead4InAttractionInfo"/>
     <TextView
@@ -106,7 +119,6 @@
         android:layout_below="@+id/textStateInAttractionInfo"
         android:layout_alignStart="@+id/textStateInAttractionInfo"
         android:gravity="center"
-        android:text="營業時間：12:30 - 19:30"
         android:layout_marginBottom="8dp"/>
     <TextView
         android:id="@+id/textShowMoreInAttractionInfo"
@@ -115,8 +127,7 @@
         android:layout_alignTop="@+id/textTimeInAttractionInfo"
         android:layout_toEndOf="@+id/textTimeInAttractionInfo"
         android:gravity="center"
-        android:layout_marginStart="8dp"
-        android:text="V"/>
+        android:layout_marginStart="8dp"/>
     <TextView
         android:id="@+id/textTimeDetailInAttractionInfo"
         android:layout_width="match_parent"
@@ -125,5 +136,6 @@
         android:layout_toEndOf="@+id/imageHead4InAttractionInfo"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginBottom="8dp"
+        android:lineSpacingMultiplier="1.5"/>
 </RelativeLayout>

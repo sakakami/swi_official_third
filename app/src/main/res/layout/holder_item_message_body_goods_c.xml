@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/layoutMessageBodyGoodsC"
+    android:background="@color/colorWhiteForFFFFFF"
+    android:visibility="gone">
+    <TextView
+        android:id="@+id/textTitleInMessageBodyGoodsC"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_blue_full"
+        android:textColor="@color/colorWhiteForFBFBFB"
+        android:gravity="center"/>
+</RelativeLayout>

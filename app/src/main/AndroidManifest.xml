@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.switube.www.swiofficialthird">
+    package="com.switube.www.landmark2018test">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
@@ -9,6 +9,9 @@
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
     <application
         android:allowBackup="false"
@@ -16,11 +19,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name=".app.MyApplication"
+        android:name="com.switube.www.landmark2018test.MyApplication"
         android:theme="@style/AppTheme">
         <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
         <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyDHyj4W5pTL1UKkmmr17M6G0z9CCgGHwfY"/>
-        <activity android:name=".home.view.MainActivity"
+        <activity android:name="com.switube.www.landmark2018test.MainActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden|adjustResize">
@@ -31,7 +35,7 @@
             </intent-filter>
         </activity>
         <provider
-            android:authorities="com.switube.www.swiofficialthird.provider"
+            android:authorities="com.switube.www.landmark2018test.provider"
             android:name="android.support.v4.content.FileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
@@ -39,6 +43,15 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/take_photo_path"/>
         </provider>
+        <activity android:name="com.facebook.CustomTabActivity" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="@string/facebook_app_id_scheme"/>
+            </intent-filter>
+        </activity>
+        <service android:name="com.switube.www.landmark2018test.service.FloatPlayerService"/>
     </application>
 
 </manifest>

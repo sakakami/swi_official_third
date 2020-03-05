@@ -7,14 +7,15 @@
         android:id="@+id/viewBarInItemSelectService"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:background="@drawable/bg_gray_2_urround"/>
+        android:background="@drawable/bg_gray_2_surround"/>
     <ImageView
         android:id="@+id/imageHeadInItemSelectService"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginStart="8dp"
         android:contentDescription="@string/content_description"
-        app:srcCompat="@drawable/a0001" />
+        app:srcCompat="@drawable/add_v1_1"
+        android:padding="8dp"/>
     <TextView
         android:id="@+id/textContentInItemSelectService"
         android:layout_width="match_parent"
@@ -27,6 +28,6 @@
         android:id="@+id/viewBar2InItemSelectService"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="@color/colorWhiteForEdit"
+        android:background="@color/colorWhiteForE8EBEF"
         android:layout_marginTop="15dp"/>
 </RelativeLayout>

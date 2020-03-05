@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/layoutItemThreeFinishEbike"
-    android:background="@color/colorBlackForTranslucent"
+    android:background="@color/colorBlackFor99000000"
+    android:elevation="20dp"
     android:visibility="gone">
     <View
         android:id="@+id/viewBarInItemThreeFinishEbike"
@@ -12,12 +13,14 @@
         android:layout_centerInParent="true"
         android:layout_marginEnd="32dp"
         android:layout_marginStart="32dp"
-        android:background="@drawable/bg_white_message_map_full"/>
+        android:background="@drawable/bg_white_message_map_full"
+        android:clickable="true"
+        android:focusable="true"/>
     <TextView
         android:id="@+id/textTitleInItemThreeFinishEbike"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/ebike_finish_title"
+        android:text="@string/map_ebike_finish"
         android:textSize="24sp"
         android:textStyle="bold"
         android:gravity="center"
@@ -39,7 +42,7 @@
         android:layout_marginStart="48dp"
         android:layout_marginEnd="48dp"
         android:layout_marginTop="24dp"
-        android:text="獲取旅程回憶"
+        android:text="@string/map_ebike_finish_route"
         android:gravity="center"
         android:textSize="20sp"
         android:background="@drawable/bg_white_buttom_surround"/>
@@ -54,7 +57,7 @@
         android:layout_marginEnd="48dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="24dp"
-        android:text="查看消費明細"
+        android:text="@string/map_ebike_finish_view"
         android:gravity="center"
         android:textSize="20sp"
         android:background="@drawable/bg_white_buttom_surround"/>

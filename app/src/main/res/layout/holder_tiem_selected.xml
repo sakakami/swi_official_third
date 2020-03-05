@@ -14,8 +14,8 @@
         android:gravity="center_vertical"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:textColor="@color/colorWhiteForWord"
-        android:background="@color/colorGrayForTag"/>
+        android:textColor="@color/colorWhiteForFBFBFB"
+        android:background="@color/colorGrayFor6F6F6F"/>
     <ImageView
         android:id="@+id/imageCleanAInItemSelected"
         android:layout_width="30dp"
@@ -23,7 +23,8 @@
         android:layout_alignEnd="@+id/textTitleAInItemSelected"
         android:layout_alignTop="@+id/textTitleAInItemSelected"
         android:contentDescription="@string/content_description"
-        app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+        app:srcCompat="@drawable/delete_on"
+        android:padding="6dp"/>
     <TextView
         android:id="@+id/textTitleBInItemSelected"
         android:layout_width="wrap_content"
@@ -35,8 +36,8 @@
         android:gravity="center_vertical"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:textColor="@color/colorWhiteForWord"
-        android:background="@color/colorGrayForTag"
+        android:textColor="@color/colorWhiteForFBFBFB"
+        android:background="@color/colorGrayFor6F6F6F"
         android:layout_toEndOf="@+id/textTitleAInItemSelected"/>
     <ImageView
         android:id="@+id/imageCleanBInItemSelected"
@@ -45,5 +46,6 @@
         android:layout_alignEnd="@+id/textTitleBInItemSelected"
         android:layout_alignTop="@+id/textTitleBInItemSelected"
         android:contentDescription="@string/content_description"
-        app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+        app:srcCompat="@drawable/delete_on"
+        android:padding="6dp"/>
 </RelativeLayout>

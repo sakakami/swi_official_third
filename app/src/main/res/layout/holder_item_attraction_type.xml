@@ -3,12 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+    <View
+        android:id="@+id/viewBarInItemAttractionType"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/colorWhiteForE0E0E0"/>
     <ImageView
         android:id="@+id/imageHeadInItemAttractionType"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:contentDescription="@string/content_description"
-        app:srcCompat="@drawable/a0001" />
+        android:padding="8dp"/>
     <TextView
         android:id="@+id/textTitleInItemAttractionType"
         android:layout_width="match_parent"
@@ -16,5 +21,7 @@
         android:layout_toEndOf="@+id/imageHeadInItemAttractionType"
         android:maxLines="1"
         android:layout_marginStart="16dp"
-        android:ellipsize="end"/>
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:textColor="@color/colorBlackFor000000"/>
 </RelativeLayout>

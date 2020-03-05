@@ -1,49 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorPrimary">
+    android:layout_height="match_parent">
     <ImageView
         android:id="@+id/imagePhotoInItemPhotoView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/viewBarInItemPhotoView"/>
-    <View
-        android:id="@+id/viewBarInItemPhotoView"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="70dp"
-        android:background="@color/colorGray"/>
-
-    <ImageView
-        android:id="@+id/imageHeadInItemPhotoView"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="15dp"
-        android:layout_marginStart="16dp"
-        android:contentDescription="@string/content_description"
-        android:src="@drawable/com_facebook_profile_picture_blank_square" />
-    <TextView
-        android:id="@+id/textNameInItemPhotoView"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:layout_alignTop="@+id/imageHeadInItemPhotoView"
-        android:layout_toEndOf="@+id/imageHeadInItemPhotoView"
-        android:layout_marginStart="16dp"
-        android:textColor="@color/colorWhiteForWord"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:text="柯宗慶"/>
-    <TextView
-        android:id="@+id/textMessageInItemPhotoView"
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:layout_below="@+id/textNameInItemPhotoView"
-        android:layout_toEndOf="@+id/imageHeadInItemPhotoView"
-        android:layout_marginStart="16dp"
-        android:textColor="@color/colorWhiteForWord"
-        android:gravity="center_vertical"
-        android:text="Images may be subject to copyright."/>
+        android:layout_height="match_parent"/>
 </RelativeLayout>

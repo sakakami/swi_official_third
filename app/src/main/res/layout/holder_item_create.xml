@@ -8,12 +8,30 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:contentDescription="@string/content_description"
-        app:srcCompat="@drawable/gps_go_v1_1"
-        android:padding="4dp"/>
+        app:srcCompat="@drawable/locatename_v11"
+        android:padding="8dp"/>
     <TextView
         android:id="@+id/textTitleInItemCreate"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="30dp"
         android:layout_toEndOf="@+id/imagePhotoInItemCreate"
+        android:gravity="center_vertical"
+        android:textStyle="bold"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:maxLines="1"
+        android:ellipsize="end"/>
+    <TextView
+        android:id="@+id/textMessageInItemCreate"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_below="@+id/textTitleInItemCreate"
+        android:layout_alignStart="@+id/textTitleInItemCreate"
+        android:layout_alignEnd="@+id/textTitleInItemCreate"
         android:gravity="center_vertical"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/imagePhotoInItemCreate"
+        android:background="@color/colorWhiteForEDEDED"/>
 </RelativeLayout>

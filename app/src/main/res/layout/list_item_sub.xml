@@ -9,7 +9,8 @@
         android:contentDescription="@string/content_description"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginBottom="8dp"
+        android:padding="4dp"/>
     <TextView
         android:id="@+id/textTitleInListItemSub"
         android:layout_width="match_parent"
@@ -20,4 +21,12 @@
         android:gravity="center_vertical"
         android:maxLines="1"
         android:layout_marginEnd="16dp"/>
+    <View
+        android:id="@+id/viewBarInListItemSub"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/imageIconInListItemSub"
+        android:layout_alignStart="@+id/textTitleInListItemSub"
+        android:background="@color/colorGrayForA0FFFFFF"
+        android:visibility="gone"/>
 </RelativeLayout>

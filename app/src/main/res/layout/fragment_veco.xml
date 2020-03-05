@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.VEco">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorWhiteForE0E0E0"/>
+    <TextView
+        android:id="@+id/textBackInEco"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="@string/global_back"/>
+    <TextView
+        android:id="@+id/textOkInEco"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="@string/global_ok"
+        android:layout_alignParentEnd="true"/>
+    <TextView
+        android:id="@+id/textTitleInEco"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_toEndOf="@+id/textBackInEco"
+        android:layout_toStartOf="@+id/textOkInEco"
+        android:gravity="center"
+        android:text="節能紀錄"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
+    <View
+        android:id="@+id/viewBarInEco"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/textTitleInEco"
+        android:background="@color/colorGrayFor5F5F5F"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerInEco"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/viewBarInEco"/>
+
+</RelativeLayout>

@@ -3,157 +3,121 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/layoutMessageBody">
-    <TextView
-        android:id="@+id/textTagInMessageBody"
+    android:id="@+id/layoutMessageBody"
+    android:background="@color/colorWhiteForFFFFFF"
+    android:visibility="gone">
+    <View
+        android:id="@+id/viewBarTopInMessageBody"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center_vertical"
-        android:text="@string/tag"/>
-    <RelativeLayout
-        android:id="@+id/layoutGoodsInMessageBody"
+        android:layout_height="2dp"
+        android:background="@color/colorWhiteForF8F8F9"
+        android:layout_below="@+id/imageGoodInMessageBody"
+        android:layout_marginTop="8dp"/>
+    <View
+        android:id="@+id/viewBarBottomInMessageBody"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textTagInMessageBody"
+        android:layout_height="2dp"
+        android:layout_below="@+id/imageMessageInMessageBody"
         android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp">
-        <TextView
-            android:id="@+id/textCostInMessageBody"
-            android:layout_width="60dp"
-            android:layout_height="30dp"
-            android:gravity="center"
-            android:text="$11.99"/>
-        <TextView
-            android:id="@+id/textSillInMessageBody"
-            android:layout_width="60dp"
-            android:layout_height="20dp"
-            android:layout_below="@+id/textCostInMessageBody"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:textColor="	#00db00"
-            android:text="In Stock."/>
-        <TextView
-            android:id="@+id/textSillDetailInMessageBody"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textSillInMessageBody"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="8dp"
-            android:gravity="center_vertical"
-            android:text="@string/permission"/>
-        <ImageView
-            android:id="@+id/imagePermissionInMessageBody"
-            android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:layout_below="@+id/textSillDetailInMessageBody"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:contentDescription="@string/content_description"
-            app:srcCompat="@drawable/license" />
-        <TextView
-            android:id="@+id/textPermissionInMessageBody"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_below="@+id/imagePermissionInMessageBody"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="8dp"
-            android:gravity="center"
-            android:text="CC0 License"/>
-        <TextView
-            android:id="@+id/textPermissionDetailInMessageBody"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textPermissionInMessageBody"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="8dp"
-            android:gravity="center_vertical"
-            android:text="@string/message"/>
-        <TextView
-            android:id="@+id/textPermissionLinkInMessageBody"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_below="@+id/textPermissionDetailInMessageBody"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:gravity="center_vertical"
-            android:text="Learn more about the license"/>
-        <TextView
-            android:id="@+id/textOkInMessageBody"
-            android:layout_width="160dp"
-            android:layout_height="30dp"
-            android:layout_below="@+id/textPermissionLinkInMessageBody"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:background="@drawable/bg_red_full"
-            android:textColor="@color/colorWhiteForWord"
-            android:text="我要認養"/>
-    </RelativeLayout>
+        android:background="@color/colorWhiteForF8F8F9"/>
     <ImageView
         android:id="@+id/imageMessageInMessageBody"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_below="@+id/layoutGoodsInMessageBody"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="16dp"
         android:padding="4dp"
         android:contentDescription="@string/content_description"
-        app:srcCompat="@drawable/comment_v1_1" />
+        app:srcCompat="@drawable/c_comment_v11"
+        android:layout_below="@+id/imageGoodInMessageBody" />
+    <TextView
+        android:id="@+id/textMessageInMessageBody"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/imageMessageInMessageBody"
+        android:layout_toEndOf="@+id/imageMessageInMessageBody"
+        android:text="@string/info_comment"
+        android:gravity="center"
+        android:layout_marginStart="8dp"/>
     <ImageView
         android:id="@+id/imageShareInMessageBody"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_alignTop="@+id/imageMessageInMessageBody"
         android:layout_marginStart="8dp"
-        android:layout_toEndOf="@+id/imageMessageInMessageBody"
         android:contentDescription="@string/content_description"
         android:padding="5dp"
-        app:srcCompat="@drawable/share_v1_1" />
+        android:layout_toStartOf="@+id/textShareInMessageBody"
+        app:srcCompat="@drawable/c_share_v11"
+        android:layout_marginEnd="8dp"/>
+    <TextView
+        android:id="@+id/textShareInMessageBody"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/imageShareInMessageBody"
+        android:text="@string/info_share"
+        android:gravity="center"
+        android:layout_marginEnd="70dp"/>
+    <View
+        android:id="@+id/viewBarInMessageBody"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:layout_centerHorizontal="true"/>
     <ImageView
         android:id="@+id/imageLoveInMessageBody"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_alignTop="@+id/imageMessageInMessageBody"
-        android:layout_marginStart="8dp"
-        android:layout_toEndOf="@+id/imageShareInMessageBody"
         android:contentDescription="@string/content_description"
         android:padding="4dp"
-        app:srcCompat="@drawable/sub_2_v1_1" />
-    <ImageView
-        android:id="@+id/imageBadInMessageBody"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/imageMessageInMessageBody"
-        android:layout_marginEnd="16dp"
-        android:contentDescription="@string/content_description"
-        android:padding="6dp"
-        app:srcCompat="@drawable/like_v1_1" />
+        android:src="@drawable/love_off_2x"
+        android:layout_toStartOf="@+id/viewBarInMessageBody"
+        android:layout_marginEnd="4dp"
+        android:visibility="gone"/>
     <TextView
-        android:id="@+id/textCountInMessageBody"
+        android:id="@+id/textLoveInMessageBody"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_toStartOf="@+id/imageBadInMessageBody"
-        android:layout_alignTop="@+id/imageMessageInMessageBody"
-        android:layout_marginEnd="8dp"
-        android:gravity="center"
-        android:text="0"/>
+        android:layout_toEndOf="@+id/viewBarInMessageBody"
+        android:layout_alignTop="@+id/imageLoveInMessageBody"
+        android:layout_marginStart="4dp"/>
     <ImageView
         android:id="@+id/imageGoodInMessageBody"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_alignTop="@+id/imageMessageInMessageBody"
-        android:layout_marginEnd="8dp"
-        android:layout_toStartOf="@+id/textCountInMessageBody"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:contentDescription="@string/content_description"
         android:padding="6dp"
-        app:srcCompat="@drawable/unlike_v1_1" />
+        app:srcCompat="@drawable/like_fornote_v11" />
+    <TextView
+        android:id="@+id/textCountInMessageBody"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_toEndOf="@+id/imageGoodInMessageBody"
+        android:layout_marginEnd="8dp"
+        android:gravity="center"
+        android:layout_alignTop="@+id/imageGoodInMessageBody"
+        android:text="0"/>
+    <ImageView
+        android:id="@+id/imageBadInMessageBody"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="8dp"
+        android:layout_toEndOf="@+id/textCountInMessageBody"
+        android:contentDescription="@string/content_description"
+        android:padding="6dp"
+        android:layout_alignTop="@+id/imageGoodInMessageBody"
+        app:srcCompat="@drawable/dislike_fornote_v11" />
+    <TextView
+        android:id="@+id/textAllMessageInMessageBody"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginEnd="16dp"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/imageBadInMessageBody"
+        android:layout_alignTop="@+id/imageGoodInMessageBody"
+        android:gravity="end"/>
 </RelativeLayout>

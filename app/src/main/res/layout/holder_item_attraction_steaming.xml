@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <include layout="@layout/layout_item_message_head"/>
+    <include layout="@layout/holder_item_message_head_customer"/>
+    <include layout="@layout/holder_item_message_head_photo"/>
+    <include layout="@layout/layout_item_message_body"/>
+    <include layout="@layout/layout_item_message_end_message"/>
+    <include layout="@layout/layout_item_message_end"/>
+</LinearLayout>

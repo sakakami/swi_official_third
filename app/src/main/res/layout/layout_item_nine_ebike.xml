@@ -3,16 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/layoutItemNineEbike"
-    android:background="@color/colorBlackForTranslucent"
+    android:background="@color/colorBlackFor99000000"
+    android:elevation="20dp"
     android:visibility="gone">
     <View
         android:id="@+id/viewBarInItemNineEbike"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="380dp"
         android:layout_centerInParent="true"
         android:layout_marginEnd="32dp"
         android:layout_marginStart="32dp"
-        android:background="@drawable/bg_white_message_map_full"/>
+        android:background="@drawable/bg_white_message_map_full"
+        android:focusable="true"
+        android:clickable="true"/>
     <TextView
         android:id="@+id/textTitleInItemNineEbike"
         android:layout_width="wrap_content"
@@ -21,16 +24,15 @@
         android:layout_alignTop="@+id/viewBarInItemNineEbike"
         android:layout_marginTop="16dp"
         android:gravity="center"
-        android:text="@string/ebike_select_title"
+        android:text="@string/map_ebike_select_title"
         android:textStyle="bold"
         android:textSize="26sp"/>
     <TextView
         android:id="@+id/textCenterInItemNineEbike"
         android:layout_width="80dp"
         android:layout_height="30dp"
-        android:layout_below="@+id/textTitleInItemNineEbike"
+        android:layout_below="@+id/textCenterSubInItemNineEbike"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
         android:gravity="center"
         android:textSize="18sp"
         android:maxLines="1"/>
@@ -38,10 +40,11 @@
         android:id="@+id/textCenterSubInItemNineEbike"
         android:layout_width="80dp"
         android:layout_height="20dp"
-        android:layout_below="@+id/textCenterInItemNineEbike"
+        android:layout_below="@+id/textTitleInItemNineEbike"
         android:layout_alignStart="@+id/textCenterInItemNineEbike"
         android:gravity="center"
-        android:text="@string/ebike_distance"/>
+        android:layout_marginTop="16dp"
+        android:text="@string/map_ebike_distance"/>
     <TextView
         android:id="@+id/textRightInItemNineEbike"
         android:layout_width="80dp"
@@ -56,10 +59,10 @@
         android:id="@+id/textRightSubInItemNineEbike"
         android:layout_width="80dp"
         android:layout_height="20dp"
-        android:layout_below="@+id/textRightInItemNineEbike"
+        android:layout_alignTop="@+id/textCenterSubInItemNineEbike"
         android:layout_alignStart="@+id/textRightInItemNineEbike"
         android:gravity="center"
-        android:text="@string/ebike_cost"/>
+        android:text="@string/map_ebike_cost"/>
     <TextView
         android:id="@+id/textLeftInItemNineEbike"
         android:layout_width="80dp"
@@ -74,15 +77,15 @@
         android:id="@+id/textLeftSubInItemNineEbike"
         android:layout_width="80dp"
         android:layout_height="20dp"
-        android:layout_below="@+id/textRightInItemNineEbike"
+        android:layout_alignTop="@+id/textCenterSubInItemNineEbike"
         android:layout_alignStart="@+id/textLeftInItemNineEbike"
         android:gravity="center"
-        android:text="@string/ebike_power"/>
+        android:text="@string/map_ebike_power"/>
     <RadioGroup
         android:id="@+id/radioGroupInItemNineEbike"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textCenterSubInItemNineEbike"
+        android:layout_below="@+id/textCenterInItemNineEbike"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="32dp">
         <RadioButton
@@ -95,7 +98,7 @@
             android:gravity="center_vertical"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:textColor="@color/colorGray"/>
+            android:textColor="@color/colorGrayFor5F5F5F"/>
         <RadioButton
             android:id="@+id/radioTwoInItemNineEbike"
             android:layout_width="wrap_content"
@@ -106,7 +109,7 @@
             android:gravity="center_vertical"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:textColor="@color/colorGray"/>
+            android:textColor="@color/colorGrayFor5F5F5F"/>
         <RadioButton
             android:id="@+id/radioThreeInItemNineEbike"
             android:layout_width="wrap_content"
@@ -117,8 +120,34 @@
             android:gravity="center_vertical"
             android:paddingEnd="16dp"
             android:paddingStart="16dp"
-            android:textColor="@color/colorGray"/>
+            android:textColor="@color/colorGrayFor5F5F5F"/>
     </RadioGroup>
+    <TextView
+        android:id="@+id/textCostAInItemNineEbike"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_alignTop="@+id/radioGroupInItemNineEbike"
+        android:layout_toEndOf="@+id/radioGroupInItemNineEbike"
+        android:text="(500/day)"
+        android:gravity="bottom"/>
+    <TextView
+        android:id="@+id/textCostBInItemNineEbike"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_below="@+id/textCostAInItemNineEbike"
+        android:layout_alignStart="@+id/textCostAInItemNineEbike"
+        android:text="(400/day)"
+        android:gravity="bottom"
+        android:layout_marginTop="8dp"/>
+    <TextView
+        android:id="@+id/textCostCInItemNineEbike"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:layout_below="@+id/textCostBInItemNineEbike"
+        android:layout_alignStart="@+id/textCostAInItemNineEbike"
+        android:text="(300/day)"
+        android:gravity="bottom"
+        android:layout_marginTop="8dp"/>
     <TextView
         android:id="@+id/textRightBottomInItemNineEbike"
         android:layout_width="120dp"
@@ -127,9 +156,9 @@
         android:layout_marginTop="32dp"
         android:layout_alignEnd="@+id/viewBarInItemNineEbike"
         android:layout_marginEnd="16dp"
-        android:background="@color/colorBlack"
-        android:text="@string/ebike_confirm"
-        android:textColor="@color/colorWhite"
+        android:background="@color/colorBlackFor000000"
+        android:text="@string/global_confirm"
+        android:textColor="@color/colorWhiteForFFFFFF"
         android:gravity="center"
         android:textSize="18sp"
         android:textStyle="bold"/>
@@ -140,7 +169,7 @@
         android:layout_alignTop="@+id/textRightBottomInItemNineEbike"
         android:layout_alignStart="@+id/viewBarInItemNineEbike"
         android:layout_marginStart="16dp"
-        android:text="@string/ebike_cancel"
+        android:text="@string/global_cancel"
         android:textSize="18sp"
         android:gravity="center"
         android:textStyle="bold"

@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/colorWhiteForFFFFFF">
     <ImageView
         android:id="@+id/imageMarkInItemCreateAttraction"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:contentDescription="@string/content_description"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"/>
+        android:layout_marginTop="16dp"
+        android:padding="4dp"/>
     <TextView
         android:id="@+id/textTitleInItemCreateAttraction"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:layout_toEndOf="@+id/imageMarkInItemCreateAttraction"
         android:layout_marginTop="16dp"
-        android:layout_marginStart="32dp"/>
+        android:layout_marginStart="32dp"
+        android:textStyle="bold"/>
     <EditText
         android:id="@+id/editMessageInItemCreateAttraction"
         android:layout_width="match_parent"
@@ -23,7 +26,11 @@
         android:layout_alignStart="@+id/textTitleInItemCreateAttraction"
         android:layout_marginEnd="16dp"
         android:layout_below="@+id/textTitleInItemCreateAttraction"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="16dp"
+        android:textSize="14sp"
+        android:textColor="@color/colorGrayFor808080"
+        android:maxLength="150"
+        android:theme="@style/EditColor"/>
     <TextView
         android:id="@+id/textMessageInItemCreateAttraction"
         android:layout_width="match_parent"
@@ -35,11 +42,11 @@
     <View
         android:id="@+id/viewBarInItemCreateAttraction"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="1dp"
         android:layout_below="@+id/textMessageInItemCreateAttraction"
         android:layout_alignStart="@+id/textMessageInItemCreateAttraction"
         android:layout_alignEnd="@+id/textMessageInItemCreateAttraction"
-        android:background="@color/colorGray"/>
+        android:background="@color/colorGrayFor757575"/>
     <TextView
         android:id="@+id/textTimeAInItemCreateAttraction"
         android:layout_width="wrap_content"
@@ -54,7 +61,8 @@
         android:layout_below="@+id/textTitleInItemCreateAttraction"
         android:layout_alignParentEnd="true"
         android:layout_toEndOf="@+id/textTimeAInItemCreateAttraction"
-        android:gravity="end"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
         android:layout_marginTop="16dp"/>
     <TextView
         android:id="@+id/textCountInItemCreateAttraction"
@@ -63,7 +71,6 @@
         android:layout_below="@+id/editMessageInItemCreateAttraction"
         android:layout_alignEnd="@+id/editMessageInItemCreateAttraction"
         android:gravity="center"
-        android:text="150/150"
         android:layout_marginEnd="16dp"/>
     <CheckBox
         android:id="@+id/checkboxInItemCreateAttraction"
@@ -87,7 +94,11 @@
         android:contentDescription="@string/content_description"
         android:layout_below="@+id/textTitleInItemCreateAttraction"
         android:layout_alignStart="@+id/textTitleInItemCreateAttraction"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="16dp"
+        android:src="@drawable/add_off_v11"
+        android:scaleType="centerCrop"
+        android:padding="28dp"
+        android:background="@drawable/bg_gray_4_surround"/>
     <ImageView
         android:id="@+id/imageBInItemCreateAttraction"
         android:layout_width="100dp"
@@ -95,7 +106,10 @@
         android:contentDescription="@string/content_description"
         android:layout_alignTop="@+id/imageAInItemCreateAttraction"
         android:layout_toEndOf="@+id/imageAInItemCreateAttraction"
-        android:layout_marginStart="8dp"/>
+        android:layout_marginStart="8dp"
+        android:src="@drawable/add_off_v11"
+        android:padding="28dp"
+        android:background="@drawable/bg_gray_4_surround"/>
     <TextView
         android:id="@+id/textPhotoCountInItemCreateAttraction"
         android:layout_width="wrap_content"
@@ -104,6 +118,18 @@
         android:layout_alignStart="@+id/imageAInItemCreateAttraction"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:gravity="center"/>
+    <TextView
+        android:id="@+id/textRemoveInItemCreateAttraction"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/edit_attraction_remove"
         android:gravity="center"
-        android:text="+6 PHOTOS"/>
+        android:textColor="@color/colorWhiteForFFFFFF"
+        android:background="@drawable/bg_blue_full"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone"/>
 </RelativeLayout>
