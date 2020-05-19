@@ -1,11 +1,12 @@
 package com.switube.www.landmark2018test.adapter;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.switube.www.landmark2018test.R;
 import com.switube.www.landmark2018test.adapter.callback.IACarbon;
@@ -51,30 +52,10 @@ public class ACarbon extends RecyclerView.Adapter<ACarbon.ViewHolder> {
             name = itemView.findViewById(R.id.textNameItemCashFlow);
             distance = itemView.findViewById(R.id.textMessageItemCashFlow);
             carbon = itemView.findViewById(R.id.textCashItemCashFlow);
-            date.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    iaCarbon.handleItemClick(eCarBonLists.get(getAdapterPosition()));
-                }
-            });
-            name.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    iaCarbon.handleItemClick(eCarBonLists.get(getAdapterPosition()));
-                }
-            });
-            distance.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    iaCarbon.handleItemClick(eCarBonLists.get(getAdapterPosition()));
-                }
-            });
-            carbon.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    iaCarbon.handleItemClick(eCarBonLists.get(getAdapterPosition()));
-                }
-            });
+            date.setOnClickListener(view -> iaCarbon.handleItemClick(eCarBonLists.get(getAdapterPosition())));
+            name.setOnClickListener(view -> iaCarbon.handleItemClick(eCarBonLists.get(getAdapterPosition())));
+            distance.setOnClickListener(view -> iaCarbon.handleItemClick(eCarBonLists.get(getAdapterPosition())));
+            carbon.setOnClickListener(view -> iaCarbon.handleItemClick(eCarBonLists.get(getAdapterPosition())));
         }
     }
 }

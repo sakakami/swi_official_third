@@ -1,9 +1,6 @@
 package com.switube.www.landmark2018test.adapter;
 
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +9,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.jakewharton.rxbinding2.view.RxView;
@@ -242,7 +242,6 @@ public class ALeaveCommnets extends RecyclerView.Adapter<ALeaveCommnets.ViewHold
                         @Override
                         public void onNext(CharSequence charSequence) {
                             if (charSequence.length() > 0) {
-                                Log.e("length", String.valueOf(charSequence.length()));
                                 MyApplication.getAppData().setEditCommentMode(true);
                             }
                             message = charSequence.toString();

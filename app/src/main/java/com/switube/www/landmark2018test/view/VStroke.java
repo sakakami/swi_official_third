@@ -2,12 +2,7 @@ package com.switube.www.landmark2018test.view;
 
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +11,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
@@ -130,10 +129,7 @@ public class VStroke extends Fragment implements IVStroke, IAStroke, IAStrokeAtt
                                                     getContext(),
                                                     R.string.stroke_title_create_message,
                                                     R.string.global_ok,
-                                                    new DialogInterface.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(DialogInterface dialogInterface, int i) { }
-                                                    });
+                                                    (dialogInterface, i) -> { });
                                     AlertDialogUtil.getInstance().showAlertDialog();
                                 }
                             }
@@ -172,7 +168,7 @@ public class VStroke extends Fragment implements IVStroke, IAStroke, IAStrokeAtt
                                 editText.setVisibility(View.GONE);
                                 pStroke.getPushStrokeData();
                             } else {
-                                getFragmentManager().popBackStack();
+                                getParentFragmentManager().popBackStack();
                             }
                         } else {
                             if (MyApplication.getAppData().getStrokeMode() == 1) {
@@ -181,7 +177,7 @@ public class VStroke extends Fragment implements IVStroke, IAStroke, IAStrokeAtt
                             } else {
                                 MyApplication.getAppData().setNormalMap(true);
                             }
-                            getFragmentManager().popBackStack();
+                            getParentFragmentManager().popBackStack();
                         }
                     }
 
@@ -266,17 +262,9 @@ public class VStroke extends Fragment implements IVStroke, IAStroke, IAStrokeAtt
                         getContext(),
                         R.string.stroke_title_delete_message,
                         R.string.global_confirm,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                pStroke.handleNewStroke("", "del", gSaveList.getData().get(index).getUrid(), 2);
-                            }
-                        },
+                        (dialogInterface, i) -> pStroke.handleNewStroke("", "del", gSaveList.getData().get(index).getUrid(), 2),
                         R.string.global_cancel,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {}
-                        });
+                        (dialogInterface, i) -> {});
         AlertDialogUtil.getInstance().showAlertDialog();
     }
 
@@ -291,17 +279,9 @@ public class VStroke extends Fragment implements IVStroke, IAStroke, IAStrokeAtt
                         view,
                         getString(R.string.stroke_create_title),
                         getString(R.string.global_ok),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                pStroke.handleNewStroke(editText.getText().toString(), "edit", gSaveList.getData().get(index).getUrid(), 3);
-                            }
-                        },
+                        (dialogInterface, i) -> pStroke.handleNewStroke(editText.getText().toString(), "edit", gSaveList.getData().get(index).getUrid(), 3),
                         getString(R.string.global_cancel),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {}
-                        });
+                        (dialogInterface, i) -> {});
         AlertDialogUtil.getInstance().showAlertDialog();
     }
 
@@ -320,7 +300,7 @@ public class VStroke extends Fragment implements IVStroke, IAStroke, IAStrokeAtt
                 break;
         }
         MyApplication.getAppData().setNormalMap(false);
-        getFragmentManager().popBackStack();
+        getParentFragmentManager().popBackStack();
     }
 
     @Override
@@ -340,7 +320,7 @@ public class VStroke extends Fragment implements IVStroke, IAStroke, IAStrokeAtt
 
     private IMainActivity iMainActivity;
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NotNull Context context) {
         super.onAttach(context);
         iMainActivity = (IMainActivity)context;
     }
@@ -402,21 +382,18 @@ public class VStroke extends Fragment implements IVStroke, IAStroke, IAStrokeAtt
                         getContext(),
                         view,
                         getString(R.string.global_ok),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                int size = aSaveList.getIsChecked().size();
-                                boolean canNext = false;
-                                for (int j = 0; j < size; j++) {
-                                    if (aSaveList.getIsChecked().get(j)) {
-                                        canNext = true;
-                                    }
+                        (dialogInterface, i) -> {
+                            int size = aSaveList.getIsChecked().size();
+                            boolean canNext = false;
+                            for (int j = 0; j < size; j++) {
+                                if (aSaveList.getIsChecked().get(j)) {
+                                    canNext = true;
                                 }
-                                if (canNext) {
-                                    pStroke.sendSaveData(gSaveList, aSaveList.getIsChecked(), aStrokeAttractionList.getgStrokeList().getData().get(saveTripIndex).getSpid());
-                                    AlertDialogUtil.getInstance().initDialogBuilder(getContext(), view1);
-                                    AlertDialogUtil.getInstance().showAlertDialog();
-                                }
+                            }
+                            if (canNext) {
+                                pStroke.sendSaveData(gSaveList, aSaveList.getIsChecked(), aStrokeAttractionList.getgStrokeList().getData().get(saveTripIndex).getSpid());
+                                AlertDialogUtil.getInstance().initDialogBuilder(getContext(), view1);
+                                AlertDialogUtil.getInstance().showAlertDialog();
                             }
                         }, true);
         AlertDialogUtil.getInstance().showAlertDialog();
@@ -434,10 +411,7 @@ public class VStroke extends Fragment implements IVStroke, IAStroke, IAStrokeAtt
                                             getContext(),
                                             R.string.stroke_title_create_message,
                                             R.string.global_ok,
-                                            new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialogInterface, int i) { }
-                                            });
+                                            (dialogInterface, i) -> { });
                             AlertDialogUtil.getInstance().showAlertDialog();
                         } else {
                             if (gSaveList.getData().size() < 10) {
@@ -448,10 +422,7 @@ public class VStroke extends Fragment implements IVStroke, IAStroke, IAStrokeAtt
                                                 getContext(),
                                                 R.string.stroke_title_create_message,
                                                 R.string.global_ok,
-                                                new DialogInterface.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(DialogInterface dialogInterface, int i) { }
-                                                });
+                                                (dialogInterface, i) -> { });
                                 AlertDialogUtil.getInstance().showAlertDialog();
                             }
                         }
@@ -477,10 +448,7 @@ public class VStroke extends Fragment implements IVStroke, IAStroke, IAStrokeAtt
                                             getContext(),
                                             R.string.stroke_title_create_message,
                                             R.string.global_ok,
-                                            new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialogInterface, int i) { }
-                                            });
+                                            (dialogInterface, i) -> { });
                             AlertDialogUtil.getInstance().showAlertDialog();
                         } else {
                             if (gSaveList.getData().size() < 10) {
@@ -491,10 +459,7 @@ public class VStroke extends Fragment implements IVStroke, IAStroke, IAStrokeAtt
                                                 getContext(),
                                                 R.string.stroke_title_create_message,
                                                 R.string.global_ok,
-                                                new DialogInterface.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(DialogInterface dialogInterface, int i) { }
-                                                });
+                                                (dialogInterface, i) -> { });
                                 AlertDialogUtil.getInstance().showAlertDialog();
                             }
                         }
@@ -543,7 +508,7 @@ public class VStroke extends Fragment implements IVStroke, IAStroke, IAStrokeAtt
         } else {
             MyApplication.getAppData().setFromStroke(true);
             iMainActivity.saveAttractionId(aStrokeAttractionList.getgStrokeList().getData().get(index).getSpid());
-            getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VInfo()).addToBackStack("VStroke").commit();
+            getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VInfo()).addToBackStack("VStroke").commit();
         }
     }
 
@@ -554,10 +519,7 @@ public class VStroke extends Fragment implements IVStroke, IAStroke, IAStrokeAtt
                         getContext(),
                         R.string.stroke_title_create_message,
                         R.string.global_ok,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) { }
-                        });
+                        (dialogInterface, i) -> { });
         AlertDialogUtil.getInstance().showAlertDialog();
     }
 
@@ -570,17 +532,9 @@ public class VStroke extends Fragment implements IVStroke, IAStroke, IAStrokeAtt
                         view,
                         getString(R.string.stroke_create_title),
                         getString(R.string.global_ok),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                pStroke.handleNewStroke(editText.getText().toString(), "add", "", 1);
-                            }
-                        },
+                        (dialogInterface, i) -> pStroke.handleNewStroke(editText.getText().toString(), "add", "", 1),
                         getString(R.string.global_cancel),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {}
-                        });
+                        (dialogInterface, i) -> {});
         AlertDialogUtil.getInstance().showAlertDialog();
     }
 
@@ -593,17 +547,9 @@ public class VStroke extends Fragment implements IVStroke, IAStroke, IAStrokeAtt
                         view,
                         getString(R.string.stroke_create_title),
                         getString(R.string.global_ok),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                pStroke.handleNewStroke(editText.getText().toString(), isCreate);
-                            }
-                        },
+                        (dialogInterface, i) -> pStroke.handleNewStroke(editText.getText().toString(), isCreate),
                         getString(R.string.global_cancel),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {}
-                        });
+                        (dialogInterface, i) -> {});
         AlertDialogUtil.getInstance().showAlertDialog();
     }
 }

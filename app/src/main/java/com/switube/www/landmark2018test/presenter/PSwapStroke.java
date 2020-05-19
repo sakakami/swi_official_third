@@ -1,7 +1,5 @@
 package com.switube.www.landmark2018test.presenter;
 
-import android.util.Log;
-
 import com.google.gson.Gson;
 import com.switube.www.landmark2018test.MyApplication;
 import com.switube.www.landmark2018test.entity.ESwapData;
@@ -50,7 +48,6 @@ public class PSwapStroke implements IPSwapStroke {
             map.put("urid", urid);
         }
         map.put("val", urspids);
-        Log.e("swap", map.toString());
         mSwapStroke.sendAddToStroke(map, eSwapDataList.get(0).isMyCollection(), fromPositionList, toPositionList);
     }
 

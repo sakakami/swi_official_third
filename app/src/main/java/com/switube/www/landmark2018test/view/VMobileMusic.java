@@ -1,20 +1,20 @@
 package com.switube.www.landmark2018test.view;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.switube.www.landmark2018test.MyApplication;
@@ -32,6 +32,8 @@ import com.switube.www.landmark2018test.util.SignInUtil;
 import com.switube.www.landmark2018test.view.callback.IFragmentBackHandler;
 import com.switube.www.landmark2018test.view.callback.IMainActivity;
 import com.switube.www.landmark2018test.view.callback.IVMobileMusic;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -135,7 +137,7 @@ public class VMobileMusic extends Fragment implements IAMobileMusic, IVMobileMus
                                     pMobileMusic.getMusicRadioData(MyApplication.getAppData().getTaid(), false);
                                 }
                             } else {
-                                getFragmentManager().popBackStack();
+                                getParentFragmentManager().popBackStack();
                             }
                         } else {
                             if (isSearch) {
@@ -157,7 +159,7 @@ public class VMobileMusic extends Fragment implements IAMobileMusic, IVMobileMus
                                         break;
                                 }
                             } else {
-                                getFragmentManager().popBackStack();
+                                getParentFragmentManager().popBackStack();
                             }
                         }
                     }
@@ -183,7 +185,7 @@ public class VMobileMusic extends Fragment implements IAMobileMusic, IVMobileMus
                         searchView.setVisibility(View.VISIBLE);
                         searchView.setIconifiedByDefault(false);
                         searchView.setIconified(false);
-                        aMobileMusic.refreshData(new ArrayList<String>(), new ArrayList<String>());
+                        aMobileMusic.refreshData(new ArrayList<>(), new ArrayList<>());
                     }
 
                     @Override
@@ -207,7 +209,7 @@ public class VMobileMusic extends Fragment implements IAMobileMusic, IVMobileMus
                         searchView.setVisibility(View.VISIBLE);
                         searchView.setIconifiedByDefault(false);
                         searchView.setIconified(false);
-                        aMobileMusic.refreshData(new ArrayList<String>(), new ArrayList<String>());
+                        aMobileMusic.refreshData(new ArrayList<>(), new ArrayList<>());
                     }
 
                     @Override
@@ -264,7 +266,7 @@ public class VMobileMusic extends Fragment implements IAMobileMusic, IVMobileMus
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NotNull Context context) {
         super.onAttach(context);
         iMainActivity = (IMainActivity) context;
     }
@@ -283,7 +285,7 @@ public class VMobileMusic extends Fragment implements IAMobileMusic, IVMobileMus
                     pMobileMusic.getMusicRadioData(MyApplication.getAppData().getTaid(), false);
                 }
             } else {
-                getFragmentManager().popBackStack();
+                getParentFragmentManager().popBackStack();
             }
         } else {
             if (isSearch) {
@@ -295,13 +297,11 @@ public class VMobileMusic extends Fragment implements IAMobileMusic, IVMobileMus
                     case 1:
                         pMobileMusic.getMusicRadioData("", false);
                         break;
-                    case 2:
-                        break;
                     default:
                         break;
                 }
             } else {
-                getFragmentManager().popBackStack();
+                getParentFragmentManager().popBackStack();
             }
         }
         return true;
@@ -352,7 +352,7 @@ public class VMobileMusic extends Fragment implements IAMobileMusic, IVMobileMus
                     MyApplication.getAppData().setPush(push);
                     MyApplication.getAppData().setPush(false);
                     MyApplication.getAppData().setPushBuffer(null);
-                    getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VPlayer(), "Player").addToBackStack("MobileMusic").commit();
+                    getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VPlayer(), "Player").addToBackStack("MobileMusic").commit();
                 } else {
                     String value = gMusicRadio.getTdData().get(index).getMuid();
                     String taid = gMusicRadio.getTdData().get(index).getTaid();
@@ -428,7 +428,7 @@ public class VMobileMusic extends Fragment implements IAMobileMusic, IVMobileMus
                     MyApplication.getAppData().setPush(push);
                     MyApplication.getAppData().setPushBuffer(null);
                     MyApplication.getAppData().setPush(false);
-                    getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VPlayer(), "Player").addToBackStack("MobileMusic").commit();
+                    getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VPlayer(), "Player").addToBackStack("MobileMusic").commit();
                 }
                 break;
             case 2:
@@ -471,7 +471,7 @@ public class VMobileMusic extends Fragment implements IAMobileMusic, IVMobileMus
                 MyApplication.getAppData().setPush(push);
                 MyApplication.getAppData().setPushBuffer(null);
                 MyApplication.getAppData().setPush(false);
-                getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VPlayer(), "Player").addToBackStack("MobileMusic").commit();
+                getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VPlayer(), "Player").addToBackStack("MobileMusic").commit();
                 break;
             default:
                 break;
@@ -538,10 +538,7 @@ public class VMobileMusic extends Fragment implements IAMobileMusic, IVMobileMus
     public void showSearchError() {
         AlertDialogUtil
                 .getInstance()
-                .initDialogBuilder(getContext(), R.string.music_search_error, R.string.music_search_yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                    }
+                .initDialogBuilder(getContext(), R.string.music_search_error, R.string.music_search_yes, (dialogInterface, i) -> {
                 });
         AlertDialogUtil.getInstance().showAlertDialog();
     }

@@ -1,7 +1,5 @@
 package com.switube.www.landmark2018test.model;
 
-import android.util.Log;
-
 import com.switube.www.landmark2018test.gson.GSendLove;
 import com.switube.www.landmark2018test.gson.GSignInData;
 import com.switube.www.landmark2018test.presenter.callback.IMainActivityPresenter;

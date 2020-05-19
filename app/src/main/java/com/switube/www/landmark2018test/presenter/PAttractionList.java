@@ -1,7 +1,6 @@
 package com.switube.www.landmark2018test.presenter;
 
 import android.location.Location;
-import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
@@ -26,12 +25,12 @@ import java.util.regex.Pattern;
 public class PAttractionList implements IPAttractionList {
     private IVAttractionList ivAttractionList;
     private MAttractionList mAttractionList;
-    private String[] baseCodeB = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
-    private String[] baseCodeC = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
     private List<String> apiKeys = new ArrayList<>();
     public PAttractionList(IVAttractionList IVAttractionList) {
         ivAttractionList = IVAttractionList;
         mAttractionList = new MAttractionList(this);
+        String[] baseCodeB = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
+        String[] baseCodeC = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
         String key = baseCodeB[0] + baseCodeB[8] + baseCodeC[25] + baseCodeC[0] + baseCodeB[18] + baseCodeC[24]
                 + baseCodeB[3] + baseCodeC[19] + baseCodeB[4] + baseCodeB[19] + baseCodeC[24] + "9"
                 + baseCodeC[7] + baseCodeC[11] + baseCodeC[0] + baseCodeB[14] + baseCodeB[5] + baseCodeB[5]
@@ -68,7 +67,7 @@ public class PAttractionList implements IPAttractionList {
 
     public void getAllAttractionData(LatLng latLng) {
         Map<String, String> map = NetworkUtil.getInstance().getMap();
-        SearchPlaceDataGson searchPlaceDataGson = new SearchPlaceDataGson("xxx", new ArrayList<String>(), new ArrayList<String>());
+        SearchPlaceDataGson searchPlaceDataGson = new SearchPlaceDataGson("xxx", new ArrayList<>(), new ArrayList<>());
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
         String value = gson.toJson(searchPlaceDataGson);
         map.put("value", value);
@@ -77,7 +76,7 @@ public class PAttractionList implements IPAttractionList {
 
     public void getPlaceData(LatLng latLng) {
         int index = new Random().nextInt(apiKeys.size());
-        String builder = String.valueOf(latLng.latitude) + "," + String.valueOf(latLng.longitude);
+        String builder = latLng.latitude + "," + latLng.longitude;
         Map<String, String> map = new HashMap<>();
         map.put("latlng", builder);
         map.put("language", "zh-TW");

@@ -1,20 +1,21 @@
 package com.switube.www.landmark2018test.adapter;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.jakewharton.rxbinding2.view.RxView;
 import com.switube.www.landmark2018test.MyApplication;
 import com.switube.www.landmark2018test.R;
-import com.switube.www.landmark2018test.entity.EFeatures;
 import com.switube.www.landmark2018test.database.entity.AttractionClassEntity;
 import com.switube.www.landmark2018test.database.entity.AttractionItemEntity;
 import com.switube.www.landmark2018test.database.entity.AttractionTermEntity;
+import com.switube.www.landmark2018test.entity.EFeatures;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -159,7 +160,7 @@ public class AFeatures extends RecyclerView.Adapter<AFeatures.ViewHolder> {
                     }
                     if (mItemList.get(j).getMtid().equals(mTermList.get(i).getMtid())) {
                         serviceItemEntities.add(new EFeatures(mItemList.get(j).getMstid(), mItemList.get(j).getMiid(), mItemList.get(i).getMtid(),
-                                title, true, true, false, false, "item" + String.valueOf(i)));
+                                title, true, true, false, false, "item" + i));
                     }
                 }
                 serviceItemEntities.add(new EFeatures("", "", "", "", false, false, false, false, "n"));

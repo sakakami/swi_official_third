@@ -29,9 +29,6 @@ public interface IMainActivity {
     void handleStopTimer();
     //設定TextView實例
     void handleSetTextView(TextView textCenter, TextView textRight, TextView textLeft);
-    void handleChangeTextCenter(String text, int size);
-    void handleChangeTextRight(String right);
-    void handleChangeTextLeft(String left);
     //設定所選地標類型
     void setSelectedAttractionType(AttractionStyleEntity attractionType);
     //取得所選地標類型
@@ -48,7 +45,6 @@ public interface IMainActivity {
     void handleBikeTextViews(TextView timer, TextView cost);
     void handleChangeTimeAndCost(String time, String cost);
     void setCost(double cost);
-    double getCost();
     //畫線路圖
     void handleDrawLine();
     //清除座標紀錄

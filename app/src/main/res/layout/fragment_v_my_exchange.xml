@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.VMyExchange">
+
+
+    <TextView
+        android:id="@+id/textTitleInMyExchange"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="20sp"
+        android:text="我的兌換卷"
+        android:gravity="center"/>
+    <TextView
+        android:id="@+id/textBackInMyExchange"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text="@string/global_back"
+        android:textSize="20sp"
+        android:gravity="center" />
+    <View
+        android:id="@+id/viewPointInMyExchange"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:layout_below="@+id/textTitleInMyExchange"
+        android:layout_centerHorizontal="true"/>
+    <TextView
+        android:id="@+id/textLeftInMyExchange"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_toStartOf="@+id/viewPointInMyExchange"
+        android:layout_below="@+id/textTitleInMyExchange"
+        android:gravity="center"
+        android:textSize="16sp"/>
+    <TextView
+        android:id="@+id/textRightInMyExchange"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_toEndOf="@+id/viewPointInMyExchange"
+        android:layout_below="@+id/textTitleInMyExchange"
+        android:gravity="center"
+        android:textSize="16sp"/>
+    <View
+        android:id="@+id/viewLeftInMyExchange"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@+id/textLeftInMyExchange"
+        android:layout_alignEnd="@+id/textLeftInMyExchange"/>
+    <View
+        android:id="@+id/viewRightInMyExchange"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@+id/textRightInMyExchange"
+        android:layout_alignStart="@+id/textRightInMyExchange"/>
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPagerInMyExchange"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/viewLeftInMyExchange"/>
+
+</RelativeLayout>

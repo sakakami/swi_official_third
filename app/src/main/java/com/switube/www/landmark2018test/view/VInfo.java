@@ -2,17 +2,10 @@ package com.switube.www.landmark2018test.view;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +14,13 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.jakewharton.rxbinding2.support.v7.widget.RecyclerViewScrollEvent;
 import com.jakewharton.rxbinding2.support.v7.widget.RxRecyclerView;
@@ -42,6 +42,8 @@ import com.switube.www.landmark2018test.view.callback.IVInfo;
 import com.tbruyelle.rxpermissions2.Permission;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -51,7 +53,6 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.observers.DisposableObserver;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -67,7 +68,7 @@ public class VInfo extends Fragment implements IAInfo, IVInfo, IFragmentBackHand
     List<View> viewList;
     @BindView(R.id.layoutInInfo)
     RelativeLayout relativeLayout;
-    String url;
+    private String url;
     private PInfo pInfo;
     private Unbinder mUnbinder;
     private LinearLayoutManager linearLayoutManager;
@@ -126,18 +127,18 @@ public class VInfo extends Fragment implements IAInfo, IVInfo, IFragmentBackHand
                     public void onNext(Object o) {
                         if (MyApplication.getAppData().isFromSearchAttraction()) {
                             MyApplication.getAppData().setFromSearchAttraction(false);
-                            getFragmentManager().popBackStack();
+                            getParentFragmentManager().popBackStack();
                         } else if (MyApplication.getAppData().isFromMyCollection()) {
                             MyApplication.getAppData().setFromMyCollection(false);
-                            getFragmentManager().popBackStack();
+                            getParentFragmentManager().popBackStack();
                         } else if (MyApplication.getAppData().isFromStrokeAttractionList()) {
                             MyApplication.getAppData().setFromStrokeAttractionList(false);
-                            getFragmentManager().popBackStack();
+                            getParentFragmentManager().popBackStack();
                         } else if (MyApplication.getAppData().isFromStroke()) {
                             MyApplication.getAppData().setFromStroke(false);
-                            getFragmentManager().popBackStack();
+                            getParentFragmentManager().popBackStack();
                         } else {
-                            getFragmentManager().popBackStackImmediate("Map", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                            getParentFragmentManager().popBackStackImmediate("Map", FragmentManager.POP_BACK_STACK_INCLUSIVE);
                         }
 
                     }
@@ -161,14 +162,14 @@ public class VInfo extends Fragment implements IAInfo, IVInfo, IFragmentBackHand
                 } else {
                     VLeaveComments.IS_IN_MAP = false;
                     SharePreferencesUtil.getInstance().getEditor().putString("selectedTag", "finish").apply();
-                    getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VTag()).addToBackStack("Info").commit();
+                    getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VTag()).addToBackStack("Info").commit();
                 }
                 break;
             case 1:
-                getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VPhotoView()).addToBackStack("Info").commit();
+                getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VPhotoView()).addToBackStack("Info").commit();
                 break;
             case 2:
-                getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VAttractionSteaming()).addToBackStack("Info").commit();
+                getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VAttractionSteaming()).addToBackStack("Info").commit();
                 break;
             case 3:
                 intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
@@ -194,7 +195,7 @@ public class VInfo extends Fragment implements IAInfo, IVInfo, IFragmentBackHand
                                         if (SharePreferencesUtil.getInstance().getSharedPreferences().getString("userMaid", "null").equals("null")) {
                                             new SignInUtil(getContext(), iMainActivity);
                                         } else {
-                                            getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VPhotoList()).addToBackStack("Info").commit();
+                                            getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VPhotoList()).addToBackStack("Info").commit();
                                         }
                                     }
                                 }
@@ -209,15 +210,15 @@ public class VInfo extends Fragment implements IAInfo, IVInfo, IFragmentBackHand
                     if (SharePreferencesUtil.getInstance().getSharedPreferences().getString("userMaid", "null").equals("null")) {
                         new SignInUtil(getContext(), iMainActivity);
                     } else {
-                        getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VPhotoList()).addToBackStack("Info").commit();
+                        getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VPhotoList()).addToBackStack("Info").commit();
                     }
                 }
                 break;
             case 6:
-                getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VShowFeatures()).addToBackStack("Info").commit();
+                getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VShowFeatures()).addToBackStack("Info").commit();
                 break;
             case 7:
-                getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VEditAttraction()).addToBackStack("Info").commit();
+                getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VEditAttraction()).addToBackStack("Info").commit();
                 break;
             default:
                 break;
@@ -248,14 +249,14 @@ public class VInfo extends Fragment implements IAInfo, IVInfo, IFragmentBackHand
     public void handViewCustomerPhoto(List<String> photo) {
         MyApplication.getAppData().setFromPersonalSteaming(true);
         MyApplication.getAppData().setPhotoList(photo);
-        getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VPhotoView()).addToBackStack("Info").commit();
+        getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VPhotoView()).addToBackStack("Info").commit();
     }
 
     @Override
     public void handleClickHeadPhoto(String maid, String wsid, String type, String privacy) {
         MyApplication.getAppData().setPersonalData(maid, wsid, type, privacy);
         MyApplication.getAppData().setFromMapToPersonal(true);
-        getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VPersonalSteaming()).addToBackStack("Info").commit();
+        getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VPersonalSteaming()).addToBackStack("Info").commit();
     }
 
     @Override
@@ -267,7 +268,7 @@ public class VInfo extends Fragment implements IAInfo, IVInfo, IFragmentBackHand
     public void handleSelectArtid(int index) {
         MyApplication.getAppData().setArtid(articleList.get(index).getArtid());
         MyApplication.getAppData().setMessageList(articleList.get(index).getMsg());
-        getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VAttractionComments()).addToBackStack("Info").commit();
+        getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VAttractionComments()).addToBackStack("Info").commit();
     }
 
     @Override
@@ -277,17 +278,14 @@ public class VInfo extends Fragment implements IAInfo, IVInfo, IFragmentBackHand
 
     @Override
     public void init(String style, String item, GInfoData gInfoData) {
-        StringBuilder stringBuilder = new StringBuilder("geo:");
-        stringBuilder.append("0,0");
-        stringBuilder.append("?q=");
-        stringBuilder.append(gInfoData.getData().get(0).getLat());
-        stringBuilder.append(",");
-        stringBuilder.append(gInfoData.getData().get(0).getLng());
-        stringBuilder.append("(");
-        stringBuilder.append(gInfoData.getData().get(0).getPlace());
-        stringBuilder.append(")");
-
-        location = stringBuilder.toString();
+        location = "geo:" + "0,0" +
+                "?q=" +
+                gInfoData.getData().get(0).getLat() +
+                "," +
+                gInfoData.getData().get(0).getLng() +
+                "(" +
+                gInfoData.getData().get(0).getPlace() +
+                ")";
         aInfo = new AInfo(style, item, this, gInfoData);
         mRecyclerView.setAdapter(aInfo);
         mTextTitle.setText(gInfoData.getData().get(0).getPlace());
@@ -353,21 +351,19 @@ public class VInfo extends Fragment implements IAInfo, IVInfo, IFragmentBackHand
                         getContext(),
                         view,
                         getString(R.string.global_ok),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                int size = aSaveList.getIsChecked().size();
-                                boolean canNext = false;
-                                for (int j = 0; j < size; j++) {
-                                    if (aSaveList.getIsChecked().get(j)) {
-                                        canNext = true;
-                                    }
+                        (dialogInterface, i) -> {
+                            int size = aSaveList.getIsChecked().size();
+                            boolean canNext = false;
+                            for (int j = 0; j < size; j++) {
+                                if (aSaveList.getIsChecked().get(j)) {
+                                    canNext = true;
+                                    break;
                                 }
-                                if (canNext) {
-                                    pInfo.sendSaveData(gSaveList, aSaveList.getIsChecked(), iMainActivity.getAttractionId());
-                                    AlertDialogUtil.getInstance().initDialogBuilder(getContext(), view1);
-                                    AlertDialogUtil.getInstance().showAlertDialog();
-                                }
+                            }
+                            if (canNext) {
+                                pInfo.sendSaveData(gSaveList, aSaveList.getIsChecked(), iMainActivity.getAttractionId());
+                                AlertDialogUtil.getInstance().initDialogBuilder(getContext(), view1);
+                                AlertDialogUtil.getInstance().showAlertDialog();
                             }
                         }, true);
         AlertDialogUtil.getInstance().showAlertDialog();
@@ -385,10 +381,7 @@ public class VInfo extends Fragment implements IAInfo, IVInfo, IFragmentBackHand
                                             getContext(),
                                             R.string.stroke_title_create_message,
                                             R.string.global_ok,
-                                            new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialogInterface, int i) {}
-                                            });
+                                            (dialogInterface, i) -> {});
                             AlertDialogUtil.getInstance().showAlertDialog();
                         } else {
                             if (gSaveList.getData().size() < 10) {
@@ -399,10 +392,7 @@ public class VInfo extends Fragment implements IAInfo, IVInfo, IFragmentBackHand
                                                 getContext(),
                                                 R.string.stroke_title_create_message,
                                                 R.string.global_ok,
-                                                new DialogInterface.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(DialogInterface dialogInterface, int i) {}
-                                                });
+                                                (dialogInterface, i) -> {});
                                 AlertDialogUtil.getInstance().showAlertDialog();
                             }
                         }
@@ -430,10 +420,7 @@ public class VInfo extends Fragment implements IAInfo, IVInfo, IFragmentBackHand
                                             getContext(),
                                             R.string.stroke_title_create_message,
                                             R.string.global_ok,
-                                            new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialogInterface, int i) { }
-                                            });
+                                            (dialogInterface, i) -> { });
                             AlertDialogUtil.getInstance().showAlertDialog();
                         }
                     }
@@ -479,12 +466,12 @@ public class VInfo extends Fragment implements IAInfo, IVInfo, IFragmentBackHand
 
     @Override
     public void showEditComment() {
-        getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VLeaveComments()).addToBackStack("Info").commit();
+        getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VLeaveComments()).addToBackStack("Info").commit();
     }
 
     @Override
     public void showEditTag() {
-        getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VTag()).addToBackStack("Info").commit();
+        getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VTag()).addToBackStack("Info").commit();
     }
 
     @Override
@@ -493,7 +480,7 @@ public class VInfo extends Fragment implements IAInfo, IVInfo, IFragmentBackHand
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NotNull Context context) {
         super.onAttach(context);
         iMainActivity = (IMainActivity) context;
     }
@@ -508,18 +495,18 @@ public class VInfo extends Fragment implements IAInfo, IVInfo, IFragmentBackHand
     public boolean onBackPressed() {
         if (MyApplication.getAppData().isFromSearchAttraction()) {
             MyApplication.getAppData().setFromSearchAttraction(false);
-            getFragmentManager().popBackStack();
+            getParentFragmentManager().popBackStack();
         } else if (MyApplication.getAppData().isFromMyCollection()) {
             MyApplication.getAppData().setFromMyCollection(false);
-            getFragmentManager().popBackStack();
+            getParentFragmentManager().popBackStack();
         } else if (MyApplication.getAppData().isFromStrokeAttractionList()) {
             MyApplication.getAppData().setFromStrokeAttractionList(false);
-            getFragmentManager().popBackStack();
+            getParentFragmentManager().popBackStack();
         } else if (MyApplication.getAppData().isFromStroke()) {
             MyApplication.getAppData().setFromStroke(false);
-            getFragmentManager().popBackStack();
+            getParentFragmentManager().popBackStack();
         } else {
-            getFragmentManager().popBackStack("Map", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            getParentFragmentManager().popBackStack("Map", FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
         return true;
     }
@@ -533,17 +520,9 @@ public class VInfo extends Fragment implements IAInfo, IVInfo, IFragmentBackHand
                         view,
                         "行程標題",
                         getString(R.string.global_ok),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                pInfo.handleNewStroke(editText.getText().toString());
-                            }
-                        },
+                        (dialogInterface, i) -> pInfo.handleNewStroke(editText.getText().toString()),
                         getString(R.string.global_cancel),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {}
-                        });
+                        (dialogInterface, i) -> {});
         AlertDialogUtil.getInstance().showAlertDialog();
     }
 }

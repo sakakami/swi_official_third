@@ -14,7 +14,6 @@ import java.util.Map;
 
 import io.reactivex.MaybeObserver;
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -51,14 +50,11 @@ public class MPlayer {
 
     public void insertMusicData(final List<MusicEntity> musicEntities, final GPlayer gPlayer) {
         Observable
-                .create(new ObservableOnSubscribe<String>() {
-                    @Override
-                    public void subscribe(ObservableEmitter<String> emitter) throws Exception {
-                        AppDatabase.getInstance().musicDao().clearTable();
-                        AppDatabase.getInstance().musicDao().handleInsertAllData(musicEntities);
-                        emitter.onNext("finish");
-                        emitter.onComplete();
-                    }
+                .create((ObservableOnSubscribe<String>) emitter -> {
+                    AppDatabase.getInstance().musicDao().clearTable();
+                    AppDatabase.getInstance().musicDao().handleInsertAllData(musicEntities);
+                    emitter.onNext("finish");
+                    emitter.onComplete();
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

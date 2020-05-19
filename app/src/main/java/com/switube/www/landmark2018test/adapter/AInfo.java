@@ -5,17 +5,13 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -25,6 +21,9 @@ import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.jakewharton.rxbinding2.view.RxView;
@@ -132,8 +131,6 @@ public class AInfo extends RecyclerView.Adapter<AInfo.ViewHolder> {
                 holder.mRatingInHead.setRating(Float.parseFloat(rateForTop));
                 break;
             case 3:
-                setVisibility(holder, -1);
-                break;
             case 4:
                 setVisibility(holder, -1);
                 break;
@@ -201,6 +198,7 @@ public class AInfo extends RecyclerView.Adapter<AInfo.ViewHolder> {
                 }
                 break;
             case 7:
+            case 13:
                 setVisibility(holder, 0);
                 break;
             case 8:
@@ -288,9 +286,6 @@ public class AInfo extends RecyclerView.Adapter<AInfo.ViewHolder> {
                     }
                 }
                 break;
-            case 13:
-                setVisibility(holder, 0);
-                break;
             case 14:
                 setVisibility(holder, 9);
                 holder.mRatingBar.setRating(Float.parseFloat(uRate));
@@ -375,7 +370,7 @@ public class AInfo extends RecyclerView.Adapter<AInfo.ViewHolder> {
                                         .load(Uri.parse(AppConstant.BASE_URL + gInfoData.getData().get(0).getArticle().get(0).getImg().get(0)))
                                         .into(holder.mImageInMessageHeadPhoto);
                                 holder.mTextViewsInMessageHeadPhoto.get(1).setVisibility(View.VISIBLE);
-                                String photoCount = "1/" + String.valueOf(gInfoData.getData().get(0).getArticle().get(0).getImg().size());
+                                String photoCount = "1/" + gInfoData.getData().get(0).getArticle().get(0).getImg().size();
                                 holder.mTextViewsInMessageHeadPhoto.get(1).setText(photoCount);
                             } else {
                                 holder.mTextViewsInMessageHeadPhoto.get(1).setVisibility(View.GONE);
@@ -403,7 +398,7 @@ public class AInfo extends RecyclerView.Adapter<AInfo.ViewHolder> {
                         case 4:
                             setVisibility(holder, 11);
                             size = gInfoData.getData().get(0).getArticle().get(0).getMsg().size();
-                            count = String.valueOf(size) + " " + holder.itemView.getContext().getString(R.string.info_comments);
+                            count = size + " " + holder.itemView.getContext().getString(R.string.info_comments);
                             holder.mTextViewsInMessageBody.get(1).setText(count);
                             holder.mTextViewsInMessageBody.get(0).setText(gInfoData.getData().get(0).getArticle().get(0).getCount());
                             switch (gInfoData.getData().get(0).getArticle().get(0).getLike()) {
@@ -574,7 +569,7 @@ public class AInfo extends RecyclerView.Adapter<AInfo.ViewHolder> {
                                         .load(Uri.parse(AppConstant.BASE_URL + gInfoData.getData().get(0).getArticle().get(1).getImg().get(0)))
                                         .into(holder.mImageInMessageHeadPhoto);
                                 holder.mTextViewsInMessageHeadPhoto.get(1).setVisibility(View.VISIBLE);
-                                String photoCount = "1/" + String.valueOf(gInfoData.getData().get(0).getArticle().get(1).getImg().size());
+                                String photoCount = "1/" + gInfoData.getData().get(0).getArticle().get(1).getImg().size();
                                 holder.mTextViewsInMessageHeadPhoto.get(1).setText(photoCount);
                             } else {
                                 holder.mTextViewsInMessageHeadPhoto.get(1).setVisibility(View.GONE);
@@ -602,7 +597,7 @@ public class AInfo extends RecyclerView.Adapter<AInfo.ViewHolder> {
                         case 4:
                             setVisibility(holder, 11);
                             size = gInfoData.getData().get(0).getArticle().get(1).getMsg().size();
-                            count = String.valueOf(size) + " " + holder.itemView.getContext().getString(R.string.info_comments);
+                            count = size + " " + holder.itemView.getContext().getString(R.string.info_comments);
                             holder.mTextViewsInMessageBody.get(1).setText(count);
                             holder.mTextViewsInMessageBody.get(0).setText(gInfoData.getData().get(0).getArticle().get(1).getCount());
                             switch (gInfoData.getData().get(0).getArticle().get(1).getLike()) {
@@ -652,7 +647,6 @@ public class AInfo extends RecyclerView.Adapter<AInfo.ViewHolder> {
                                 setVisibility(holder, 12);
                                 stringBuilder.delete(0, stringBuilder.length());
                                 stringBuilder.append(SharePreferencesUtil.getInstance().getSharedPreferences().getString("userImg", "null"));
-                                Log.e("info", stringBuilder.toString());
                                 if (stringBuilder.toString().equals("null")) {
                                     holder.imagePhotoInMessageEnd.setImageResource(R.drawable.person_unlogin);
                                 } else {
@@ -774,7 +768,7 @@ public class AInfo extends RecyclerView.Adapter<AInfo.ViewHolder> {
                                         .load(Uri.parse(AppConstant.BASE_URL + gInfoData.getData().get(0).getArticle().get(2).getImg().get(0)))
                                         .into(holder.mImageInMessageHeadPhoto);
                                 holder.mTextViewsInMessageHeadPhoto.get(1).setVisibility(View.VISIBLE);
-                                String photoCount = "1/" + String.valueOf(gInfoData.getData().get(0).getArticle().get(2).getImg().size());
+                                String photoCount = "1/" + gInfoData.getData().get(0).getArticle().get(2).getImg().size();
                                 holder.mTextViewsInMessageHeadPhoto.get(1).setText(photoCount);
                             } else {
                                 holder.mTextViewsInMessageHeadPhoto.get(1).setVisibility(View.GONE);
@@ -802,7 +796,7 @@ public class AInfo extends RecyclerView.Adapter<AInfo.ViewHolder> {
                         case 4:
                             setVisibility(holder, 11);
                             size = gInfoData.getData().get(0).getArticle().get(1).getMsg().size();
-                            count = String.valueOf(size) + " " + holder.itemView.getContext().getString(R.string.info_comments);
+                            count = size + " " + holder.itemView.getContext().getString(R.string.info_comments);
                             holder.mTextViewsInMessageBody.get(1).setText(count);
                             holder.mTextViewsInMessageBody.get(0).setText(gInfoData.getData().get(0).getArticle().get(2).getCount());
                             switch (gInfoData.getData().get(0).getArticle().get(2).getLike()) {
@@ -973,7 +967,7 @@ public class AInfo extends RecyclerView.Adapter<AInfo.ViewHolder> {
                                         .load(Uri.parse(AppConstant.BASE_URL + gInfoData.getData().get(0).getArticle().get(3).getImg().get(0)))
                                         .into(holder.mImageInMessageHeadPhoto);
                                 holder.mTextViewsInMessageHeadPhoto.get(1).setVisibility(View.VISIBLE);
-                                String photoCount = "1/" + String.valueOf(gInfoData.getData().get(0).getArticle().get(3).getImg().size());
+                                String photoCount = "1/" + gInfoData.getData().get(0).getArticle().get(3).getImg().size();
                                 holder.mTextViewsInMessageHeadPhoto.get(1).setText(photoCount);
                             } else {
                                 holder.mTextViewsInMessageHeadPhoto.get(1).setVisibility(View.GONE);
@@ -1001,7 +995,7 @@ public class AInfo extends RecyclerView.Adapter<AInfo.ViewHolder> {
                         case 4:
                             setVisibility(holder, 11);
                             size = gInfoData.getData().get(0).getArticle().get(3).getMsg().size();
-                            count = String.valueOf(size) + " " + holder.itemView.getContext().getString(R.string.info_comments);
+                            count = size + " " + holder.itemView.getContext().getString(R.string.info_comments);
                             holder.mTextViewsInMessageBody.get(1).setText(count);
                             holder.mTextViewsInMessageBody.get(0).setText(gInfoData.getData().get(0).getArticle().get(3).getCount());
                             switch (gInfoData.getData().get(0).getArticle().get(3).getLike()) {
@@ -1172,7 +1166,7 @@ public class AInfo extends RecyclerView.Adapter<AInfo.ViewHolder> {
                                         .load(Uri.parse(AppConstant.BASE_URL + gInfoData.getData().get(0).getArticle().get(4).getImg().get(0)))
                                         .into(holder.mImageInMessageHeadPhoto);
                                 holder.mTextViewsInMessageHeadPhoto.get(1).setVisibility(View.VISIBLE);
-                                String photoCount = "1/" + String.valueOf(gInfoData.getData().get(0).getArticle().get(4).getImg().size());
+                                String photoCount = "1/" + gInfoData.getData().get(0).getArticle().get(4).getImg().size();
                                 holder.mTextViewsInMessageHeadPhoto.get(1).setText(photoCount);
                             } else {
                                 holder.mTextViewsInMessageHeadPhoto.get(1).setVisibility(View.GONE);
@@ -1200,7 +1194,7 @@ public class AInfo extends RecyclerView.Adapter<AInfo.ViewHolder> {
                         case 4:
                             setVisibility(holder, 11);
                             size = gInfoData.getData().get(0).getArticle().get(4).getMsg().size();
-                            count = String.valueOf(size) + " " + holder.itemView.getContext().getString(R.string.info_comments);
+                            count = size + " " + holder.itemView.getContext().getString(R.string.info_comments);
                             holder.mTextViewsInMessageBody.get(1).setText(count);
                             holder.mTextViewsInMessageBody.get(0).setText(gInfoData.getData().get(0).getArticle().get(4).getCount());
                             switch (gInfoData.getData().get(0).getArticle().get(4).getLike()) {
@@ -1888,34 +1882,31 @@ public class AInfo extends RecyclerView.Adapter<AInfo.ViewHolder> {
             ButterKnife.bind(this, itemView);
             mRatingInHead.setRating(Float.parseFloat(mRate));
             mRatingBar.setIsIndicator(false);
-            mRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-                @Override
-                public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                    if (SharePreferencesUtil.getInstance().getSharedPreferences().getString("userMaid", "null").equals("null")) {
-                        iaInfo.handSignIn();
-                    } else {
-                        if (rating == 0) {
-                            ratingBar.setRating(1);
-                            uRate = String.valueOf(1);
-                        } else if (rating > 0 && rating <= 1) {
-                            ratingBar.setRating(1);
-                            uRate = String.valueOf(1);
-                        } else if (rating > 1 && rating <= 2) {
-                            ratingBar.setRating(2);
-                            uRate = String.valueOf(2);
-                        } else if (rating > 2 && rating <= 3) {
-                            ratingBar.setRating(3);
-                            uRate = String.valueOf(3);
-                        } else if (rating > 3 && rating <= 4) {
-                            ratingBar.setRating(4);
-                            uRate = String.valueOf(4);
-                        } else if (rating > 4 && rating <= 5) {
-                            ratingBar.setRating(5);
-                            uRate = String.valueOf(5);
-                        }
-                        if (fromUser) {
-                            iaInfo.handleRating(gInfoData.getData().get(0).getSpid(), uRate);
-                        }
+            mRatingBar.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
+                if (SharePreferencesUtil.getInstance().getSharedPreferences().getString("userMaid", "null").equals("null")) {
+                    iaInfo.handSignIn();
+                } else {
+                    if (rating == 0) {
+                        ratingBar.setRating(1);
+                        uRate = String.valueOf(1);
+                    } else if (rating > 0 && rating <= 1) {
+                        ratingBar.setRating(1);
+                        uRate = String.valueOf(1);
+                    } else if (rating > 1 && rating <= 2) {
+                        ratingBar.setRating(2);
+                        uRate = String.valueOf(2);
+                    } else if (rating > 2 && rating <= 3) {
+                        ratingBar.setRating(3);
+                        uRate = String.valueOf(3);
+                    } else if (rating > 3 && rating <= 4) {
+                        ratingBar.setRating(4);
+                        uRate = String.valueOf(4);
+                    } else if (rating > 4 && rating <= 5) {
+                        ratingBar.setRating(5);
+                        uRate = String.valueOf(5);
+                    }
+                    if (fromUser) {
+                        iaInfo.handleRating(gInfoData.getData().get(0).getSpid(), uRate);
                     }
                 }
             });
@@ -2747,8 +2738,7 @@ public class AInfo extends RecyclerView.Adapter<AInfo.ViewHolder> {
 
                         @Override
                         public void onNext(Object o) {
-                            //Toast.makeText(itemView.getContext(), R.string.float_message_coming_soon, Toast.LENGTH_SHORT).show();
-                            String language = "";
+                            String language;
                             switch (MyApplication.getLanguageIndex()) {
                                 case 1:
                                     language = "&l=TW";
@@ -2782,8 +2772,7 @@ public class AInfo extends RecyclerView.Adapter<AInfo.ViewHolder> {
 
                         @Override
                         public void onNext(Object o) {
-                            //Toast.makeText(itemView.getContext(), R.string.float_message_coming_soon, Toast.LENGTH_SHORT).show();
-                            String language = "";
+                            String language;
                             switch (MyApplication.getLanguageIndex()) {
                                 case 1:
                                     language = "&l=TW";
@@ -2863,52 +2852,49 @@ public class AInfo extends RecyclerView.Adapter<AInfo.ViewHolder> {
             PopupMenu popupMenu = new PopupMenu(context, mImageViewsInMessageHead.get(2));
             popupMenu.getMenuInflater().inflate(R.menu.menu_info_comment, popupMenu.getMenu());
             popupMenu.show();
-            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem menuItem) {
-                    if (getAdapterPosition() < 16 + customerCount1) {
-                        if (menuItem.getItemId() == R.id.menuDeleteInComment) {
-                            iaInfo.handleDeleteComment(0, gInfoData);
-                        } else if (menuItem.getItemId() == R.id.menuEditCommentInComment) {
-                            iaInfo.handleEdit(0, gInfoData, true);
-                        } else {
-                            iaInfo.handleEdit(0, gInfoData, false);
-                        }
-                    } else if (getAdapterPosition() < 16 + customerCount1 + customerCount2) {
-                        if (menuItem.getItemId() == R.id.menuDeleteInComment) {
-                            iaInfo.handleDeleteComment(1, gInfoData);
-                        } else if (menuItem.getItemId() == R.id.menuEditCommentInComment) {
-                            iaInfo.handleEdit(1, gInfoData, true);
-                        } else {
-                            iaInfo.handleEdit(1, gInfoData, false);
-                        }
-                    } else if (getAdapterPosition() < 16 + customerCount1 + customerCount2 + customerCount3) {
-                        if (menuItem.getItemId() == R.id.menuDeleteInComment) {
-                            iaInfo.handleDeleteComment(2, gInfoData);
-                        } else if (menuItem.getItemId() == R.id.menuEditCommentInComment) {
-                            iaInfo.handleEdit(2, gInfoData, true);
-                        } else {
-                            iaInfo.handleEdit(2, gInfoData, false);
-                        }
-                    } else if (getAdapterPosition() < 16 + customerCount1 + customerCount2 + customerCount3 + customerCount4) {
-                        if (menuItem.getItemId() == R.id.menuDeleteInComment) {
-                            iaInfo.handleDeleteComment(3, gInfoData);
-                        } else if (menuItem.getItemId() == R.id.menuEditCommentInComment) {
-                            iaInfo.handleEdit(3, gInfoData, true);
-                        } else {
-                            iaInfo.handleEdit(3, gInfoData, false);
-                        }
+            popupMenu.setOnMenuItemClickListener(menuItem -> {
+                if (getAdapterPosition() < 16 + customerCount1) {
+                    if (menuItem.getItemId() == R.id.menuDeleteInComment) {
+                        iaInfo.handleDeleteComment(0, gInfoData);
+                    } else if (menuItem.getItemId() == R.id.menuEditCommentInComment) {
+                        iaInfo.handleEdit(0, gInfoData, true);
                     } else {
-                        if (menuItem.getItemId() == R.id.menuDeleteInComment) {
-                            iaInfo.handleDeleteComment(4, gInfoData);
-                        } else if (menuItem.getItemId() == R.id.menuEditCommentInComment) {
-                            iaInfo.handleEdit(4, gInfoData, true);
-                        } else {
-                            iaInfo.handleEdit(4, gInfoData, false);
-                        }
+                        iaInfo.handleEdit(0, gInfoData, false);
                     }
-                    return true;
+                } else if (getAdapterPosition() < 16 + customerCount1 + customerCount2) {
+                    if (menuItem.getItemId() == R.id.menuDeleteInComment) {
+                        iaInfo.handleDeleteComment(1, gInfoData);
+                    } else if (menuItem.getItemId() == R.id.menuEditCommentInComment) {
+                        iaInfo.handleEdit(1, gInfoData, true);
+                    } else {
+                        iaInfo.handleEdit(1, gInfoData, false);
+                    }
+                } else if (getAdapterPosition() < 16 + customerCount1 + customerCount2 + customerCount3) {
+                    if (menuItem.getItemId() == R.id.menuDeleteInComment) {
+                        iaInfo.handleDeleteComment(2, gInfoData);
+                    } else if (menuItem.getItemId() == R.id.menuEditCommentInComment) {
+                        iaInfo.handleEdit(2, gInfoData, true);
+                    } else {
+                        iaInfo.handleEdit(2, gInfoData, false);
+                    }
+                } else if (getAdapterPosition() < 16 + customerCount1 + customerCount2 + customerCount3 + customerCount4) {
+                    if (menuItem.getItemId() == R.id.menuDeleteInComment) {
+                        iaInfo.handleDeleteComment(3, gInfoData);
+                    } else if (menuItem.getItemId() == R.id.menuEditCommentInComment) {
+                        iaInfo.handleEdit(3, gInfoData, true);
+                    } else {
+                        iaInfo.handleEdit(3, gInfoData, false);
+                    }
+                } else {
+                    if (menuItem.getItemId() == R.id.menuDeleteInComment) {
+                        iaInfo.handleDeleteComment(4, gInfoData);
+                    } else if (menuItem.getItemId() == R.id.menuEditCommentInComment) {
+                        iaInfo.handleEdit(4, gInfoData, true);
+                    } else {
+                        iaInfo.handleEdit(4, gInfoData, false);
+                    }
                 }
+                return true;
             });
         }
     }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.switube.www.landmark2018test.util.CustomBarcodePreview
+        android:id="@+id/zxing_barcode_surface"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <com.switube.www.landmark2018test.util.CustomViewFinderView
+        android:id="@+id/zxing_viewfinder_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</FrameLayout>

@@ -1,12 +1,12 @@
 package com.switube.www.landmark2018test.util;
 
 import android.content.Context;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.common.SignInButton;
@@ -15,12 +15,10 @@ import com.switube.www.landmark2018test.MyApplication;
 import com.switube.www.landmark2018test.R;
 import com.switube.www.landmark2018test.view.callback.IMainActivity;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
-import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.reactivex.Observer;

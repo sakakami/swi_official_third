@@ -2,12 +2,7 @@ package com.switube.www.landmark2018test.view;
 
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +10,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.switube.www.landmark2018test.MyApplication;
@@ -83,7 +82,7 @@ public class VStrokeAttractionList extends Fragment implements IVStrokeAttractio
 
                     @Override
                     public void onNext(Object o) {
-                        getFragmentManager().popBackStack();
+                        getParentFragmentManager().popBackStack();
                     }
 
                     @Override
@@ -117,7 +116,7 @@ public class VStrokeAttractionList extends Fragment implements IVStrokeAttractio
 
                     @Override
                     public void onNext(Object o) {
-                        getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VSwapStroke()).addToBackStack("strokeList").commit();
+                        getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VSwapStroke()).addToBackStack("strokeList").commit();
                     }
 
                     @Override
@@ -170,21 +169,18 @@ public class VStrokeAttractionList extends Fragment implements IVStrokeAttractio
                         getContext(),
                         view,
                         getString(R.string.global_ok),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                int size = aSaveList.getIsChecked().size();
-                                boolean canNext = false;
-                                for (int j = 0; j < size; j++) {
-                                    if (aSaveList.getIsChecked().get(j)) {
-                                        canNext = true;
-                                    }
+                        (dialogInterface, i) -> {
+                            int size = aSaveList.getIsChecked().size();
+                            boolean canNext = false;
+                            for (int j = 0; j < size; j++) {
+                                if (aSaveList.getIsChecked().get(j)) {
+                                    canNext = true;
                                 }
-                                if (canNext) {
-                                    pStrokeAttractionList.sendSaveData(gSaveList, aSaveList.getIsChecked(), aStrokeAttractionList.getgStrokeList().getData().get(saveTripIndex).getSpid());
-                                    AlertDialogUtil.getInstance().initDialogBuilder(getContext(), view1);
-                                    AlertDialogUtil.getInstance().showAlertDialog();
-                                }
+                            }
+                            if (canNext) {
+                                pStrokeAttractionList.sendSaveData(gSaveList, aSaveList.getIsChecked(), aStrokeAttractionList.getgStrokeList().getData().get(saveTripIndex).getSpid());
+                                AlertDialogUtil.getInstance().initDialogBuilder(getContext(), view1);
+                                AlertDialogUtil.getInstance().showAlertDialog();
                             }
                         }, true);
         AlertDialogUtil.getInstance().showAlertDialog();
@@ -207,10 +203,7 @@ public class VStrokeAttractionList extends Fragment implements IVStrokeAttractio
                                                 getContext(),
                                                 R.string.stroke_title_create_message,
                                                 R.string.global_ok,
-                                                new DialogInterface.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(DialogInterface dialogInterface, int i) { }
-                                                });
+                                                (dialogInterface, i) -> { });
                                 AlertDialogUtil.getInstance().showAlertDialog();
                             }
                         }
@@ -241,10 +234,7 @@ public class VStrokeAttractionList extends Fragment implements IVStrokeAttractio
                                                 getContext(),
                                                 R.string.stroke_title_create_message,
                                                 R.string.global_ok,
-                                                new DialogInterface.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(DialogInterface dialogInterface, int i) { }
-                                                });
+                                                (dialogInterface, i) -> { });
                                 AlertDialogUtil.getInstance().showAlertDialog();
                             }
                         }
@@ -297,12 +287,12 @@ public class VStrokeAttractionList extends Fragment implements IVStrokeAttractio
     public void handlePhotoClicked(int index) {
         MyApplication.getAppData().setFromStrokeAttractionList(true);
         iMainActivity.saveAttractionId(aStrokeAttractionList.getgStrokeList().getData().get(index).getSpid());
-        getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VInfo()).addToBackStack("VStrokeAttractionList").commit();
+        getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VInfo()).addToBackStack("VStrokeAttractionList").commit();
     }
 
     private IMainActivity iMainActivity;
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NotNull Context context) {
         super.onAttach(context);
         iMainActivity = (IMainActivity)context;
     }
@@ -325,17 +315,9 @@ public class VStrokeAttractionList extends Fragment implements IVStrokeAttractio
                         view,
                         getString(R.string.stroke_create_title),
                         getString(R.string.global_ok),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                pStrokeAttractionList.handleNewStroke(editText.getText().toString(), isCreate);
-                            }
-                        },
+                        (dialogInterface, i) -> pStrokeAttractionList.handleNewStroke(editText.getText().toString(), isCreate),
                         getString(R.string.global_cancel),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {}
-                        });
+                        (dialogInterface, i) -> {});
         AlertDialogUtil.getInstance().showAlertDialog();
     }
 }

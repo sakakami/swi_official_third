@@ -3,15 +3,15 @@ package com.switube.www.landmark2018test.view;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.jakewharton.rxbinding2.support.v7.widget.RecyclerViewScrollEvent;
 import com.jakewharton.rxbinding2.support.v7.widget.RxRecyclerView;
@@ -23,9 +23,10 @@ import com.switube.www.landmark2018test.adapter.callback.IAAttractionSteaming;
 import com.switube.www.landmark2018test.gson.GInfoData;
 import com.switube.www.landmark2018test.gson.GPersonalSteaming;
 import com.switube.www.landmark2018test.presenter.PPersonalSteaming;
-import com.switube.www.landmark2018test.view.callback.IFragmentBackHandler;
 import com.switube.www.landmark2018test.view.callback.IMainActivity;
 import com.switube.www.landmark2018test.view.callback.IVPersonalSteaming;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,7 +92,7 @@ public class VPersonalSteaming extends Fragment implements IVPersonalSteaming, I
                     @Override
                     public void onNext(Object o) {
                         MyApplication.getAppData().setFromMapToPersonal(false);
-                        getFragmentManager().popBackStack();
+                        getParentFragmentManager().popBackStack();
                     }
 
                     @Override
@@ -145,7 +146,7 @@ public class VPersonalSteaming extends Fragment implements IVPersonalSteaming, I
         MyApplication.getAppData().setArtid(articleList.get(index).getArtid());
         MyApplication.getAppData().setMessageList(articleList.get(index).getMsg());
         MyApplication.getAppData().setArticleList(articleList);
-        getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VAttractionComments()).addToBackStack("PersonalSteaming").commit();
+        getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VAttractionComments()).addToBackStack("PersonalSteaming").commit();
     }
 
     @Override
@@ -158,10 +159,10 @@ public class VPersonalSteaming extends Fragment implements IVPersonalSteaming, I
         iMainActivity.saveAttractionId(attractionId);
         if (MyApplication.getAppData().isFromMapToPersonal()) {
             MyApplication.getAppData().setNeedScrollToTop(true);
-            getFragmentManager().popBackStack();
+            getParentFragmentManager().popBackStack();
         } else {
             MyApplication.getAppData().setFromMapToPersonal(false);
-            getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VInfo()).commit();
+            getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VInfo()).commit();
         }
     }
 
@@ -180,12 +181,12 @@ public class VPersonalSteaming extends Fragment implements IVPersonalSteaming, I
         } else {
             MyApplication.getAppData().setPhotoList(articleList.get(index).getImg());
         }
-        getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VPhotoView()).addToBackStack("PersonalSteaming").commit();
+        getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VPhotoView()).addToBackStack("PersonalSteaming").commit();
     }
 
     private IMainActivity iMainActivity;
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NotNull Context context) {
         super.onAttach(context);
         iMainActivity = (IMainActivity)context;
     }
@@ -212,13 +213,13 @@ public class VPersonalSteaming extends Fragment implements IVPersonalSteaming, I
     @Override
     public void toEditCommentPage() {
         MyApplication.getAppData().setFromPersonalSteaming(true);
-        getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VLeaveComments()).addToBackStack("PersonalSteaming").commit();
+        getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VLeaveComments()).addToBackStack("PersonalSteaming").commit();
     }
 
     @Override
     public void toEditTagPage() {
         MyApplication.getAppData().setFromPersonalSteaming(true);
-        getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VTag()).commit();
+        getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VTag()).commit();
     }
 
     @Override

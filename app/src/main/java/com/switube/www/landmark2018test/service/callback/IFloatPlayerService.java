@@ -11,7 +11,6 @@ public interface IFloatPlayerService {
     void switchPlayMode(boolean mode);
     void handleFloatPlayerMoving(int x, int y);
     void handleBackFromDeskTop(Context context, boolean isFirst);
-    void handleBeatClicked();
     void handleKillFloatPlayer();
     String handleYouTubeTime(int time);
     void setIsFullScreenMode(boolean mode);

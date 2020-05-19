@@ -2,8 +2,6 @@ package com.switube.www.landmark2018test.adapter;
 
 import android.content.Context;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.jakewharton.rxbinding2.view.RxView;
@@ -100,27 +101,6 @@ public class AAttractionComments extends RecyclerView.Adapter<AAttractionComment
                 Glide.with(MyApplication.getInstance())
                         .load(Uri.parse(AppConstant.BASE_URL2 + messageList.get(position).getReply().get(0).getMaimg()))
                         .into(holder.circleImageViews.get(1));
-                break;
-            case 2:
-                holder.textViews.get(5).setVisibility(View.GONE);
-                holder.textViews.get(6).setVisibility(View.VISIBLE);
-                holder.textViews.get(7).setVisibility(View.VISIBLE);
-                holder.textViews.get(8).setVisibility(View.VISIBLE);
-                holder.textViews.get(9).setVisibility(View.VISIBLE);
-                holder.circleImageViews.get(1).setVisibility(View.VISIBLE);
-                holder.circleImageViews.get(2).setVisibility(View.VISIBLE);
-                holder.views.get(1).setVisibility(View.VISIBLE);
-                holder.views.get(2).setVisibility(View.VISIBLE);
-                holder.textViews.get(6).setText(messageList.get(position).getReply().get(0).getManame());
-                holder.textViews.get(7).setText(messageList.get(position).getReply().get(0).getTxt());
-                Glide.with(MyApplication.getInstance())
-                        .load(Uri.parse(AppConstant.BASE_URL2 + messageList.get(position).getReply().get(0).getMaimg()))
-                        .into(holder.circleImageViews.get(1));
-                holder.textViews.get(8).setText(messageList.get(position).getReply().get(1).getManame());
-                holder.textViews.get(9).setText(messageList.get(position).getReply().get(1).getTxt());
-                Glide.with(MyApplication.getInstance())
-                        .load(Uri.parse(AppConstant.BASE_URL2 + messageList.get(position).getReply().get(1).getMaimg()))
-                        .into(holder.circleImageViews.get(2));
                 break;
             default:
                 holder.textViews.get(5).setVisibility(View.GONE);

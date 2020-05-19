@@ -117,7 +117,7 @@
         android:padding="8dp"
         app:srcCompat="@drawable/btn_repeat_bt_v2_2x"
         android:layout_marginTop="4dp"/>
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewInPlayer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

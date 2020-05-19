@@ -4,13 +4,14 @@ package com.switube.www.landmark2018test.view;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -20,6 +21,8 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.switube.www.landmark2018test.R;
 import com.switube.www.landmark2018test.view.callback.IMainActivity;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -80,7 +83,7 @@ public class VFinishTour extends Fragment implements OnMapReadyCallback {
                         mIMainActivity.handleStopTimer();
                         mIMainActivity.handleClearLatLngList();
                         mIMainActivity.handleClearPolyline();
-                        getFragmentManager().popBackStack();
+                        getParentFragmentManager().popBackStack();
                     }
 
                     @Override
@@ -100,7 +103,7 @@ public class VFinishTour extends Fragment implements OnMapReadyCallback {
                         mIMainActivity.handleStopTimer();
                         mIMainActivity.handleClearLatLngList();
                         mIMainActivity.handleClearPolyline();
-                        getFragmentManager().popBackStack();
+                        getParentFragmentManager().popBackStack();
                     }
 
                     @Override
@@ -131,7 +134,7 @@ public class VFinishTour extends Fragment implements OnMapReadyCallback {
 
     private IMainActivity mIMainActivity;
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NotNull Context context) {
         super.onAttach(context);
         mIMainActivity = (IMainActivity)context;
     }

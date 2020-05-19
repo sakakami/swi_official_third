@@ -3,14 +3,15 @@ package com.switube.www.landmark2018test.view;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.switube.www.landmark2018test.MyApplication;
@@ -84,7 +85,7 @@ public class VEditFeatures extends Fragment implements IVEditFeatures {
 
     private IMainActivity iMainActivity;
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NotNull Context context) {
         super.onAttach(context);
         iMainActivity = (IMainActivity)context;
     }
@@ -102,7 +103,7 @@ public class VEditFeatures extends Fragment implements IVEditFeatures {
 
     @Override
     public void finishSend() {
-        getFragmentManager().popBackStack("Info", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        getParentFragmentManager().popBackStack("Info", FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
 
     private void initClicks() {
@@ -114,7 +115,7 @@ public class VEditFeatures extends Fragment implements IVEditFeatures {
 
                     @Override
                     public void onNext(Object o) {
-                        getFragmentManager().popBackStack();
+                        getParentFragmentManager().popBackStack();
                     }
 
                     @Override

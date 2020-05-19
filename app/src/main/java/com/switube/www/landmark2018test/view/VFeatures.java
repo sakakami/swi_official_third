@@ -2,18 +2,18 @@ package com.switube.www.landmark2018test.view;
 
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.switube.www.landmark2018test.MyApplication;
@@ -27,6 +27,8 @@ import com.switube.www.landmark2018test.util.AlertDialogUtil;
 import com.switube.www.landmark2018test.util.ItemDecorationUtil;
 import com.switube.www.landmark2018test.view.callback.IMainActivity;
 import com.switube.www.landmark2018test.view.callback.IVFeatures;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +63,7 @@ public class VFeatures extends Fragment implements IVFeatures {
     private IMainActivity mIMainActivity;
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NotNull Context context) {
         super.onAttach(context);
         mIMainActivity = (IMainActivity) context;
     }
@@ -80,7 +82,7 @@ public class VFeatures extends Fragment implements IVFeatures {
 
                     @Override
                     public void onNext(Object o) {
-                        getFragmentManager().popBackStack();
+                        getParentFragmentManager().popBackStack();
                     }
 
                     @Override
@@ -161,14 +163,14 @@ public class VFeatures extends Fragment implements IVFeatures {
         AlertDialogUtil.getInstance().clearAlertDialog();
         if (canToInfo) {
             layoutForCreating.setVisibility(View.GONE);
-            int count = getFragmentManager().getBackStackEntryCount();
+            int count = getParentFragmentManager().getBackStackEntryCount();
             for (int i = 1; i < count; i++) {
-                FragmentManager.BackStackEntry backStackEntry = getFragmentManager().getBackStackEntryAt(i);
-                getFragmentManager().popBackStack(backStackEntry.getId(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                FragmentManager.BackStackEntry backStackEntry = getParentFragmentManager().getBackStackEntryAt(i);
+                getParentFragmentManager().popBackStack(backStackEntry.getId(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
             }
-            getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VInfo()).commit();
+            getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VInfo()).commit();
         } else {
-            getFragmentManager().popBackStack("Map", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            getParentFragmentManager().popBackStack("Map", FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
     }
 
@@ -177,22 +179,22 @@ public class VFeatures extends Fragment implements IVFeatures {
         mIMainActivity.setSelectedAttractionType(null);
         mIMainActivity.saveAttractionId("");
         layoutForCreating.setVisibility(View.GONE);
-        int count = getFragmentManager().getBackStackEntryCount();
+        int count = getParentFragmentManager().getBackStackEntryCount();
         for (int i = 1; i < count; i++) {
-            FragmentManager.BackStackEntry backStackEntry = getFragmentManager().getBackStackEntryAt(i);
-            getFragmentManager().popBackStack(backStackEntry.getId(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            FragmentManager.BackStackEntry backStackEntry = getParentFragmentManager().getBackStackEntryAt(i);
+            getParentFragmentManager().popBackStack(backStackEntry.getId(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
-        getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VMap()).commit();
+        getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VMap()).commit();
     }
 
     @Override
     public void finishSend() {
         MyApplication.getAppData().setFormEditAttractionForType(false);
         MyApplication.getAppData().setFromEditAttraction(false);
-        MyApplication.getAppData().setIsEdit(new ArrayList<Boolean>());
+        MyApplication.getAppData().setIsEdit(new ArrayList<>());
         MyApplication.getAppData().getSelectedPhotos().clear();
         AlertDialogUtil.getInstance().clearAlertDialog();
-        getFragmentManager().popBackStack("Info", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        getParentFragmentManager().popBackStack("Info", FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
 
     private void sendCreateData() {
@@ -209,10 +211,7 @@ public class VFeatures extends Fragment implements IVFeatures {
             AlertDialogUtil.getInstance().initDialogBuilder(getContext(),
                     R.string.create_action_Data_null,
                     R.string.global_ok,
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                        }
+                    (dialogInterface, i) -> {
                     });
             AlertDialogUtil.getInstance().showAlertDialog();
         }

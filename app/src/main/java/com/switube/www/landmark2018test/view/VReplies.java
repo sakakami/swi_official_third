@@ -4,18 +4,18 @@ package com.switube.www.landmark2018test.view;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.jakewharton.rxbinding2.view.RxView;
@@ -31,6 +31,8 @@ import com.switube.www.landmark2018test.util.MyEditText;
 import com.switube.www.landmark2018test.util.SharePreferencesUtil;
 import com.switube.www.landmark2018test.view.callback.IMainActivity;
 import com.switube.www.landmark2018test.view.callback.IVReplies;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -100,7 +102,7 @@ public class VReplies extends Fragment implements IVReplies, IAReplies {
 
                     @Override
                     public void onNext(Object o) {
-                        getFragmentManager().popBackStack();
+                        getParentFragmentManager().popBackStack();
                     }
 
                     @Override
@@ -194,14 +196,11 @@ public class VReplies extends Fragment implements IVReplies, IAReplies {
                     @Override
                     public void onComplete() {}
                 });
-        editText.setOnBackPressedListener(new MyEditText.OnBackPressedListener() {
-            @Override
-            public void onKeyBack() {
-                message = "";
-                editText.setText("");
-                isEdit = false;
-                viewBackground.setVisibility(View.GONE);
-            }
+        editText.setOnBackPressedListener(() -> {
+            message = "";
+            editText.setText("");
+            isEdit = false;
+            viewBackground.setVisibility(View.GONE);
         });
         return view;
     }
@@ -338,14 +337,14 @@ public class VReplies extends Fragment implements IVReplies, IAReplies {
     @Override
     public void handleFinishDel(boolean isComment, int index) {
         if (isComment) {
-            getFragmentManager().popBackStack();
+            getParentFragmentManager().popBackStack();
         } else {
             aReplies.refreshAdapter(MyApplication.getAppData().getMessageList().get(index).getReply());
         }
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NotNull Context context) {
         super.onAttach(context);
         iMainActivity = (IMainActivity) context;
     }
@@ -360,16 +359,13 @@ public class VReplies extends Fragment implements IVReplies, IAReplies {
         PopupMenu popupMenu = new PopupMenu(getContext(), imageViews.get(2));
         popupMenu.getMenuInflater().inflate(R.menu.menu_info_reply, popupMenu.getMenu());
         popupMenu.show();
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                if (menuItem.getItemId() == R.id.menuEditInReply) {
-                    handleEdit(999);
-                } else {
-                    handleDelete(999);
-                }
-                return true;
+        popupMenu.setOnMenuItemClickListener(menuItem -> {
+            if (menuItem.getItemId() == R.id.menuEditInReply) {
+                handleEdit(999);
+            } else {
+                handleDelete(999);
             }
+            return true;
         });
     }
 }

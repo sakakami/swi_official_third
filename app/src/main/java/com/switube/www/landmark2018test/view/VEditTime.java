@@ -3,17 +3,17 @@ package com.switube.www.landmark2018test.view;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.switube.www.landmark2018test.MyApplication;
@@ -23,6 +23,8 @@ import com.switube.www.landmark2018test.entity.EEditTime;
 import com.switube.www.landmark2018test.presenter.PEditTime;
 import com.switube.www.landmark2018test.view.callback.IMainActivity;
 import com.switube.www.landmark2018test.view.callback.IVEditTime;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -238,75 +240,32 @@ public class VEditTime extends Fragment implements IVEditTime {
                     @Override
                     public void onComplete() {}
                 });
-        mCheckBox.get(0).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                editWeek.set(0, b);
+        mCheckBox.get(0).setOnCheckedChangeListener((compoundButton, b) -> editWeek.set(0, b));
+        mCheckBox.get(1).setOnCheckedChangeListener((compoundButton, b) -> editWeek.set(1, b));
+        mCheckBox.get(2).setOnCheckedChangeListener((compoundButton, b) -> editWeek.set(2, b));
+        mCheckBox.get(3).setOnCheckedChangeListener((compoundButton, b) -> editWeek.set(3, b));
+        mCheckBox.get(4).setOnCheckedChangeListener((compoundButton, b) -> editWeek.set(4, b));
+        mCheckBox.get(5).setOnCheckedChangeListener((compoundButton, b) -> editWeek.set(5, b));
+        mCheckBox.get(6).setOnCheckedChangeListener((compoundButton, b) -> editWeek.set(6, b));
+        mCheckBox.get(7).setOnCheckedChangeListener((compoundButton, b) -> editWeek.set(7, b));
+        mTimePicker.setOnTimeChangedListener((timePicker, i, i1) -> {
+            isEditTime = true;
+            String time;
+            String min;
+            if (i < 10) {
+                time = "0" + i;
+            } else {
+                time = String.valueOf(i);
             }
-        });
-        mCheckBox.get(1).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                editWeek.set(1, b);
+            if (i1 < 10) {
+                min = "0" + i1;
+            } else {
+                min = String.valueOf(i1);
             }
-        });
-        mCheckBox.get(2).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                editWeek.set(2, b);
-            }
-        });
-        mCheckBox.get(3).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                editWeek.set(3, b);
-            }
-        });
-        mCheckBox.get(4).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                editWeek.set(4, b);
-            }
-        });
-        mCheckBox.get(5).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                editWeek.set(5, b);
-            }
-        });
-        mCheckBox.get(6).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                editWeek.set(6, b);
-            }
-        });
-        mCheckBox.get(7).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                editWeek.set(7, b);
-            }
-        });
-        mTimePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
-            @Override
-            public void onTimeChanged(TimePicker timePicker, int i, int i1) {
-                isEditTime = true;
-                String time;
-                String min;
-                if (i < 10) {
-                    time = "0" + String.valueOf(i);
-                } else {
-                    time = String.valueOf(i);
-                }
-                if (i1 < 10) {
-                    min = "0" + String.valueOf(i1);
-                } else {
-                    min = String.valueOf(i1);
-                }
-                if (isSetStart) {
-                    editStart = time + ":" + min;
-                } else {
-                    editEnd = time + ":" + min;
-                }
+            if (isSetStart) {
+                editStart = time + ":" + min;
+            } else {
+                editEnd = time + ":" + min;
             }
         });
         RxView.clicks(mTextWeek.get(7))
@@ -321,6 +280,7 @@ public class VEditTime extends Fragment implements IVEditTime {
                         for (int i = 0; i < 7; i++) {
                             if (editWeek.get(i)) {
                                 isChecked = true;
+                                break;
                             }
                         }
                         if (editWeek.get(7)) {
@@ -574,7 +534,7 @@ public class VEditTime extends Fragment implements IVEditTime {
                         } else {
                             MyApplication.getAppData().setFromEditAttraction(false);
                         }
-                        getFragmentManager().popBackStack();
+                        getParentFragmentManager().popBackStack();
                     }
 
                     @Override
@@ -592,7 +552,7 @@ public class VEditTime extends Fragment implements IVEditTime {
                     @Override
                     public void onNext(Object o) {
                         MyApplication.getAppData().setFromEditAttraction(false);
-                        getFragmentManager().popBackStack();
+                        getParentFragmentManager().popBackStack();
                     }
 
                     @Override
@@ -744,7 +704,7 @@ public class VEditTime extends Fragment implements IVEditTime {
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NotNull Context context) {
         super.onAttach(context);
         mIMainActivity = (IMainActivity) context;
     }

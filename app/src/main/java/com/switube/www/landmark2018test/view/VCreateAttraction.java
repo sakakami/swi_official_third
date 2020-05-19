@@ -3,20 +3,20 @@ package com.switube.www.landmark2018test.view;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
@@ -36,6 +36,8 @@ import com.switube.www.landmark2018test.view.callback.IMainActivity;
 import com.switube.www.landmark2018test.view.callback.IVCreateAttraction;
 import com.tbruyelle.rxpermissions2.Permission;
 import com.tbruyelle.rxpermissions2.RxPermissions;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -90,7 +92,7 @@ public class VCreateAttraction extends Fragment implements IVCreateAttraction, I
                     @Override
                     public void onNext(Object o) {
                         mIMainActivity.setCreateData(null);
-                        getFragmentManager().popBackStack();
+                        getParentFragmentManager().popBackStack();
                     }
 
                     @Override
@@ -116,17 +118,14 @@ public class VCreateAttraction extends Fragment implements IVCreateAttraction, I
                         int nameCN = mIMainActivity.getCreateData().getPlace().getPlace_ch().length();
                         int nameJP = mIMainActivity.getCreateData().getPlace().getPlace_jp().length();
                         if (nameCN > 0 && nameEN > 0 && nameTW > 0 && nameJP > 0 && mIMainActivity.getSelectedAttractionType() != null) {
-                            getFragmentManager().beginTransaction()
+                            getParentFragmentManager().beginTransaction()
                                     .replace(R.id.layoutContainer, new VFeatures()).addToBackStack("CreateAttraction")
                                     .commit();
                         } else {
                             AlertDialogUtil.getInstance().initDialogBuilder(getContext(),
                                     R.string.create_action_message,
                                     R.string.global_ok,
-                                    new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {}
-                                    });
+                                    (dialogInterface, i) -> {});
                             AlertDialogUtil.getInstance().showAlertDialog();
                         }
                     }
@@ -153,12 +152,12 @@ public class VCreateAttraction extends Fragment implements IVCreateAttraction, I
         switch (type) {
             case 0:
                 VAttractionType.isClickHotKey = false;
-                getFragmentManager().beginTransaction()
+                getParentFragmentManager().beginTransaction()
                         .replace(R.id.layoutContainer, new VAttractionType()).addToBackStack("CreateAttraction")
                         .commit();
                 break;
             case 1:
-                getFragmentManager().beginTransaction()
+                getParentFragmentManager().beginTransaction()
                         .replace(R.id.layoutContainer, new VEditTime()).addToBackStack("CreateAttraction")
                         .commit();
                 break;
@@ -174,7 +173,7 @@ public class VCreateAttraction extends Fragment implements IVCreateAttraction, I
                                 @Override
                                 public void onNext(Permission permission) {
                                     if (permission.granted) {
-                                        getFragmentManager().beginTransaction()
+                                        getParentFragmentManager().beginTransaction()
                                                 .replace(R.id.layoutContainer, new VPhotoList()).addToBackStack("CreateAttraction")
                                                 .commit();
                                     }
@@ -189,7 +188,7 @@ public class VCreateAttraction extends Fragment implements IVCreateAttraction, I
                                 }
                             });
                 } else {
-                    getFragmentManager().beginTransaction()
+                    getParentFragmentManager().beginTransaction()
                             .replace(R.id.layoutContainer, new VPhotoList()).addToBackStack("CreateAttraction")
                             .commit();
                 }
@@ -208,7 +207,7 @@ public class VCreateAttraction extends Fragment implements IVCreateAttraction, I
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NotNull Context context) {
         super.onAttach(context);
         mIMainActivity = (IMainActivity) context;
     }
@@ -226,7 +225,6 @@ public class VCreateAttraction extends Fragment implements IVCreateAttraction, I
 
     @Override
     public void init(ECreateAttraction entity) {
-        //MyApplication.getAppData().seteCreateAttraction(entity);
         relativeLayout.setVisibility(View.GONE);
         mView.setVisibility(View.GONE);
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getContext());
@@ -277,7 +275,7 @@ public class VCreateAttraction extends Fragment implements IVCreateAttraction, I
         pCreateAttraction.getAttractionDetail(id);
     }
 
-    public void saveCreateData() {
+    private void saveCreateData() {
         mIMainActivity.setCreateData(aCreateAttraction.getmCreateData());
     }
 }

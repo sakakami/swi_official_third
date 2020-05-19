@@ -1,8 +1,6 @@
 package com.switube.www.landmark2018test.presenter;
 
 import android.content.Context;
-import android.os.Environment;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -112,7 +110,6 @@ public class PLeaveComments implements IPLeaveComments {
 
                         @Override
                         public void onSuccess(File file) {
-                            Log.e("luban", "absolutePath -> " + file.getAbsolutePath());
                             RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
                             switch (image.size()) {
                                 case 0:
@@ -156,7 +153,6 @@ public class PLeaveComments implements IPLeaveComments {
     private Map<String, RequestBody> image = new HashMap<>();
     private void handlePhotoDataToSend(final Context context, final CheckInDataGson checkInDataGson, final List<String> photo) {
         final int size = photo.size();
-        Log.e("before", "0 address -> " + photo.get(0));
         Luban.with(context)
                 .load(photo)
                 .ignoreBy(100)
@@ -166,7 +162,6 @@ public class PLeaveComments implements IPLeaveComments {
 
                     @Override
                     public void onSuccess(File file) {
-                        Log.e("after", "address -> " + file.getAbsolutePath());
                         RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
                         switch (image.size()) {
                             case 0:

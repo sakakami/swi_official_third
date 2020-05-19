@@ -1,18 +1,19 @@
 package com.switube.www.landmark2018test.view;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.jakewharton.rxbinding2.view.RxView;
-import com.switube.www.landmark2018test.adapter.AShowFeatures;
 import com.switube.www.landmark2018test.MyApplication;
 import com.switube.www.landmark2018test.R;
+import com.switube.www.landmark2018test.adapter.AShowFeatures;
 import com.switube.www.landmark2018test.entity.EFeatures;
 import com.switube.www.landmark2018test.presenter.PShowFeatures;
 import com.switube.www.landmark2018test.util.ItemDecorationUtil;
@@ -96,7 +97,7 @@ public class VShowFeatures extends Fragment implements IVShowFeatures {
 
                     @Override
                     public void onNext(Object o) {
-                        getFragmentManager().popBackStack();
+                        getParentFragmentManager().popBackStack();
                     }
 
                     @Override
@@ -113,7 +114,7 @@ public class VShowFeatures extends Fragment implements IVShowFeatures {
 
                     @Override
                     public void onNext(Object o) {
-                        getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VEditFeatures()).addToBackStack("ShowFeatures").commit();
+                        getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VEditFeatures()).addToBackStack("ShowFeatures").commit();
                     }
 
                     @Override

@@ -1,7 +1,5 @@
 package com.switube.www.landmark2018test.presenter;
 
-import android.util.Log;
-
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -35,12 +33,13 @@ public class PEditAttraction implements IPEditAttraction {
     private List<String> apiKeysForJp = new ArrayList<>();
     private List<String> apiKeys = new ArrayList<>();
     private Random random;
-    private String[] baseCodeB = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
-    private String[] baseCodeC = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
+
     public PEditAttraction(IVEditAttraction ivEditAttraction) {
         this.ivEditAttraction = ivEditAttraction;
         mEditAttraction = new MEditAttraction(this);
         random = new Random();
+        String[] baseCodeB = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
+        String[] baseCodeC = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
         String key = baseCodeB[0] + baseCodeB[8] + baseCodeC[25] + baseCodeC[0] + baseCodeB[18] + baseCodeC[24]
                 + baseCodeB[1] + baseCodeC[20] + baseCodeB[8] + "7" + baseCodeC[10] + baseCodeC[5]
                 + "1" + baseCodeB[13] + baseCodeB[16] + baseCodeB[8] + baseCodeC[14] + baseCodeB[23]
@@ -372,7 +371,7 @@ public class PEditAttraction implements IPEditAttraction {
 
     public void getPlaceId(LatLng latLng) {
         int index = new Random().nextInt(apiKeys.size());
-        String builder = String.valueOf(latLng.latitude) + "," + String.valueOf(latLng.longitude);
+        String builder = latLng.latitude + "," + latLng.longitude;
         Map<String, String> map = new HashMap<>();
         map.put("latlng", builder);
         map.put("language", "zh-TW");
@@ -383,7 +382,6 @@ public class PEditAttraction implements IPEditAttraction {
     public void sendDelPlaceData(String spid) {
         Map<String, String> map = NetworkUtil.getInstance().getMap();
         map.put("spid", spid);
-        Log.e("del place", spid);
         mEditAttraction.sendDelPlace(map);
     }
 

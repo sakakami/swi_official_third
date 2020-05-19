@@ -2,15 +2,15 @@ package com.switube.www.landmark2018test.view;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.android.gms.maps.SupportMapFragment;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.jakewharton.rxbinding2.view.RxView;
 import com.switube.www.landmark2018test.R;
 import com.switube.www.landmark2018test.adapter.ACarbonDetail;
@@ -43,14 +43,13 @@ public class VEco extends Fragment implements IVEco {
     @BindView(R.id.recyclerInEco)
     RecyclerView recyclerView;
     private ACarbonDetail adapter;
-    private SupportMapFragment mapFragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_veco, container, false);
         unbinder = ButterKnife.bind(this, view);
-        adapter = new ACarbonDetail(getActivity());
+        adapter = new ACarbonDetail();
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.addItemDecoration(new ItemDecorationUtil(getContext(), 8, 0, 8, 8));
         recyclerView.setAdapter(adapter);
@@ -61,7 +60,7 @@ public class VEco extends Fragment implements IVEco {
                     public void onSubscribe(Disposable d) {}
 
                     @Override
-                    public void onNext(Object o) { getFragmentManager().popBackStack(); }
+                    public void onNext(Object o) { getParentFragmentManager().popBackStack(); }
 
                     @Override
                     public void onError(Throwable e) {}
@@ -76,7 +75,7 @@ public class VEco extends Fragment implements IVEco {
                     public void onSubscribe(Disposable d) {}
 
                     @Override
-                    public void onNext(Object o) { getFragmentManager().popBackStack(); }
+                    public void onNext(Object o) { getParentFragmentManager().popBackStack(); }
 
                     @Override
                     public void onError(Throwable e) {}
@@ -84,11 +83,7 @@ public class VEco extends Fragment implements IVEco {
                     @Override
                     public void onComplete() {}
                 });
-        //if (mapFragment == null) {
-            //mapFragment = SupportMapFragment.newInstance();
-            //mapFragment.getMapAsync(this);
-        //}
-        //getChildFragmentManager().beginTransaction().replace(R.id.mapInItemCarbon, mapFragment).commit();
+
         pEco.init();
         return view;
     }

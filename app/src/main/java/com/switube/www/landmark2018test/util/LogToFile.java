@@ -2,11 +2,9 @@ package com.switube.www.landmark2018test.util;
 
 import android.content.Context;
 import android.os.Environment;
-import android.util.Log;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -15,7 +13,6 @@ import java.util.Date;
 import java.util.Locale;
 
 public class LogToFile {
-    private static String TAG = "LogToFile";
     private static String logPath = null;
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.TAIWAN);
     private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.TAIWAN);
@@ -40,7 +37,6 @@ public class LogToFile {
 
     private static void writeToFile(String tag, String msg) {
         if (null == logPath) {
-            Log.e(TAG, "logPath == null");
             return;
         }
 
@@ -59,8 +55,6 @@ public class LogToFile {
             fos = new FileOutputStream(fileName, true);
             bw = new BufferedWriter(new OutputStreamWriter(fos));
             bw.write(log);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

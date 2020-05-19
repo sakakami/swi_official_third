@@ -1,7 +1,5 @@
 package com.switube.www.landmark2018test.model;
 
-import android.util.Log;
-
 import com.switube.www.landmark2018test.gson.GInfoData;
 import com.switube.www.landmark2018test.gson.GLikeUnlike;
 import com.switube.www.landmark2018test.gson.GPersonalSteaming;

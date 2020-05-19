@@ -16,9 +16,9 @@ import java.util.ArrayList;
 public class LineChartManager {
     private LineChart lineChart;
 
-    public LineChartManager(LineChart lineChart, String chartType) {
+    public LineChartManager(LineChart lineChart) {
         this.lineChart = lineChart;
-        lineChart.getDescription().setText(chartType);
+        lineChart.getDescription().setText("");
         XAxis xAxis = this.lineChart.getXAxis();
         xAxis.setEnabled(true);
         xAxis.setDrawAxisLine(true);
@@ -37,15 +37,17 @@ public class LineChartManager {
         this.lineChart.animateX(8000);
     }
 
-    public void setEntryData(ArrayList<Entry> entries) {
+    public void setEntryData(ArrayList<Entry> entries, String name) {
         if (lineChart.getData() != null && lineChart.getData().getDataSetCount() > 0) {
             lineChart.getData().clearValues();
             LineDataSet dataSet = (LineDataSet)lineChart.getData().getDataSetByIndex(0);
-            dataSet.setValues(entries);
-            lineChart.getData().notifyDataChanged();
-            lineChart.notifyDataSetChanged();
+            if (entries.size() > 0) {
+                dataSet.setValues(entries);
+                lineChart.getData().notifyDataChanged();
+                lineChart.notifyDataSetChanged();
+            }
         } else {
-            LineDataSet dataSet = new LineDataSet(entries, "");
+            LineDataSet dataSet = new LineDataSet(entries, name);
             dataSet.setColor(Color.BLUE);
             dataSet.setCircleColor(Color.BLUE);
             dataSet.setLineWidth(1.5f);

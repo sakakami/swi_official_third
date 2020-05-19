@@ -66,7 +66,7 @@ public class PEco {
                         disOutZero.add(dis);
                     }
                 } catch (ParseException e) {
-                    Log.e("PCarbon", e.toString());
+                    Log.e("PEco", e.toString());
                 }
             }
         }
@@ -75,11 +75,9 @@ public class PEco {
         double speedPerMin = 0;
         double disPerMin = 0;
         //行程分類
-        //int x = 0;
         for (int i = 0; i < spdOutZero.size(); i++) {
             int x = i + 1;
             if (x % 60 == 0 || i == spdOutZero.size() - 1) {
-                //double speedForKPH = 0;
                 speedPerMin += spdOutZero.get(i);
                 double speedForKPH = speedPerMin / 60;
                 disPerMin += disOutZero.get(i);
@@ -150,8 +148,6 @@ public class PEco {
             totalDis += disToKm;
             switch (carbonType.get(i)) {
                 case 1:
-                    carbons.add(disToKm * 0);
-                    break;
                 case 2:
                     carbons.add(disToKm * 0);
                     break;
@@ -192,8 +188,6 @@ public class PEco {
             double dis = finalStroke.get(i).getDis();
             switch (finalStroke.get(i).getMode()) {
                 case 1:
-                    finalStroke.get(i).setCarbon(dis / 1000 * 0);
-                    break;
                 case 2:
                     finalStroke.get(i).setCarbon(dis / 1000 * 0);
                     break;
@@ -246,9 +240,9 @@ public class PEco {
             e.printStackTrace();
         }
         time /= 1000;
-        int hour = 0;
-        int min = 0;
-        int sec = 0;
+        int hour;
+        int min;
+        int sec;
         if (time >= 3600) {
             hour = (int)(time / 3600);
             time %= 3600;
@@ -311,19 +305,15 @@ public class PEco {
             switch (finalStroke.get(i).getMode()) {
                 case 1:
                     detail.setTool("交通工具： 步行");
-                    //builder.append("步行\n碳足跡：");
                     break;
                 case 2:
                     detail.setTool("交通工具： 自行車");
-                    //builder.append("自行車\n碳足跡：");
                     break;
                 case 3:
                     detail.setTool("交通工具： 摩托車");
-                    //builder.append("摩托車\n碳足跡：");
                     break;
                 default:
                     detail.setTool("交通工具： 開車");
-                    //builder.append("開車\n碳足跡：");
                     break;
             }
             detail.setCarbon("碳足跡：" + df.format(finalStroke.get(i).getCarbon()) + "公克二氧化碳排放量");

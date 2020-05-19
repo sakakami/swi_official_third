@@ -1,7 +1,6 @@
 package com.switube.www.landmark2018test.youtube;
 
 import android.content.Context;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.RelativeLayout;
 

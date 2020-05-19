@@ -4,17 +4,17 @@ package com.switube.www.landmark2018test.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
@@ -30,6 +30,8 @@ import com.switube.www.landmark2018test.presenter.PAttractionList;
 import com.switube.www.landmark2018test.util.SharePreferencesUtil;
 import com.switube.www.landmark2018test.view.callback.IMainActivity;
 import com.switube.www.landmark2018test.view.callback.IVAttractionList;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +58,7 @@ public class VAttractionList extends Fragment implements IAAttractionList, IVAtt
     RecyclerView recyclerView;
     @BindView(R.id.searchInAttractionSelect)
     SearchView searchView;
-    IMainActivity iMainActivity;
+    private IMainActivity iMainActivity;
     private PAttractionList pAttractionList;
     private Unbinder mUnbinder;
     private GAttractionListData gAttractionListData;
@@ -84,7 +86,7 @@ public class VAttractionList extends Fragment implements IAAttractionList, IVAtt
 
                     @Override
                     public void onNext(Object o) {
-                        getFragmentManager().popBackStack();
+                        getParentFragmentManager().popBackStack();
                     }
 
                     @Override
@@ -165,13 +167,13 @@ public class VAttractionList extends Fragment implements IAAttractionList, IVAtt
         iMainActivity.saveAttractionId(spid);
         iMainActivity.setPlaceName(place);
         SharePreferencesUtil.getInstance().getEditor().putString("selectedTag", "finish").apply();
-        getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VTag()).addToBackStack("AttractionList").commit();
+        getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VTag()).addToBackStack("AttractionList").commit();
     }
 
     @Override
     public void savePlaceId(String id) {
         iMainActivity.setPlaceId(id);
-        getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VCreateAttraction()).addToBackStack("AttractionList").commit();
+        getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VCreateAttraction()).addToBackStack("AttractionList").commit();
     }
 
     @Override
@@ -180,7 +182,7 @@ public class VAttractionList extends Fragment implements IAAttractionList, IVAtt
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NotNull Context context) {
         super.onAttach(context);
         iMainActivity = (IMainActivity) context;
     }
@@ -198,7 +200,7 @@ public class VAttractionList extends Fragment implements IAAttractionList, IVAtt
                     pAttractionList.getPlaceData(place.getLatLng());
                 } else {
                     iMainActivity.setPlaceId(place.getId());
-                    getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VCreateAttraction()).addToBackStack("AttractionList").commit();
+                    getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VCreateAttraction()).addToBackStack("AttractionList").commit();
                 }
             }
         }

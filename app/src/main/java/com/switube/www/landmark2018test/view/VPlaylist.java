@@ -1,17 +1,17 @@
 package com.switube.www.landmark2018test.view;
 
 
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.switube.www.landmark2018test.MyApplication;
@@ -69,7 +69,7 @@ public class VPlaylist extends Fragment implements IAPlaylist, IVPlaylist {
                     public void onNext(Object o) {
                         MyApplication.getAppData().setCanRefreshList(false);
                         MyApplication.getAppData().setPlaylist(false);
-                        getFragmentManager().popBackStack();
+                        getParentFragmentManager().popBackStack();
                     }
 
                     @Override
@@ -126,10 +126,7 @@ public class VPlaylist extends Fragment implements IAPlaylist, IVPlaylist {
     public void showSearchError() {
         AlertDialogUtil
                 .getInstance()
-                .initDialogBuilder(getContext(), R.string.music_search_error, R.string.music_search_yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                    }
+                .initDialogBuilder(getContext(), R.string.music_search_error, R.string.music_search_yes, (dialogInterface, i) -> {
                 });
         AlertDialogUtil.getInstance().showAlertDialog();
     }

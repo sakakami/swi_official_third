@@ -4,9 +4,6 @@ import android.animation.Animator;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,6 +12,9 @@ import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 
 import com.switube.www.landmark2018test.MainActivity;
 import com.switube.www.landmark2018test.MyApplication;
@@ -35,7 +35,6 @@ public class YouTubePlayerController implements YouTubePlayer.YouTubeListener, V
     };
 
     private ImageView mImageRightTop;
-    //private ImageView mImageLeftTop;
     private ImageView mImageRightBottom;
     private ImageView mImageCenter;
     private ImageView mImageRightCenter;
@@ -63,7 +62,6 @@ public class YouTubePlayerController implements YouTubePlayer.YouTubeListener, V
                             @NotNull View view) {
         ButterKnife.bind(this, view);
         mImageRightTop = view.findViewById(R.id.imageRightTopInYouTubePlayer);
-        //mImageLeftTop = view.findViewById(R.id.imageLeftTopInYouTubePlayer);
         mImageRightBottom = view.findViewById(R.id.imageRightDownInYouTubePlayer);
         mImageCenter = view.findViewById(R.id.imagePlayInYouTubePlayer);
         mImageRightCenter = view.findViewById(R.id.imageRightCenterInYouTubePlayer);
@@ -78,7 +76,6 @@ public class YouTubePlayerController implements YouTubePlayer.YouTubeListener, V
         mContext = context;
         mYouTubePlayerView = youTubePlayerView;
 
-        //mImageLeftTop.setOnTouchListener(this);
         mImageRightTop.setOnTouchListener(this);
         mImageRightBottom.setOnTouchListener(this);
         mImageCenter.setOnTouchListener(this);

@@ -3,17 +3,22 @@ package com.switube.www.landmark2018test.view;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
 import com.jakewharton.rxbinding2.view.RxView;
 import com.switube.www.landmark2018test.R;
+import com.switube.www.landmark2018test.presenter.PCreditCard;
 import com.switube.www.landmark2018test.view.callback.IMainActivity;
+import com.switube.www.landmark2018test.view.callback.IVCreditCard;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -27,9 +32,10 @@ import io.reactivex.disposables.Disposable;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class VCreditCard extends Fragment {
-
+public class VCreditCard extends Fragment implements IVCreditCard {
+    private PCreditCard pCreditCard;
     public VCreditCard() {
+        pCreditCard = new PCreditCard(this);
     }
 
     @BindViews({R.id.textTitleInCreditCard, R.id.textBackInCreditCard, R.id.textAddInCreditCard,
@@ -54,9 +60,7 @@ public class VCreditCard extends Fragment {
 
                     @Override
                     public void onNext(Object o) {
-                        VMap.isCent = true;
-                        iMainActivity.handleStartTimer(false);
-                        getFragmentManager().popBackStack();
+                        pCreditCard.sendCashFlow();
                     }
 
                     @Override
@@ -74,7 +78,7 @@ public class VCreditCard extends Fragment {
 
                     @Override
                     public void onNext(Object o) {
-                        getFragmentManager().popBackStack();
+                        getParentFragmentManager().popBackStack();
                     }
 
                     @Override
@@ -94,8 +98,15 @@ public class VCreditCard extends Fragment {
 
     private IMainActivity iMainActivity;
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NotNull Context context) {
         super.onAttach(context);
         iMainActivity = (IMainActivity)context;
+    }
+
+    @Override
+    public void finishSend() {
+        VMap.isCent = true;
+        iMainActivity.handleStartTimer(false);
+        getParentFragmentManager().popBackStack();
     }
 }

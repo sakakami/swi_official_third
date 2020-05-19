@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.VStoreList"
+    android:background="@color/colorWhiteForFFFFFF">
+
+    <TextView
+        android:id="@+id/textCashInStoreList"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="#070F3C"
+        android:text="碳幣餘額：770"
+        android:textSize="20sp"
+        android:textColor="@color/colorWhiteForFFFFFF"
+        android:textStyle="bold"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/textTitleInStoreList"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/textCashInStoreList"
+        android:background="@color/colorWhiteForD0D0D0"
+        android:layout_marginTop="8dp"
+        android:text="兌換"
+        android:textSize="20sp"
+        android:gravity="center"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerInStoreList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/textTitleInStoreList"
+        android:layout_marginTop="8dp"/>
+
+</RelativeLayout>

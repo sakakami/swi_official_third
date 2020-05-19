@@ -18,7 +18,6 @@ import com.switube.www.landmark2018test.util.SharePreferencesUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class ASlideMenu extends BaseAdapter {
     private LayoutInflater mLayoutInflater;
@@ -143,7 +142,7 @@ public class ASlideMenu extends BaseAdapter {
 
         mItemList.add(new ESlideMenu(R.drawable.me_12_v11, MyApplication.getInstance().getString(R.string.map_slide_wallet), false, false, "default", false, "null"));
         mItemList.add(new ESlideMenu(R.drawable.me_13_v11, "碳足跡試算", false, false, "default", false, "null"));
-        mItemList.add(new ESlideMenu(R.drawable.me_14_v11, "節能駕駛", false, false, "default", false, "null"));
+        mItemList.add(new ESlideMenu(R.drawable.me_14_v11, "體適能試算", false, false, "default", false, "null"));
 
         mItemList.add(new ESlideMenu(R.drawable.me_1_v11, MyApplication.getInstance().getString(R.string.map_slide_timeline),
                 false, false, "default", false, "null"));

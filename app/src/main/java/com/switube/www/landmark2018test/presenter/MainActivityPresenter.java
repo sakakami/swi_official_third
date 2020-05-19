@@ -8,20 +8,17 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
 import android.provider.Settings;
-import android.support.annotation.Nullable;
-import android.util.ArrayMap;
-import android.util.Log;
+
+import androidx.annotation.Nullable;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
 import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
@@ -42,28 +39,26 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.switube.www.landmark2018test.MainActivity;
 import com.switube.www.landmark2018test.MyApplication;
 import com.switube.www.landmark2018test.R;
 import com.switube.www.landmark2018test.entity.ECreateAttraction;
 import com.switube.www.landmark2018test.gson.GSignInData;
 import com.switube.www.landmark2018test.model.MainActivityModel;
 import com.switube.www.landmark2018test.presenter.callback.IMainActivityPresenter;
-import com.switube.www.landmark2018test.util.NetworkUtil;
-import com.switube.www.landmark2018test.view.callback.IMainActivity;
-import com.switube.www.landmark2018test.MainActivity;
-import com.switube.www.landmark2018test.view.VMap;
 import com.switube.www.landmark2018test.util.AppConstant;
+import com.switube.www.landmark2018test.util.NetworkUtil;
 import com.switube.www.landmark2018test.util.SharePreferencesUtil;
+import com.switube.www.landmark2018test.view.VMap;
+import com.switube.www.landmark2018test.view.callback.IMainActivity;
 import com.tbruyelle.rxpermissions2.Permission;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -115,7 +110,6 @@ public class MainActivityPresenter implements IMainActivityPresenter {
 
     private boolean isFirst = true;
     private LatLng mLatLng;
-    private LocationResult mLocationResult;
     private List<LatLng> mLatLngList = new ArrayList<>();
     private MarkerOptions markerOptions;
     private PolylineOptions polylineRed;
@@ -127,10 +121,6 @@ public class MainActivityPresenter implements IMainActivityPresenter {
             @Override
             public void onLocationResult(LocationResult locationResult) {
                 super.onLocationResult(locationResult);
-                double lat = locationResult.getLastLocation().getLatitude();
-                double lon = locationResult.getLastLocation().getLongitude();
-                //Log.e("MAP", "lat -> " + lat + ", long -> " + lon);
-                mLocationResult = locationResult;
                 mLatLng = new LatLng(locationResult.getLastLocation().getLatitude(), locationResult.getLastLocation().getLongitude());
                 if (VMap.isCent) {
                     mLatLngList.add(mLatLng);
@@ -289,7 +279,6 @@ public class MainActivityPresenter implements IMainActivityPresenter {
         mMin = 0;
         mSec = 0;
         mHour = 0;
-        mDistance = 0;
     }
 
     private double mCostPerSec = 0;
@@ -388,13 +377,10 @@ public class MainActivityPresenter implements IMainActivityPresenter {
                 map.put("maimg", "");
                 String photoUrl;
                 if (googleSignInAccount.getPhotoUrl() != null) {
-                    //map.put("maimg", googleSignInAccount.getPhotoUrl().toString());
                     photoUrl = googleSignInAccount.getPhotoUrl().toString();
                 } else {
-                    //map.put("maimg", "");
                     photoUrl = "";
                 }
-                Log.e("google map ->", map.toString());
                 mMainActivityModel.sendSignInData(map, "google", photoUrl);
             }
         }
@@ -421,13 +407,6 @@ public class MainActivityPresenter implements IMainActivityPresenter {
     @Override
     public void handleAccountGson(GSignInData gSignInData, String signType, String photoUrl) {
         SharePreferencesUtil.getInstance().getEditor().putString("userMaid", gSignInData.getInfo_data().get(0).getMaid()).apply();
-        /*if (photoUrl.length() > 0) {
-            Log.e("photoUrl", photoUrl);
-            SharePreferencesUtil.getInstance().getEditor().putString("userImg", photoUrl).apply();
-        } else {
-            Log.e("photoUrl", "error");
-            SharePreferencesUtil.getInstance().getEditor().putString("userImg", gSignInData.getInfo_data().get(0).getImg()).apply();
-        }*/
         SharePreferencesUtil.getInstance().getEditor().putString("userImg", gSignInData.getInfo_data().get(0).getImg()).apply();
         SharePreferencesUtil.getInstance().getEditor().putString("userName", gSignInData.getInfo_data().get(0).getAccname()).apply();
         SharePreferencesUtil.getInstance().getEditor().putString("userEmail", gSignInData.getInfo_data().get(0).getAccid()).apply();
@@ -462,19 +441,14 @@ public class MainActivityPresenter implements IMainActivityPresenter {
                             map.put("accname", "");
                         }
                         map.put("maimg", "");
-                        //map.put("maimg", profile.getProfilePictureUri(96, 96).toString());
-                        GraphRequest graphRequest = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
-                            @Override
-                            public void onCompleted(JSONObject object, GraphResponse response) {
-                                if (object != null) {
-                                    try {
-                                        map.put("accid", object.getString("email"));
-                                        map.put("id", object.getString("id"));
-                                        Log.e("facebook map ->", map.toString());
-                                        mMainActivityModel.sendSignInData(map, "facebook", profile.getProfilePictureUri(96, 96).toString());
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
+                        GraphRequest graphRequest = GraphRequest.newMeRequest(loginResult.getAccessToken(), (object, response) -> {
+                            if (object != null) {
+                                try {
+                                    map.put("accid", object.getString("email"));
+                                    map.put("id", object.getString("id"));
+                                    mMainActivityModel.sendSignInData(map, "facebook", profile.getProfilePictureUri(96, 96).toString());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
                                 }
                             }
                         });
@@ -512,86 +486,7 @@ public class MainActivityPresenter implements IMainActivityPresenter {
         return placeName;
     }
 
-    private LocationResult mLocationOld;
-    private float mDistance = 0;
-    private void calculateDistance() {
-        if (mLocationOld == null) {
-            mLocationOld = mLocationResult;
-        } else {
-            float[] results = new float[1];
-            Location.distanceBetween(mLocationOld.getLastLocation().getLatitude(),
-                    mLocationOld.getLastLocation().getLongitude(),
-                    mLocationResult.getLastLocation().getLatitude(),
-                    mLocationResult.getLastLocation().getLongitude(), results);
-            mLocationOld = mLocationResult;
-            if (results[0] <= 11) {
-                mDistance += results[0];
-            }
-            float result = mDistance / 1000;
-            if (result < 0.01) {
-                mIMainActivity.handleChangeTextLeft("0.00");
-            } else {
-                mIMainActivity.handleChangeTextLeft(String.format(Locale.TAIWAN, "%.2f", result));
-            }
-        }
-    }
-
-    private void calculateAvg() {
-        if (mDistance != 0 && mCount != 0) {
-            double mAvg = mCount / (mDistance / 1000);
-            double sec;
-            double min = 0;
-            if (mAvg > 59) {
-                sec = mAvg % 60;
-                min = mAvg / 60;
-            } else {
-                sec = mAvg;
-            }
-            StringBuilder stringBuffer = new StringBuilder();
-            stringBuffer.append((int)min);
-            stringBuffer.append(":");
-            if (sec < 10) {
-                stringBuffer.append("0");
-            }
-            stringBuffer.append((int)sec);
-            mIMainActivity.handleChangeTextRight(stringBuffer.toString());
-        } else {
-            mIMainActivity.handleChangeTextRight("99+");
-        }
-    }
-
     private StringBuilder mStringBuilder = new StringBuilder();
-    private void handleTime() {
-        mStringBuilder.delete(0, mStringBuilder.length());
-        int size;
-        if (mHour > 0) {
-            if (mHour < 10) {
-                mStringBuilder.append(0);
-            }
-            mStringBuilder.append(mHour);
-            mStringBuilder.append(":");
-            size = 30;
-        } else {
-            size = 50;
-        }
-        if (mMin < 10) {
-            mStringBuilder.append(0);
-        }
-        mStringBuilder.append(mMin);
-        mStringBuilder.append(":");
-        if (mSec < 10) {
-            mStringBuilder.append(0);
-        }
-        mStringBuilder.append(mSec);
-        mIMainActivity.handleChangeTextCenter(mStringBuilder.toString(), size);
-    }
-
-    private PolylineOptions polylineOptions = new PolylineOptions().color(R.color.colorBlueFor6398D9);
-    private void handleDrawLine() {
-        polylineOptions.add(new LatLng(mLocationResult.getLastLocation().getLatitude(), mLocationResult.getLastLocation().getLongitude()));
-        mIMainActivity.getGoogleMap().clear();
-        mIMainActivity.getGoogleMap().addPolyline(polylineOptions);
-    }
 
     private double mMoney = 0;
     private void handleTimeAndCost() {
@@ -615,7 +510,7 @@ public class MainActivityPresenter implements IMainActivityPresenter {
         mStringBuilder.append(mSec);
         String titleA = MyApplication.getInstance().getString(R.string.map_ebike_calculate_down);
         String titleB = MyApplication.getInstance().getString(R.string.map_ebike_calculate_up) + MyApplication.getInstance().getString(R.string.map_ebike_calculate_unit);
-        mIMainActivity.handleChangeTimeAndCost(titleA + mStringBuilder.toString(), titleB + String.valueOf((int)mMoney));
+        mIMainActivity.handleChangeTimeAndCost(titleA + mStringBuilder.toString(), titleB + (int)mMoney);
     }
 
     private void handleTimeAndCarbon() {
@@ -638,6 +533,6 @@ public class MainActivityPresenter implements IMainActivityPresenter {
         mStringBuilder.append(mSec);
         String titleA = "交通時間：";
         String titleB = "預計碳足跡：";
-        mIMainActivity.handleChangeTimeAndCost(titleA + mStringBuilder.toString(), titleB + String.valueOf(0));
+        mIMainActivity.handleChangeTimeAndCost(titleA + mStringBuilder.toString(), titleB + 0);
     }
 }

@@ -1,12 +1,14 @@
 package com.switube.www.landmark2018test.presenter;
 
-import android.util.Log;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.switube.www.landmark2018test.MyApplication;
+import com.switube.www.landmark2018test.database.entity.AttractionClassEntity;
+import com.switube.www.landmark2018test.database.entity.AttractionItemEntity;
+import com.switube.www.landmark2018test.database.entity.AttractionStyleEntity;
+import com.switube.www.landmark2018test.database.entity.AttractionTermEntity;
 import com.switube.www.landmark2018test.entity.ECreateAttraction;
 import com.switube.www.landmark2018test.entity.EFeatures;
 import com.switube.www.landmark2018test.gson.GCreateAttraction;
@@ -14,10 +16,6 @@ import com.switube.www.landmark2018test.model.MFeatures;
 import com.switube.www.landmark2018test.presenter.callback.IPFeatures;
 import com.switube.www.landmark2018test.util.NetworkUtil;
 import com.switube.www.landmark2018test.view.callback.IVFeatures;
-import com.switube.www.landmark2018test.database.entity.AttractionClassEntity;
-import com.switube.www.landmark2018test.database.entity.AttractionItemEntity;
-import com.switube.www.landmark2018test.database.entity.AttractionStyleEntity;
-import com.switube.www.landmark2018test.database.entity.AttractionTermEntity;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -436,7 +434,7 @@ public class PFeatures implements IPFeatures {
             stringBuilder.append("%");
             mFeatures.getDataThree(stringBuilder.toString());
         } else {
-            ivFeatures.init(mClassList, mTermList, new ArrayList<AttractionItemEntity>());
+            ivFeatures.init(mClassList, mTermList, new ArrayList<>());
         }
     }
 

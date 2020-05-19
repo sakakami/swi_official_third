@@ -38,10 +38,11 @@
         android:layout_height="1dp"
         android:layout_below="@+id/textTitleInEco"
         android:background="@color/colorGrayFor5F5F5F"/>
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerInEco"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/viewBarInEco"/>
+        android:layout_below="@+id/viewBarInEco"
+        android:nestedScrollingEnabled="false"/>
 
 </RelativeLayout>

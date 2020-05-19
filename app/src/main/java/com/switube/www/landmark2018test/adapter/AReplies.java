@@ -2,15 +2,15 @@ package com.switube.www.landmark2018test.adapter;
 
 import android.content.Context;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.jakewharton.rxbinding2.view.RxView;
@@ -174,16 +174,13 @@ public class AReplies extends RecyclerView.Adapter<AReplies.ViewHolder> {
             PopupMenu popupMenu = new PopupMenu(context, imageViews.get(2));
             popupMenu.getMenuInflater().inflate(R.menu.menu_info_reply, popupMenu.getMenu());
             popupMenu.show();
-            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem menuItem) {
-                    if (menuItem.getItemId() == R.id.menuEditInReply) {
-                        iaReplies.handleEdit(getAdapterPosition());
-                    } else {
-                        iaReplies.handleDelete(getAdapterPosition());
-                    }
-                    return true;
+            popupMenu.setOnMenuItemClickListener(menuItem -> {
+                if (menuItem.getItemId() == R.id.menuEditInReply) {
+                    iaReplies.handleEdit(getAdapterPosition());
+                } else {
+                    iaReplies.handleDelete(getAdapterPosition());
                 }
+                return true;
             });
         }
     }

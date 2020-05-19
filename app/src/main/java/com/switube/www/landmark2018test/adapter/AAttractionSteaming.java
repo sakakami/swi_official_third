@@ -4,17 +4,13 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -22,6 +18,9 @@ import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.jakewharton.rxbinding2.view.RxView;
@@ -144,7 +143,7 @@ public class AAttractionSteaming extends RecyclerView.Adapter<AAttractionSteamin
                             .load(Uri.parse(AppConstant.BASE_URL + articleList.get(index).getImg().get(0)))
                             .into(holder.imageViewInMessageHeadPhoto);
                     holder.textViewsInMessageHeadPhoto.get(1).setVisibility(View.VISIBLE);
-                    String photoCount = "1/" + String.valueOf(articleList.get(index).getImg().size());
+                    String photoCount = "1/" + articleList.get(index).getImg().size();
                     holder.textViewsInMessageHeadPhoto.get(1).setText(photoCount);
                 } else {
                     holder.imageViewInMessageHeadPhoto.setImageResource(0);
@@ -173,7 +172,7 @@ public class AAttractionSteaming extends RecyclerView.Adapter<AAttractionSteamin
             case 4:
                 switchLayout(holder, 4);
                 size = articleList.get(index).getMsg().size();
-                count = String.valueOf(size) + " " + holder.itemView.getContext().getString(R.string.info_comments);
+                count = size + " " + holder.itemView.getContext().getString(R.string.info_comments);
                 holder.textViewsInMessageBody.get(3).setText(count);
                 holder.textViewsInMessageBody.get(2).setText(articleList.get(index).getCount());
                 switch (articleList.get(index).getLike()) {
@@ -248,10 +247,8 @@ public class AAttractionSteaming extends RecyclerView.Adapter<AAttractionSteamin
             articleList.clear();
         }
         if (tag.equals("null")) {
-            Log.e("null", "is null");
             articleList.addAll(baseList);
         } else {
-            Log.e("null", "not null");
             List<GInfoData.Article> noSelectedList = new ArrayList<>();
             int size = baseList.size();
             for (int i = 0; i < size; i++) {
@@ -261,6 +258,7 @@ public class AAttractionSteaming extends RecyclerView.Adapter<AAttractionSteamin
                     for (int j = 0; j < size2; j++) {
                         if (baseList.get(i).getTag().get(j).equals(tag)) {
                             isSelected = true;
+                            break;
                         }
                     }
                     if (isSelected) {
@@ -566,18 +564,15 @@ public class AAttractionSteaming extends RecyclerView.Adapter<AAttractionSteamin
             PopupMenu popupMenu = new PopupMenu(context, imageViewsInMessageHead.get(2));
             popupMenu.getMenuInflater().inflate(R.menu.menu_info_comment, popupMenu.getMenu());
             popupMenu.show();
-            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem menuItem) {
-                    if (menuItem.getItemId() == R.id.menuDeleteInComment) {
-                        iaAttractionSteaming.handleDeleteComment(getAdapterPosition() / 8);
-                    } else if (menuItem.getItemId() == R.id.menuEditCommentInComment) {
-                        iaAttractionSteaming.handleEdit(getAdapterPosition() / 8, true);
-                    } else {
-                        iaAttractionSteaming.handleEdit(getAdapterPosition() / 8, false);
-                    }
-                    return true;
+            popupMenu.setOnMenuItemClickListener(menuItem -> {
+                if (menuItem.getItemId() == R.id.menuDeleteInComment) {
+                    iaAttractionSteaming.handleDeleteComment(getAdapterPosition() / 8);
+                } else if (menuItem.getItemId() == R.id.menuEditCommentInComment) {
+                    iaAttractionSteaming.handleEdit(getAdapterPosition() / 8, true);
+                } else {
+                    iaAttractionSteaming.handleEdit(getAdapterPosition() / 8, false);
                 }
+                return true;
             });
         }
     }

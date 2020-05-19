@@ -36,7 +36,6 @@ public interface IPMap {
     void handlePushMusicData(GPushMusic gPushMusic);
     void handleLoveData(GSendLove gSendLove);
     void handleCarbon(List<CarbonEntity> list, boolean isShow);
-    void finishCashFlowInsert();
     void finishSendCashFlow(GSendLove gSendLove);
     void finishSaveCarbon();
     void handleEco(List<EcoEntity> list, boolean isShow);

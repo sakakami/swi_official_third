@@ -1,7 +1,5 @@
 package com.switube.www.landmark2018test.model;
 
-import android.util.Log;
-
 import com.google.android.gms.maps.model.LatLng;
 import com.switube.www.landmark2018test.database.AppDatabase;
 import com.switube.www.landmark2018test.database.entity.AttractionClassEntity;
@@ -10,18 +8,17 @@ import com.switube.www.landmark2018test.database.entity.AttractionModeEntity;
 import com.switube.www.landmark2018test.database.entity.AttractionStyleEntity;
 import com.switube.www.landmark2018test.database.entity.AttractionTermEntity;
 import com.switube.www.landmark2018test.database.entity.CarbonEntity;
-import com.switube.www.landmark2018test.database.entity.CashFlowEntity;
 import com.switube.www.landmark2018test.database.entity.EcoEntity;
 import com.switube.www.landmark2018test.database.entity.MapPlaceBaseDataEntity;
 import com.switube.www.landmark2018test.database.entity.MapPlaceBaseSubDataEntity;
+import com.switube.www.landmark2018test.gson.GAttractionListData;
 import com.switube.www.landmark2018test.gson.GMusicRadio;
+import com.switube.www.landmark2018test.gson.GPlaceIdData;
 import com.switube.www.landmark2018test.gson.GPushMusic;
 import com.switube.www.landmark2018test.gson.GSaveList;
+import com.switube.www.landmark2018test.gson.GSearchAttractionDetail;
 import com.switube.www.landmark2018test.gson.GSendLove;
 import com.switube.www.landmark2018test.gson.GSlideMenuData;
-import com.switube.www.landmark2018test.gson.GAttractionListData;
-import com.switube.www.landmark2018test.gson.GPlaceIdData;
-import com.switube.www.landmark2018test.gson.GSearchAttractionDetail;
 import com.switube.www.landmark2018test.gson.GStrokeList;
 import com.switube.www.landmark2018test.presenter.callback.IPMap;
 import com.switube.www.landmark2018test.util.NetworkUtil;
@@ -33,7 +30,6 @@ import java.util.Map;
 
 import io.reactivex.MaybeObserver;
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -126,25 +122,22 @@ public class MMap {
                                      final GMusicRadio gMusicRadio,
                                      final GAttractionListData gAttractionListData) {
         Observable
-                .create(new ObservableOnSubscribe<String>() {
-                    @Override
-                    public void subscribe(ObservableEmitter<String> emitter) throws Exception {
-                        AppDatabase.getInstance().attractionModeDao().cleanTable();
-                        AppDatabase.getInstance().attractionModeDao().insertAllData(attractionModeEntities);
-                        AppDatabase.getInstance().attractionStyleDao().cleanTable();
-                        AppDatabase.getInstance().attractionStyleDao().insertAllData(attractionStyleEntities);
-                        AppDatabase.getInstance().attractionClassDao().cleanTable();
-                        AppDatabase.getInstance().attractionClassDao().insertAllData(attractionClassEntities);
-                        AppDatabase.getInstance().attractionTermDao().cleanTable();
-                        AppDatabase.getInstance().attractionTermDao().insertAllData(attractionTermEntities);
-                        AppDatabase.getInstance().attractionItemDao().cleanTable();
-                        AppDatabase.getInstance().attractionItemDao().insertAllData(attractionItemEntities);
-                        AppDatabase.getInstance().mapPlaceBaseDataDao().cleanTable();
-                        AppDatabase.getInstance().mapPlaceBaseDataDao().insertAllData(mapPlaceBaseDataEntities);
-                        AppDatabase.getInstance().mapPlaceBaseSubDataDao().cleanTable();
-                        AppDatabase.getInstance().mapPlaceBaseSubDataDao().insertAllData(subDataEntities);
-                        emitter.onComplete();
-                    }
+                .create((ObservableOnSubscribe<String>) emitter -> {
+                    AppDatabase.getInstance().attractionModeDao().cleanTable();
+                    AppDatabase.getInstance().attractionModeDao().insertAllData(attractionModeEntities);
+                    AppDatabase.getInstance().attractionStyleDao().cleanTable();
+                    AppDatabase.getInstance().attractionStyleDao().insertAllData(attractionStyleEntities);
+                    AppDatabase.getInstance().attractionClassDao().cleanTable();
+                    AppDatabase.getInstance().attractionClassDao().insertAllData(attractionClassEntities);
+                    AppDatabase.getInstance().attractionTermDao().cleanTable();
+                    AppDatabase.getInstance().attractionTermDao().insertAllData(attractionTermEntities);
+                    AppDatabase.getInstance().attractionItemDao().cleanTable();
+                    AppDatabase.getInstance().attractionItemDao().insertAllData(attractionItemEntities);
+                    AppDatabase.getInstance().mapPlaceBaseDataDao().cleanTable();
+                    AppDatabase.getInstance().mapPlaceBaseDataDao().insertAllData(mapPlaceBaseDataEntities);
+                    AppDatabase.getInstance().mapPlaceBaseSubDataDao().cleanTable();
+                    AppDatabase.getInstance().mapPlaceBaseSubDataDao().insertAllData(subDataEntities);
+                    emitter.onComplete();
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -167,12 +160,9 @@ public class MMap {
 
     public void saveCarbon(final List<CarbonEntity> list) {
         Observable
-                .create(new ObservableOnSubscribe<String>() {
-                    @Override
-                    public void subscribe(ObservableEmitter<String> emitter) throws Exception {
-                        AppDatabase.getInstance().carbonDao().insert(list);
-                        emitter.onComplete();
-                    }
+                .create((ObservableOnSubscribe<String>) emitter -> {
+                    AppDatabase.getInstance().carbonDao().insert(list);
+                    emitter.onComplete();
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -193,12 +183,9 @@ public class MMap {
 
     public void saveEco(final List<EcoEntity> list) {
         Observable
-                .create(new ObservableOnSubscribe<String>() {
-                    @Override
-                    public void subscribe(ObservableEmitter<String> emitter) throws Exception {
-                        AppDatabase.getInstance().ecoDao().insert(list);
-                        emitter.onComplete();
-                    }
+                .create((ObservableOnSubscribe<String>) emitter -> {
+                    AppDatabase.getInstance().ecoDao().insert(list);
+                    emitter.onComplete();
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -559,32 +546,6 @@ public class MMap {
 
                     @Override
                     public void onComplete() {}
-                });
-    }
-
-    public void insertData(final CashFlowEntity cashFlowEntity) {
-        Observable
-                .create(new ObservableOnSubscribe<String>() {
-                    @Override
-                    public void subscribe(ObservableEmitter<String> emitter) throws Exception {
-                        AppDatabase.getInstance().cashFlowDao().insertData(cashFlowEntity);
-                        emitter.onComplete();
-                    }
-                })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<String>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {}
-
-                    @Override
-                    public void onNext(String s) {}
-
-                    @Override
-                    public void onError(Throwable e) {}
-
-                    @Override
-                    public void onComplete() { ipMap.finishCashFlowInsert(); }
                 });
     }
 

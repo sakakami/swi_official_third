@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 
-public class MyEditText extends android.support.v7.widget.AppCompatEditText {
+public class MyEditText extends androidx.appcompat.widget.AppCompatEditText {
     public MyEditText(Context context) {
         super(context);
     }

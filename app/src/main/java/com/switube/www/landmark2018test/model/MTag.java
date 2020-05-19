@@ -12,7 +12,6 @@ import java.util.Map;
 
 import io.reactivex.MaybeObserver;
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -50,15 +49,12 @@ public class MTag {
 
     public void handleInsertData(final List<TagQBNEntity> tagQBNEntities, final List<TagQBAEntity> tagQBAEntities, final String qbid) {
         Observable
-                .create(new ObservableOnSubscribe<String>() {
-                    @Override
-                    public void subscribe(ObservableEmitter<String> emitter) throws Exception {
-                        AppDatabase.getInstance().tagQBNDao().handleClearTable();
-                        AppDatabase.getInstance().tagQBNDao().handleInsertAllData(tagQBNEntities);
-                        AppDatabase.getInstance().tagQBADao().handleClearTable();
-                        AppDatabase.getInstance().tagQBADao().handleInsertAllData(tagQBAEntities);
-                        emitter.onNext("finish");
-                    }
+                .create((ObservableOnSubscribe<String>) emitter -> {
+                    AppDatabase.getInstance().tagQBNDao().handleClearTable();
+                    AppDatabase.getInstance().tagQBNDao().handleInsertAllData(tagQBNEntities);
+                    AppDatabase.getInstance().tagQBADao().handleClearTable();
+                    AppDatabase.getInstance().tagQBADao().handleInsertAllData(tagQBAEntities);
+                    emitter.onNext("finish");
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

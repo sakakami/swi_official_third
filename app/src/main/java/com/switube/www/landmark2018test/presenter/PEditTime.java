@@ -19,11 +19,7 @@ public class PEditTime {
         int size = eCreateAttraction.getTime().getMon().size();
         StringBuilder week = new StringBuilder();
         List<String> weeks = new ArrayList<>();
-        //List<String> open = new ArrayList<>();
-        //List<String> close = new ArrayList<>();
         StringBuilder time = new StringBuilder();
-        //String startTime = "";
-        //String endTime = "";
         int index;
         for (int i = 0; i < size; i++) {
             if (week.length() > 0) {

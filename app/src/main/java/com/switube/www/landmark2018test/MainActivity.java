@@ -10,35 +10,39 @@ import android.content.ServiceConnection;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+
 import com.bumptech.glide.Glide;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
+import com.switube.www.landmark2018test.adapter.ASlideMenu;
 import com.switube.www.landmark2018test.database.entity.AttractionModeEntity;
-import com.switube.www.landmark2018test.entity.ECreateAttraction;
 import com.switube.www.landmark2018test.database.entity.AttractionStyleEntity;
+import com.switube.www.landmark2018test.entity.ECreateAttraction;
 import com.switube.www.landmark2018test.presenter.MainActivityPresenter;
 import com.switube.www.landmark2018test.service.FloatPlayerService;
 import com.switube.www.landmark2018test.service.callback.IFloatPlayerService;
 import com.switube.www.landmark2018test.util.AlertDialogUtil;
 import com.switube.www.landmark2018test.util.BackHandlerHelper;
 import com.switube.www.landmark2018test.util.LogToFile;
+import com.switube.www.landmark2018test.util.SharePreferencesUtil;
+import com.switube.www.landmark2018test.view.VLogo;
 import com.switube.www.landmark2018test.view.VMap;
 import com.switube.www.landmark2018test.view.VPlayer;
 import com.switube.www.landmark2018test.view.VPlaylist;
 import com.switube.www.landmark2018test.view.callback.IMainActivity;
-import com.switube.www.landmark2018test.adapter.ASlideMenu;
-import com.switube.www.landmark2018test.util.SharePreferencesUtil;
-import com.switube.www.landmark2018test.view.VLogo;
 import com.switube.www.landmark2018test.youtube.YouTubePlayerController;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -127,18 +131,15 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         if (MyApplication.getAppData().getiFloatPlayerService() != null) {
             MyApplication.getAppData().getiFloatPlayerService().showFloatPlayerKiller(false);
         }
-        switch (requestCode) {
-            case 2000:
-                mMainActivityPresenter.handleGoogleResult(data);
-                break;
-            default:
-                mMainActivityPresenter.getCallbackManager().onActivityResult(requestCode, resultCode, data);
-                break;
+        if (requestCode == 2000) {
+            mMainActivityPresenter.handleGoogleResult(data);
+        } else {
+            mMainActivityPresenter.getCallbackManager().onActivityResult(requestCode, resultCode, data);
         }
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
+    public void onConfigurationChanged(@NotNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         if (getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
             iFloatPlayerService.switchFullscreenMode(true);
@@ -398,7 +399,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
             }
         }
         if (aSlideMenu != null && isSlideMenu) {
-            aSlideMenu.init(new ArrayList<AttractionModeEntity>(), new ArrayList<AttractionStyleEntity>(), false);
+            aSlideMenu.init(new ArrayList<>(), new ArrayList<>(), false);
         }
         isSlideMenu = false;
         VMap vMap = (VMap) getSupportFragmentManager().findFragmentByTag("Map");
@@ -436,22 +437,14 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
             AlertDialogUtil.getInstance().initDialogBuilder(this,
                     R.string.music_permission_one,
                     R.string.global_ok,
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName()));
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
-                            finish();
-                        }
+                    (dialogInterface, i) -> {
+                        Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName()));
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish();
                     },
                     R.string.music_permission_cancel,
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            handleNeverCheckPermission();
-                        }
-                    }
+                    (dialogInterface, i) -> handleNeverCheckPermission()
             );
             AlertDialogUtil.getInstance().showAlertDialog();
         } else {
@@ -464,22 +457,14 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         AlertDialogUtil.getInstance().initDialogBuilder(this,
                 R.string.music_permission_two,
                 R.string.music_permission_get,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName()));
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                        finish();
-                    }
+                (dialogInterface, i) -> {
+                    Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName()));
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
                 },
                 R.string.music_permission_cancel,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        SharePreferencesUtil.getInstance().getEditor().putBoolean("checkPermission", true);
-                    }
-                }
+                (dialogInterface, i) -> SharePreferencesUtil.getInstance().getEditor().putBoolean("checkPermission", true)
         );
         AlertDialogUtil.getInstance().showAlertDialog();
     }
@@ -489,12 +474,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
     protected void onResume() {
         super.onResume();
         final View view = findViewById(android.R.id.content);
-        view.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                MyApplication.getAppData().setUseableHeight(view.getHeight());
-            }
-        }, 1000);
+        view.postDelayed(() -> MyApplication.getAppData().setUseableHeight(view.getHeight()), 1000);
         YouTubePlayerController.isFirst = true;
         if (canSet) {
             canSet = false;
@@ -556,6 +536,16 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
             } else {
                 if (!BackHandlerHelper.handleBackPress(this)) {
                     super.onBackPressed();
+                }
+
+                if (MyApplication.getAppData().isExchangeFinish()) {
+                    MyApplication.getAppData().setExchangeFinish(false);
+                    int count = getSupportFragmentManager().getBackStackEntryCount();
+                    for (int i = 0; i < count; i++) {
+                        FragmentManager.BackStackEntry backStackEntry = getSupportFragmentManager().getBackStackEntryAt(i);
+                        getSupportFragmentManager().popBackStack(backStackEntry.getId(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    }
+                    getSupportFragmentManager().popBackStack();
                 }
             }
         }

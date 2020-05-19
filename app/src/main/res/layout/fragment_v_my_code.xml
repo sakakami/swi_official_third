@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.VMyCode"
+    android:background="@color/colorGreenFor96E7A5">
+
+    <TextView
+        android:id="@+id/textTitleInMyCode"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="我的條碼"
+        android:textSize="16sp"
+        android:textColor="@color/colorWhiteForFFFFFF"
+        android:gravity="center"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/textScannerInMyCode"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        android:text="掃碼"
+        android:textColor="@color/colorWhiteForFFFFFF"
+        android:textSize="16sp"
+        android:gravity="center"/>
+
+    <ImageView
+        android:id="@+id/imageFlashInMyCode"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="4dp"
+        android:layout_toStartOf="@+id/textScannerInMyCode"
+        app:srcCompat="@android:drawable/ic_popup_sync" />
+
+    <View
+        android:id="@+id/viewPepperInMyCode"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="50dp"
+        android:background="@color/colorWhiteForFFFFFF"/>
+
+    <TextView
+        android:id="@+id/textCashInMyCode"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignTop="@+id/viewPepperInMyCode"
+        android:layout_centerHorizontal="true"
+        android:text="碳幣金額  0"
+        android:textSize="26sp"
+        android:layout_marginTop="60dp"/>
+
+    <ImageView
+        android:id="@+id/imgCodeInMyCode"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_centerInParent="true"/>
+
+</RelativeLayout>

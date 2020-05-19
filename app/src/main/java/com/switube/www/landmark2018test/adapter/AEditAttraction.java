@@ -2,11 +2,8 @@ package com.switube.www.landmark2018test.adapter;
 
 import android.graphics.Color;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +11,9 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.jakewharton.rxbinding2.view.RxView;
@@ -190,11 +190,12 @@ public class AEditAttraction extends RecyclerView.Adapter<AEditAttraction.Holder
                 holder.textViewList.get(0).setText(R.string.create_description);
                 if (MyApplication.getAppData().getgInfoData().getData().get(0).getInfo().length() > 0) {
                     holder.editText.setText(MyApplication.getAppData().getgInfoData().getData().get(0).getInfo());
-                    String count = String.valueOf(MyApplication.getAppData().getgInfoData().getData().get(0).getInfo().length()) + "/150";
+                    String count = MyApplication.getAppData().getgInfoData().getData().get(0).getInfo().length() + "/150";
                     holder.textViewList.get(3).setText(count);
                 } else {
                     holder.editText.setHint(R.string.create_description_hint);
-                    holder.textViewList.get(3).setText("0/150");
+                    String temp = "0/150";
+                    holder.textViewList.get(3).setText(temp);
                 }
                 break;
             case 8:
@@ -217,7 +218,7 @@ public class AEditAttraction extends RecyclerView.Adapter<AEditAttraction.Holder
                 holder.viewBar.setVisibility(View.GONE);
                 holder.imageViewList.get(0).setImageResource(R.drawable.camera_off_v11);
                 holder.textViewList.get(0).setText(R.string.create_add_photo);
-                String count = "+ " + String.valueOf(MyApplication.getAppData().getSelectedPhotos().size()) + " PHOTOS";
+                String count = "+ " + MyApplication.getAppData().getSelectedPhotos().size() + " PHOTOS";
                 holder.textViewList.get(4).setText(count);
                 break;
             case 9:
@@ -444,7 +445,7 @@ public class AEditAttraction extends RecyclerView.Adapter<AEditAttraction.Holder
 
                         @Override
                         public void onNext(CharSequence charSequence) {
-                            String count = String.valueOf(charSequence.length()) + "/150";
+                            String count = charSequence.length() + "/150";
                             textViewList.get(3).setText(count);
                             switch (getAdapterPosition()) {
                                 case 0:

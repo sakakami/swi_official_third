@@ -38,6 +38,7 @@ public class PCarbon {
         ArrayList<Double> disOutZero = new ArrayList<>();
         ArrayList<Double> distancesAdd = new ArrayList<>();
         //計算速度與距離
+
         for (int i = 0; i < size; i++) {
             double lat = eCarbons.get(i).getLatitude();
             double lng = eCarbons.get(i).getLongitude();
@@ -78,11 +79,9 @@ public class PCarbon {
         double speedPerMin = 0;
         double disPerMin = 0;
         //行程分類
-        //int x = 0;
         for (int i = 0; i < spdOutZero.size(); i++) {
             int x = i + 1;
             if (x % 60 == 0 || i == spdOutZero.size() - 1) {
-                //double speedForKPH = 0;
                 speedPerMin += spdOutZero.get(i);
                 double speedForKPH = speedPerMin / 60;
                 disPerMin += disOutZero.get(i);
@@ -153,8 +152,6 @@ public class PCarbon {
             totalDis += disToKm;
             switch (carbonType.get(i)) {
                 case 1:
-                    carbons.add(disToKm * 0);
-                    break;
                 case 2:
                     carbons.add(disToKm * 0);
                     break;
@@ -195,8 +192,6 @@ public class PCarbon {
             double dis = finalStroke.get(i).getDis();
             switch (finalStroke.get(i).getMode()) {
                 case 1:
-                    finalStroke.get(i).setCarbon(dis / 1000 * 0);
-                    break;
                 case 2:
                     finalStroke.get(i).setCarbon(dis / 1000 * 0);
                     break;
@@ -249,9 +244,9 @@ public class PCarbon {
             e.printStackTrace();
         }
         time /= 1000;
-        int hour = 0;
-        int min = 0;
-        int sec = 0;
+        int hour;
+        int min;
+        int sec;
         if (time >= 3600) {
             hour = (int)(time / 3600);
             time %= 3600;
@@ -314,113 +309,20 @@ public class PCarbon {
             switch (finalStroke.get(i).getMode()) {
                 case 1:
                     detail.setTool("交通工具： 步行");
-                    //builder.append("步行\n碳足跡：");
                     break;
                 case 2:
                     detail.setTool("交通工具： 自行車");
-                    //builder.append("自行車\n碳足跡：");
                     break;
                 case 3:
                     detail.setTool("交通工具： 摩托車");
-                    //builder.append("摩托車\n碳足跡：");
                     break;
                 default:
                     detail.setTool("交通工具： 開車");
-                    //builder.append("開車\n碳足跡：");
                     break;
             }
             detail.setCarbon("碳足跡：" + df.format(finalStroke.get(i).getCarbon()) + "公克二氧化碳排放量");
             details.add(detail);
         }
         ivCarbon.init(details);
-        /*SimpleDateFormat format = new SimpleDateFormat("yyyy/M/d HH:mm:ss SSS", Locale.getDefault());
-        long time = 0;
-        StringBuilder builder = new StringBuilder();
-        double distance = Double.parseDouble(MyApplication.getAppData().geteCarBonList().getDistance());
-        double carbon = distance / 1000 * 7;
-        try {
-            Date dateS = format.parse(MyApplication.getAppData().geteCarBonList().getList().get(0).getDateFull());
-            Date dateE = format.parse(MyApplication.getAppData().geteCarBonList().getList().get(size - 1).getDateFull());
-            time = dateE.getTime() - dateS.getTime();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        time /= 1000;
-        int hour = 0;
-        int min = 0;
-        int sec = 0;
-        if (time >= 3600) {
-            hour = (int)(time / 3600);
-            time %= 3600;
-            min = (int)(time / 60);
-            sec = (int)(time % 60);
-            if (hour >= 10) {
-                builder.append(hour);
-            } else {
-                builder.append("0");
-                builder.append(hour);
-            }
-            builder.append(":");
-            if (min >= 10) {
-                builder.append(min);
-            } else {
-                builder.append("0");
-                builder.append(min);
-            }
-            builder.append(":");
-            if (sec >= 10) {
-                builder.append(sec);
-            } else {
-                builder.append("0");
-                builder.append(sec);
-            }
-        } else if (time >= 60) {
-            min = (int)(time / 60);
-            sec = (int)(time % 60);
-            if (min >= 10) {
-                builder.append(min);
-            } else {
-                builder.append("0");
-                builder.append(min);
-            }
-            builder.append(":");
-            if (sec >= 10) {
-                builder.append(sec);
-            } else {
-                builder.append("0");
-                builder.append(sec);
-            }
-        } else {
-            sec = (int)time;
-            if (sec >= 10) {
-                builder.append(sec);
-            } else {
-                builder.append("0");
-                builder.append(sec);
-            }
-        }
-        ArrayList<ECarbonDetail> list = new ArrayList<>();
-        ECarbonDetail detailS = new ECarbonDetail();
-        String name = MyApplication.getAppData().geteCarBonList().getName();
-        detailS.setTitle("租車點");
-        detailS.setContent(name);
-        list.add(detailS);
-        ECarbonDetail detailE = new ECarbonDetail();
-        name = MyApplication.getAppData().geteCarBonList().getList().get(size - 1).getLatitude() + "," + MyApplication.getAppData().geteCarBonList().getList().get(size - 1).getLongitude();
-        detailE.setTitle("還車點");
-        detailE.setContent(name);
-        list.add(detailE);
-        ECarbonDetail detailT = new ECarbonDetail();
-        detailT.setTitle("總計里程為");
-        double carbonForCar = distance / 1000 * 300;
-        double carbonC = carbonForCar - carbon;
-        StringBuilder content = new StringBuilder("碳足跡為");
-        content.append(carbon);
-        content.append("公克二氧化碳排放量\n相較於開車節省");
-        content.append(carbonC);
-        content.append("公克二氧化碳排放量");
-        detailT.setContent(content.toString());
-        list.add(detailT);
-        ivCarbon.init(String.valueOf(distance), builder.toString(), String.valueOf(carbon), list);*/
     }
 }

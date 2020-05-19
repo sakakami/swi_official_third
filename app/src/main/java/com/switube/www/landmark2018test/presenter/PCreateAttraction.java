@@ -1,15 +1,14 @@
 package com.switube.www.landmark2018test.presenter;
 
-import android.util.Log;
-
 import com.google.android.gms.maps.model.LatLng;
 import com.switube.www.landmark2018test.entity.ECreateAttraction;
 import com.switube.www.landmark2018test.gson.GAttractionDataGoogle;
 import com.switube.www.landmark2018test.gson.GPlaceIdData;
 import com.switube.www.landmark2018test.model.MCreateAttraction;
 import com.switube.www.landmark2018test.presenter.callback.IPCreateAttraction;
-import com.switube.www.landmark2018test.view.callback.IVCreateAttraction;
+import com.switube.www.landmark2018test.util.PostCode;
 import com.switube.www.landmark2018test.view.callback.IMainActivity;
+import com.switube.www.landmark2018test.view.callback.IVCreateAttraction;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,11 +24,12 @@ public class PCreateAttraction implements IPCreateAttraction {
     private List<String> apiKeysForCn = new ArrayList<>();
     private List<String> apiKeysForJp = new ArrayList<>();
     private List<String> apiKeys = new ArrayList<>();
-    private String[] baseCodeB = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
-    private String[] baseCodeC = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
+
     public PCreateAttraction(IVCreateAttraction IVCreateAttraction) {
         ivCreateAttraction = IVCreateAttraction;
         mCreateAttraction = new MCreateAttraction(this);
+        String[] baseCodeB = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
+        String[] baseCodeC = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
         String key = baseCodeB[0] + baseCodeB[8] + baseCodeC[25] + baseCodeC[0] + baseCodeB[18] + baseCodeC[24]
                 + baseCodeB[1] + baseCodeC[20] + baseCodeB[8] + "7" + baseCodeC[10] + baseCodeC[5]
                 + "1" + baseCodeB[13] + baseCodeB[16] + baseCodeB[8] + baseCodeC[14] + baseCodeB[23]
@@ -202,6 +202,7 @@ public class PCreateAttraction implements IPCreateAttraction {
         for (int i = 0; i < 4; i++) {
             if (detailEntities.get(i).getResult() == null) {
                 hasData = false;
+                break;
             }
         }
         if (hasData) {
@@ -237,12 +238,14 @@ public class PCreateAttraction implements IPCreateAttraction {
                 }
                 entity.setDefaultPhoto(photos);
             } else {
-                entity.setDefaultPhoto(new ArrayList<String>());
+                entity.setDefaultPhoto(new ArrayList<>());
             }
             if (detailEntities.get(0).getResult().getAddress_components().size() > 0) {
                 int size = detailEntities.get(0).getResult().getAddress_components().size();
                 String postal = "";
                 String country = "";
+                String district = "";
+                String city = "";
                 for (int i = 0; i < size; i++) {
                     switch (detailEntities.get(0).getResult().getAddress_components().get(i).getTypes()[0]) {
                         case "administrative_area_level_1":
@@ -255,8 +258,10 @@ public class PCreateAttraction implements IPCreateAttraction {
                                     detailEntities.get(2).getResult().getAddress_components().get(i).getShort_name(),
                                     detailEntities.get(3).getResult().getAddress_components().get(i).getLong_name(),
                                     detailEntities.get(3).getResult().getAddress_components().get(i).getShort_name()));
+                            city = detailEntities.get(0).getResult().getAddress_components().get(i).getShort_name();
                             break;
                         case "administrative_area_level_2":
+                        case "locality":
                             entity.setCity(new ECreateAttraction.LocationCity(
                                     detailEntities.get(0).getResult().getAddress_components().get(i).getLong_name(),
                                     detailEntities.get(0).getResult().getAddress_components().get(i).getShort_name(),
@@ -277,17 +282,7 @@ public class PCreateAttraction implements IPCreateAttraction {
                                     detailEntities.get(2).getResult().getAddress_components().get(i).getShort_name(),
                                     detailEntities.get(3).getResult().getAddress_components().get(i).getLong_name(),
                                     detailEntities.get(3).getResult().getAddress_components().get(i).getShort_name()));
-                            break;
-                        case "locality":
-                            entity.setCity(new ECreateAttraction.LocationCity(
-                                    detailEntities.get(0).getResult().getAddress_components().get(i).getLong_name(),
-                                    detailEntities.get(0).getResult().getAddress_components().get(i).getShort_name(),
-                                    detailEntities.get(1).getResult().getAddress_components().get(i).getLong_name(),
-                                    detailEntities.get(1).getResult().getAddress_components().get(i).getShort_name(),
-                                    detailEntities.get(2).getResult().getAddress_components().get(i).getLong_name(),
-                                    detailEntities.get(2).getResult().getAddress_components().get(i).getShort_name(),
-                                    detailEntities.get(3).getResult().getAddress_components().get(i).getLong_name(),
-                                    detailEntities.get(3).getResult().getAddress_components().get(i).getShort_name()));
+                            district = detailEntities.get(0).getResult().getAddress_components().get(i).getShort_name();
                             break;
                         case "country":
                             country = detailEntities.get(0).getResult().getAddress_components().get(i).getShort_name();
@@ -297,11 +292,16 @@ public class PCreateAttraction implements IPCreateAttraction {
                             break;
                     }
                 }
-                StringBuilder stringBuilder = new StringBuilder(postal);
-                if (stringBuilder.length() > 3) {
-                    stringBuilder.delete(3, stringBuilder.length());
+                if (postal.length() > 0) {
+                    StringBuilder stringBuilder = new StringBuilder(postal);
+                    if (stringBuilder.length() > 3) {
+                        stringBuilder.delete(3, stringBuilder.length());
+                    }
+                    entity.getCity().setCity_id(stringBuilder.toString());
+                } else {
+                    PostCode postCode = new PostCode();
+                    entity.getCity().setCity_id(postCode.getCityId(city, district));
                 }
-                entity.getCity().setCity_id(stringBuilder.toString());
                 entity.getCity().setCountry(country);
             }
             List<String> time1 = new ArrayList<>();
@@ -472,7 +472,7 @@ public class PCreateAttraction implements IPCreateAttraction {
 
     public void getPlaceData(LatLng latLng) {
         int index = new Random().nextInt(apiKeys.size());
-        String builder = String.valueOf(latLng.latitude) + "," + String.valueOf(latLng.longitude);
+        String builder = latLng.latitude + "," + latLng.longitude;
         Map<String, String> map = new HashMap<>();
         map.put("latlng", builder);
         map.put("language", "zh-TW");
@@ -484,23 +484,27 @@ public class PCreateAttraction implements IPCreateAttraction {
     private static String mKeyB;
     @Override
     public void handleAttractionDetailOne(String id, GAttractionDataGoogle gAttractionDataGoogle) {
-        detailEntities.clear();
-        detailEntities.add(gAttractionDataGoogle);
-        int index = random.nextInt(4);
-        if (mKeyB == null) {
-            mKeyB = apiKeysForTw.get(index);
+        if (gAttractionDataGoogle.getError_message().length() > 0) {
+            getAttractionDetail(id);
         } else {
-            if (apiKeysForTw.get(index).equals(mKeyB)) {
-                mKeyB = apiKeysForTw.get(random.nextInt(4));
-            } else {
+            detailEntities.clear();
+            detailEntities.add(gAttractionDataGoogle);
+            int index = random.nextInt(4);
+            if (mKeyB == null) {
                 mKeyB = apiKeysForTw.get(index);
+            } else {
+                if (apiKeysForTw.get(index).equals(mKeyB)) {
+                    mKeyB = apiKeysForTw.get(random.nextInt(4));
+                } else {
+                    mKeyB = apiKeysForTw.get(index);
+                }
             }
+            Map<String, String> map = new HashMap<>();
+            map.put("placeid", id);
+            map.put("key", mKeyB);
+            map.put("language", "zh-TW");
+            mCreateAttraction.getAttractionDetail(id, "zh-TW", map);
         }
-        Map<String, String> map = new HashMap<>();
-        map.put("placeid", id);
-        map.put("key", mKeyB);
-        map.put("language", "zh-TW");
-        mCreateAttraction.getAttractionDetail(id, "zh-TW", map);
     }
 
     private static String mKeyC;

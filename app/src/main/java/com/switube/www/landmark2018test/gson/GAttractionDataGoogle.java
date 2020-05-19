@@ -3,14 +3,21 @@ package com.switube.www.landmark2018test.gson;
 import java.util.List;
 
 public class GAttractionDataGoogle {
+    private String error_message = "";
     private Result result;
 
     public void setResult(Result result) {
         this.result = result;
     }
-
     public Result getResult() {
         return result;
+    }
+
+    public void setError_message(String error_message) {
+        this.error_message = error_message;
+    }
+    public String getError_message() {
+        return error_message;
     }
 
     public static class Result {

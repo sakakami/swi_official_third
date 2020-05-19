@@ -6,42 +6,31 @@ import android.app.NotificationManager;
 import android.app.Service;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.PixelFormat;
-import android.net.Uri;
 import android.os.Binder;
 import android.os.Build;
 import android.os.IBinder;
 import android.os.Looper;
-import android.support.annotation.Nullable;
-import android.support.v4.app.NotificationCompat;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+
+import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.PolylineOptions;
 import com.switube.www.landmark2018test.MainActivity;
 import com.switube.www.landmark2018test.MyApplication;
 import com.switube.www.landmark2018test.R;
 import com.switube.www.landmark2018test.entity.ECarbon;
 import com.switube.www.landmark2018test.entity.EEco;
-import com.switube.www.landmark2018test.util.AlertDialogUtil;
-import com.switube.www.landmark2018test.view.VMap;
-import com.switube.www.landmark2018test.youtube.FloatPlayerKiller;
 import com.switube.www.landmark2018test.service.callback.IFloatPlayer;
 import com.switube.www.landmark2018test.service.callback.IFloatPlayerService;
 import com.switube.www.landmark2018test.youtube.YouTubePlayerView;
@@ -53,7 +42,6 @@ import java.util.Locale;
 
 public class FloatPlayerService extends Service implements IFloatPlayerService, IFloatPlayer {
     private WindowManager windowManager;
-    //private FloatPlayerKiller floatPlayerKiller;
     private DisplayMetrics displayMetrics;
     private View floatPlayerKiller;
     private int bigViewX;
@@ -75,7 +63,7 @@ public class FloatPlayerService extends Service implements IFloatPlayerService, 
     @Override
     public void onCreate() {
         super.onCreate();
-        NotificationChannel channel = null;
+        NotificationChannel channel;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             channel = new NotificationChannel("ebike", "Carbon", NotificationManager.IMPORTANCE_HIGH);
             channel.setBypassDnd(true);
@@ -325,53 +313,7 @@ public class FloatPlayerService extends Service implements IFloatPlayerService, 
         return mFloatPlayerCreate;
     }
 
-    @Override
-    public void handleBeatClicked() {
-        showSmallMode();
-        int length = MyApplication.getAppData().getgPlayer().getBeatData().size();
-        final String[] item = new String[length];
-        final String[] url = new String[length];
-        for (int i = 0; i < length; i++) {
-            switch (MyApplication.getLanguageIndex()) {
-                case 1:
-                    item[i] = MyApplication.getAppData().getgPlayer().getBeatData().get(i).getAsname_tw();
-                    url[i] = MyApplication.getAppData().getgPlayer().getBeatData().get(i).getAsurl_tw();
-                    break;
-                case 2:
-                    item[i] = MyApplication.getAppData().getgPlayer().getBeatData().get(i).getAsname_ch();
-                    url[i] = MyApplication.getAppData().getgPlayer().getBeatData().get(i).getAsurl_ch();
-                    break;
-                case 3:
-                    item[i] = MyApplication.getAppData().getgPlayer().getBeatData().get(i).getAsname_jp();
-                    url[i] = MyApplication.getAppData().getgPlayer().getBeatData().get(i).getAsurl_jp();
-                    break;
-                default:
-                    item[i] = MyApplication.getAppData().getgPlayer().getBeatData().get(i).getAsname();
-                    url[i] = MyApplication.getAppData().getgPlayer().getBeatData().get(i).getAsurl();
-                    break;
-            }
-        }
-        AlertDialogUtil.getInstance().initDialogBuilder(mContext,
-                item, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        setCheckIsDeskTop(true);
-                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url[i]));
-                        mContext.startActivity(intent);
-                    }
-                },
-                mContext.getString(R.string.global_cancel),
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        if (!mIsBigMode) {
-                            mIsBigMode = true;
-                            showBigMode();
-                        }
-                    }
-                });
-        AlertDialogUtil.getInstance().showAlertDialog();
-    }
+
 
     private boolean mCheckFloatCanSee = true;
     @Override
@@ -417,7 +359,6 @@ public class FloatPlayerService extends Service implements IFloatPlayerService, 
                 MyApplication.getAppData().setWebId("");
             }
         }
-        //floatPlayerKiller.setVisibility(View.GONE);
     }
 
     private boolean mCheckIsDeskTop = false;

@@ -3,14 +3,15 @@ package com.switube.www.landmark2018test.view;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.switube.www.landmark2018test.MyApplication;
@@ -20,6 +21,8 @@ import com.switube.www.landmark2018test.adapter.callback.IAAttractionSteaming;
 import com.switube.www.landmark2018test.presenter.PAttractionSteaming;
 import com.switube.www.landmark2018test.view.callback.IMainActivity;
 import com.switube.www.landmark2018test.view.callback.IVAttractionSteaming;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -64,7 +67,7 @@ public class VAttractionSteaming extends Fragment implements IVAttractionSteamin
 
                     @Override
                     public void onNext(Object o) {
-                        getFragmentManager().popBackStack();
+                        getParentFragmentManager().popBackStack();
                     }
 
                     @Override
@@ -80,12 +83,12 @@ public class VAttractionSteaming extends Fragment implements IVAttractionSteamin
     public void handleSwitchPage(int index) {
         MyApplication.getAppData().setArtid(adapter.getArticleList().get(index).getArtid());
         MyApplication.getAppData().setMessageList(adapter.getArticleList().get(index).getMsg());
-        getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VAttractionComments()).addToBackStack("AttractionSteaming").commit();
+        getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VAttractionComments()).addToBackStack("AttractionSteaming").commit();
     }
 
     private IMainActivity iMainActivity;
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NotNull Context context) {
         super.onAttach(context);
         iMainActivity = (IMainActivity)context;
     }
@@ -109,7 +112,7 @@ public class VAttractionSteaming extends Fragment implements IVAttractionSteamin
     @Override
     public void handleClickPhoto(List<String> photo) {
         MyApplication.getAppData().setPhotoList(photo);
-        getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VPhotoView()).addToBackStack("AttractionSteaming").commit();
+        getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VPhotoView()).addToBackStack("AttractionSteaming").commit();
     }
 
     @Override
@@ -119,7 +122,7 @@ public class VAttractionSteaming extends Fragment implements IVAttractionSteamin
     public void handleLinkClick(String attractionId) {
         iMainActivity.saveAttractionId(attractionId);
         MyApplication.getAppData().setNeedScrollToTop(true);
-        getFragmentManager().popBackStack();
+        getParentFragmentManager().popBackStack();
     }
 
     @Override
@@ -135,13 +138,13 @@ public class VAttractionSteaming extends Fragment implements IVAttractionSteamin
     @Override
     public void toEditCommentPage() {
         MyApplication.getAppData().setFromAttractionSteaming(true);
-        getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VLeaveComments()).addToBackStack("AttractionSteaming").commit();
+        getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VLeaveComments()).addToBackStack("AttractionSteaming").commit();
     }
 
     @Override
     public void toEditTagPage() {
         MyApplication.getAppData().setFromAttractionSteaming(true);
-        getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VTag()).addToBackStack("AttractionSteaming").commit();
+        getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VTag()).addToBackStack("AttractionSteaming").commit();
     }
 
     @Override

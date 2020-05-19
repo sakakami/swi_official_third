@@ -18,7 +18,6 @@ import io.reactivex.MaybeObserver;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
 public class MInfo {
@@ -33,7 +32,6 @@ public class MInfo {
                 .getPlaceDetailDataWithRx("GetLargeAppPinDetail_v1.php", map)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                //.subscribe(disposableObserver);
                 .subscribe(new Observer<GInfoData>() {
                     @Override
                     public void onSubscribe(Disposable d) {}

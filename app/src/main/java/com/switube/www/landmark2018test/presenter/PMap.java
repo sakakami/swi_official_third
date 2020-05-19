@@ -9,7 +9,6 @@ import android.os.Environment;
 import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
-import com.google.gson.Gson;
 import com.switube.www.landmark2018test.MyApplication;
 import com.switube.www.landmark2018test.R;
 import com.switube.www.landmark2018test.database.entity.AttractionClassEntity;
@@ -28,21 +27,20 @@ import com.switube.www.landmark2018test.entity.EEco;
 import com.switube.www.landmark2018test.entity.EEcoList;
 import com.switube.www.landmark2018test.entity.EMobileMusic;
 import com.switube.www.landmark2018test.gson.GAttractionListData;
-import com.switube.www.landmark2018test.gson.GCashFlow;
 import com.switube.www.landmark2018test.gson.GMusicRadio;
+import com.switube.www.landmark2018test.gson.GPlaceIdData;
 import com.switube.www.landmark2018test.gson.GPushMusic;
 import com.switube.www.landmark2018test.gson.GSaveList;
+import com.switube.www.landmark2018test.gson.GSearchAttractionDetail;
 import com.switube.www.landmark2018test.gson.GSendLove;
 import com.switube.www.landmark2018test.gson.GSlideMenuData;
-import com.switube.www.landmark2018test.gson.GPlaceIdData;
-import com.switube.www.landmark2018test.gson.GSearchAttractionDetail;
 import com.switube.www.landmark2018test.gson.GStrokeList;
 import com.switube.www.landmark2018test.model.MMap;
 import com.switube.www.landmark2018test.presenter.callback.IPMap;
+import com.switube.www.landmark2018test.util.NetworkUtil;
 import com.switube.www.landmark2018test.util.SharePreferencesUtil;
 import com.switube.www.landmark2018test.view.VMap;
 import com.switube.www.landmark2018test.view.callback.IVMap;
-import com.switube.www.landmark2018test.util.NetworkUtil;
 import com.tbruyelle.rxpermissions2.Permission;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
@@ -70,11 +68,12 @@ public class PMap implements IPMap {
     private IVMap ivMap;
     private List<String> apiKeys = new ArrayList<>();
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd", Locale.TAIWAN);
-    private String[] baseCodeB = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
-    private String[] baseCodeC = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
+
     public PMap(IVMap ivMap) {
         this.ivMap = ivMap;
         mMap = new MMap(this);
+        String[] baseCodeB = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
+        String[] baseCodeC = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
         String key = baseCodeB[0] + baseCodeB[8] + baseCodeC[25] + baseCodeC[0] + baseCodeB[18] + baseCodeC[24]
                 + baseCodeB[2] + baseCodeB[5] + "6" + baseCodeB[6] + baseCodeC[15] + baseCodeC[15]
                 + baseCodeC[9] + baseCodeC[5] + baseCodeC[25] + baseCodeB[0] + baseCodeB[18] + baseCodeC[24]
@@ -338,7 +337,7 @@ public class PMap implements IPMap {
                 times++;
                 mobileMusicList.get(index).setSelected(true);
                 int angle = (int)(Math.random() * 360 + 1);
-                int distance = 0;
+                int distance;
                 if (zoomLevel < 13) {
                     distance = (int)(Math.random() * 10000 + 5000);
                 } else {
@@ -380,31 +379,6 @@ public class PMap implements IPMap {
         map.put("lat", lat);
         map.put("lng", lng);
         mMap.sendLove(map);
-    }
-
-    public void handleCentBike(int carCash) {
-        //String date = new SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.getDefault()).format(new Date());
-        Map<String, String> map = NetworkUtil.getInstance().getMap();
-        map.put("mode", "0");
-        map.put("edit", "");
-        ArrayList<GCashFlow.Data> cashFlows = new ArrayList<>();
-        GCashFlow.Data data = new GCashFlow.Data();
-        data.setTarget("E-bike 美和街站點");
-        data.setType("租車");
-        data.setCheck("0");
-        data.setMaid(SharePreferencesUtil.getInstance().getSharedPreferences().getString("userMaid", "null"));
-        data.setCash(String.valueOf((int)(carCash * 0.8)));
-        cashFlows.add(data);
-        Gson gson = new Gson();
-        String stringData = gson.toJson(cashFlows);
-        map.put("data", stringData);
-        mMap.sendCashFlow(map);
-        //String name = "E-bike 美和街站點";
-        //String type = "租車";
-        //String maid = SharePreferencesUtil.getInstance().getSharedPreferences().getString("userMaid", "null");
-        //String cash = String.valueOf((int)(carCash * 0.8));
-        //CashFlowEntity cashFlowEntity = new CashFlowEntity(maid, name, type, cash, date);
-        //mMap.insertData(cashFlowEntity);
     }
 
     public void handleSaveCarbon() {
@@ -549,50 +523,6 @@ public class PMap implements IPMap {
             MyApplication.getAppData().setTaid(SharePreferencesUtil.getInstance().getSharedPreferences().getString("musicTaid", "null"));
             MyApplication.getAppData().setMenuId(SharePreferencesUtil.getInstance().getSharedPreferences().getString("musicValue", "null"));
         }
-
-        /*String taid;
-        int size;
-        if (MyApplication.getAppData().getHotKeyMode() == 2) {
-            taid = MyApplication.getAppData().getRaid();
-            size = gMusicRadio.getRaData().size();
-        } else {
-            if (MyApplication.getAppData().getTaid().equals("")) {
-                taid = gMusicRadio.getTdData().get(0).getTaid();
-            } else {
-                taid = MyApplication.getAppData().getTaid();
-            }
-            size = gMusicRadio.getTaData().size();
-        }
-        int index = -1;
-        for (int i = 0; i < size; i++) {
-            if (MyApplication.getAppData().getHotKeyMode() == 2) {
-                if (gMusicRadio.getRaData().get(i).getRaid().equals(taid)) {
-                    index = i;
-                }
-            } else {
-                if (gMusicRadio.getTaData().get(i).getTaid().equals(taid)) {
-                    index = i;
-                }
-            }
-        }
-        if (MyApplication.getAppData().getHotKeyMode() == 2) {
-            MyApplication.getAppData().setMoreTitle(MyApplication.getAppData().getStrokeTitle());
-        } else {
-            switch (MyApplication.getLanguageIndex()) {
-                case 1:
-                    MyApplication.getAppData().setMoreTitle(gMusicRadio.getTaData().get(index).getTitle_tw());
-                    break;
-                case 2:
-                    MyApplication.getAppData().setMoreTitle(gMusicRadio.getTaData().get(index).getTitle_ch());
-                    break;
-                case 3:
-                    MyApplication.getAppData().setMoreTitle(gMusicRadio.getTaData().get(index).getTitle_jp());
-                    break;
-                default:
-                    MyApplication.getAppData().setMoreTitle(gMusicRadio.getTaData().get(index).getTitle_en());
-                    break;
-            }
-        }*/
     }
 
     @Override
@@ -783,23 +713,14 @@ public class PMap implements IPMap {
         }
         String style = type + " · " + d + " " + MyApplication.getInstance().getString(R.string.global_km);
         String time;
-        switch (isOpen) {
-            case "0":
-                if (open.get(timeIndex).equals("24")) {
-                    time = MyApplication.getInstance().getString(R.string.global_center) + " " + open.get(timeIndex) + " " + MyApplication.getInstance().getString(R.string.open_24) + " " + week;
-                } else {
-                    time = MyApplication.getInstance().getString(R.string.global_center) +  " " + open.get(timeIndex) + " " + week;
-                }
-                break;
-            case "1":
-                time = "";
-                break;
-            case "2":
-                time = "";
-                break;
-            default:
-                time = "";
-                break;
+        if ("0".equals(isOpen)) {
+            if (open.get(timeIndex).equals("24")) {
+                time = MyApplication.getInstance().getString(R.string.global_center) + " " + open.get(timeIndex) + " " + MyApplication.getInstance().getString(R.string.open_24) + " " + week;
+            } else {
+                time = MyApplication.getInstance().getString(R.string.global_center) + " " + open.get(timeIndex) + " " + week;
+            }
+        } else {
+            time = "";
         }
         ivMap.showDetailForAttractionInfo(gSearchAttractionDetail, style, isOpen, time);
     }
@@ -942,14 +863,9 @@ public class PMap implements IPMap {
     }
 
     @Override
-    public void finishCashFlowInsert() { ivMap.finishCashFlowInsert(); }
-
-    @Override
     public void finishSendCashFlow(GSendLove gSendLove) {
         if (gSendLove.getSave().equals("1")) {
             ivMap.finishCashFlowInsert();
-        } else {
-            Log.e("Save", gSendLove.getSave());
         }
     }
 
@@ -1018,7 +934,11 @@ public class PMap implements IPMap {
             while (canLoop) {
                 canLoop = false;
                 id += String.valueOf(Math.random() * 999999999 + 1000000001);
-                for (CarbonEntity entity : list) { if (entity.getCarbon_id().equals(id)) { canLoop = true; } }
+                for (CarbonEntity entity : list) {
+                    if (entity.getCarbon_id().equals(id)) {
+                        canLoop = true;
+                        break;
+                    } }
             }
             ArrayList<CarbonEntity> carbonEntities = new ArrayList<>();
             for (ECarbon eCarbon : MyApplication.getAppData().getCarbons()) {
@@ -1084,7 +1004,6 @@ public class PMap implements IPMap {
                     double disAVG = Math.round(distance / size * 100) / 100;
                     double speedAVG = Math.round(speed / size * 100) / 100;
                     eEcoList.setDistance(String.valueOf(disAVG));
-                    //double km = distance / 1000;
                     eEcoList.setSpeed(String.valueOf(speedAVG));
                 }
                 ivMap.showEEcoList(eEcoLists);
@@ -1095,7 +1014,11 @@ public class PMap implements IPMap {
             while (canLoop) {
                 canLoop = false;
                 id += String.valueOf(Math.random() * 999999999 + 1000000001);
-                for (EcoEntity entity : list) { if (entity.getEco_id().equals(id)) { canLoop = true; } }
+                for (EcoEntity entity : list) {
+                    if (entity.getEco_id().equals(id)) {
+                        canLoop = true;
+                        break;
+                    } }
             }
             ArrayList<EcoEntity> ecoEntities = new ArrayList<>();
             ArrayList<EEco> eEcos = MyApplication.getAppData().geteEcos();
@@ -1204,12 +1127,12 @@ public class PMap implements IPMap {
         double uSq = cosSqA * (Math.pow(a, 2) - Math.pow(b, 2)) / Math.pow(b, 2);
         double A = 1 + uSq / 16384 * (4096 + uSq * (-768 + uSq * (320 - 175 * uSq)));
         double B = uSq / 1024 * (256 + uSq * (-128 + uSq * (74 - 47 * uSq)));
-        double cos2SigmaM = 0;
-        double sinSigma = 0;
-        double cosSigma = 0;
-        double deltaSigma = 0;
+        double cos2SigmaM;
+        double sinSigma;
+        double cosSigma;
+        double deltaSigma;
         double sigma = distance / (b * A);
-        double sigmaP = 0;
+        double sigmaP;
         int iterations = 0;
         do {
             cos2SigmaM = Math.cos(2 * sigma1 + sigma);
@@ -1225,18 +1148,13 @@ public class PMap implements IPMap {
         double C = f / 16 * cosSqA * (4 + f * (4 - 3 * cosSqA));
         double L = lng - (1 - C) * f * sinA * (sigma + C * sinSigma * (cos2SigmaM + C * cosSigma * (-1 + 2 * Math.pow(cos2SigmaM, 2))));
         double longR2 = longR + L;
-        double angleR2 = Math.atan2(sinA, -x);
         return new LatLng(Math.toDegrees(latR2), Math.toDegrees(longR2));
     }
 
     private class ExportDatabaseCSVTask extends AsyncTask<String, String, Boolean> {
-        //boolean memoryErr = false;
         @Override
         protected Boolean doInBackground(String... strings) {
-            //boolean success = false;
-            //String currentDateString = new SimpleDateFormat("yyyy/M/d", Locale.getDefault()).format(new Date());
             String currentDate = new SimpleDateFormat("yyyyMdHHmmss", Locale.getDefault()).format(new Date());
-            //File dbDile = MyApplication.getInstance().getDatabasePath("swi_official_database");
             File exportDir = new File(Environment.getExternalStorageDirectory(), "");
             if (!exportDir.exists()) exportDir.mkdirs();
             File export = new File(exportDir, currentDate + ".csv");

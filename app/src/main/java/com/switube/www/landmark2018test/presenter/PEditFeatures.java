@@ -199,16 +199,16 @@ public class PEditFeatures implements IPEditFeatures {
                     isSelected = MyApplication.getAppData().getMstidList().contains(attractionItemEntities.get(j).getMstid());
                     switch (MyApplication.getLanguageIndex()) {
                         case 1:
-                            eFeaturesList.add(new EFeatures(attractionItemEntities.get(j).getMstid(), attractionItemEntities.get(j).getMiid(), attractionItemEntities.get(j).getMtid(), attractionItemEntities.get(j).getMititle_tw(), true, true, isSelected, false, "item" + String.valueOf(i)));
+                            eFeaturesList.add(new EFeatures(attractionItemEntities.get(j).getMstid(), attractionItemEntities.get(j).getMiid(), attractionItemEntities.get(j).getMtid(), attractionItemEntities.get(j).getMititle_tw(), true, true, isSelected, false, "item" + i));
                             break;
                         case 2:
-                            eFeaturesList.add(new EFeatures(attractionItemEntities.get(j).getMstid(), attractionItemEntities.get(j).getMiid(), attractionItemEntities.get(j).getMtid(), attractionItemEntities.get(j).getMititle_ch(), true, true, isSelected, false, "item" + String.valueOf(i)));
+                            eFeaturesList.add(new EFeatures(attractionItemEntities.get(j).getMstid(), attractionItemEntities.get(j).getMiid(), attractionItemEntities.get(j).getMtid(), attractionItemEntities.get(j).getMititle_ch(), true, true, isSelected, false, "item" + i));
                             break;
                         case 3:
-                            eFeaturesList.add(new EFeatures(attractionItemEntities.get(j).getMstid(), attractionItemEntities.get(j).getMiid(), attractionItemEntities.get(j).getMtid(), attractionItemEntities.get(j).getMititle_jp(), true, true, isSelected, false, "item" + String.valueOf(i)));
+                            eFeaturesList.add(new EFeatures(attractionItemEntities.get(j).getMstid(), attractionItemEntities.get(j).getMiid(), attractionItemEntities.get(j).getMtid(), attractionItemEntities.get(j).getMititle_jp(), true, true, isSelected, false, "item" + i));
                             break;
                         default:
-                            eFeaturesList.add(new EFeatures(attractionItemEntities.get(j).getMstid(), attractionItemEntities.get(j).getMiid(), attractionItemEntities.get(j).getMtid(), attractionItemEntities.get(j).getMititle_en(), true, true, isSelected, false, "item" + String.valueOf(i)));
+                            eFeaturesList.add(new EFeatures(attractionItemEntities.get(j).getMstid(), attractionItemEntities.get(j).getMiid(), attractionItemEntities.get(j).getMtid(), attractionItemEntities.get(j).getMititle_en(), true, true, isSelected, false, "item" + i));
                             break;
                     }
                 }

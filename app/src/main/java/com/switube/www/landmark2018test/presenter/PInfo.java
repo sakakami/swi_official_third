@@ -1,7 +1,5 @@
 package com.switube.www.landmark2018test.presenter;
 
-import android.util.Log;
-
 import com.google.gson.JsonObject;
 import com.switube.www.landmark2018test.MyApplication;
 import com.switube.www.landmark2018test.database.entity.AttractionClassEntity;

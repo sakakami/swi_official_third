@@ -2,8 +2,9 @@ package com.switube.www.landmark2018test.util;
 
 import android.content.Context;
 import android.graphics.Rect;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -21,7 +22,7 @@ public class ItemDecorationUtil extends RecyclerView.ItemDecoration {
     }
 
     @Override
-    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+    public void getItemOffsets(Rect outRect, @NotNull View view, @NotNull RecyclerView parent, @NotNull RecyclerView.State state) {
         outRect.set(mLeft, mTop, mRight, mBottom);
     }
 }

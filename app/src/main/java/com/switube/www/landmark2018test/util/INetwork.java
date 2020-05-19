@@ -1,29 +1,30 @@
 package com.switube.www.landmark2018test.util;
 
 import com.switube.www.landmark2018test.gson.GAttractionDataGoogle;
+import com.switube.www.landmark2018test.gson.GAttractionListData;
 import com.switube.www.landmark2018test.gson.GCashFlow;
 import com.switube.www.landmark2018test.gson.GCommentsData;
+import com.switube.www.landmark2018test.gson.GCreateAttraction;
 import com.switube.www.landmark2018test.gson.GInfoData;
-import com.switube.www.landmark2018test.gson.GMusicRadio;
+import com.switube.www.landmark2018test.gson.GLeaveComments;
 import com.switube.www.landmark2018test.gson.GLikeUnlike;
+import com.switube.www.landmark2018test.gson.GMusicRadio;
 import com.switube.www.landmark2018test.gson.GMyCollection;
+import com.switube.www.landmark2018test.gson.GPersonalSteaming;
+import com.switube.www.landmark2018test.gson.GPlaceIdData;
 import com.switube.www.landmark2018test.gson.GPlayer;
 import com.switube.www.landmark2018test.gson.GPushMusic;
 import com.switube.www.landmark2018test.gson.GPushNewVideo;
 import com.switube.www.landmark2018test.gson.GPushStroke;
 import com.switube.www.landmark2018test.gson.GReport;
 import com.switube.www.landmark2018test.gson.GSaveList;
-import com.switube.www.landmark2018test.gson.GSendLove;
-import com.switube.www.landmark2018test.gson.GSlideMenuData;
-import com.switube.www.landmark2018test.gson.GLeaveComments;
-import com.switube.www.landmark2018test.gson.GCreateAttraction;
-import com.switube.www.landmark2018test.gson.GSignInData;
-import com.switube.www.landmark2018test.gson.GStrokeList;
-import com.switube.www.landmark2018test.gson.GAttractionListData;
-import com.switube.www.landmark2018test.gson.GPlaceIdData;
 import com.switube.www.landmark2018test.gson.GSearchAttractionDetail;
-import com.switube.www.landmark2018test.gson.GPersonalSteaming;
+import com.switube.www.landmark2018test.gson.GSendLove;
+import com.switube.www.landmark2018test.gson.GSignInData;
+import com.switube.www.landmark2018test.gson.GSlideMenuData;
+import com.switube.www.landmark2018test.gson.GStrokeList;
 import com.switube.www.landmark2018test.gson.GTagData;
+import com.switube.www.landmark2018test.gson.GTicket;
 
 import java.util.Map;
 
@@ -34,7 +35,6 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PartMap;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import retrofit2.http.Url;
 
@@ -134,4 +134,7 @@ public interface INetwork {
 
     @POST("{url}")
     Observable<GCashFlow> getCashFlowData(@Path("url") String url, @QueryMap Map<String, String> map);
+
+    @POST("{url}")
+    Observable<GTicket> getTicketData(@Path("url") String url, @QueryMap Map<String, String> map);
 }

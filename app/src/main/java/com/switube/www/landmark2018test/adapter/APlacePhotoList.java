@@ -1,13 +1,13 @@
 package com.switube.www.landmark2018test.adapter;
 
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -79,11 +79,7 @@ public class APlacePhotoList extends RecyclerView.Adapter<APlacePhotoList.ViewHo
     private int index = -1;
     public void refreshAdapter(List<String> photo, boolean hadLimit, int index) {
         if (hadLimit) {
-            if (photo.size() > 3) {
-                size = 3;
-            } else {
-                size = photo.size();
-            }
+            size = Math.min(photo.size(), 3);
         } else {
             size = photo.size();
         }

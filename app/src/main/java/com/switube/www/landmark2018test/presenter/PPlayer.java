@@ -1,6 +1,5 @@
 package com.switube.www.landmark2018test.presenter;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -54,15 +53,6 @@ public class PPlayer implements IPPlayer {
             MyApplication.getAppData().getPush().setLove("0");
         }
         pushNowPlaying = MyApplication.getAppData().getPush();
-        /*if (index == 0) {
-            if (MyApplication.getAppData().getPushBuffer() != null) {
-                MyApplication.getAppData().setPush(MyApplication.getAppData().getPushBuffer());
-            } else {
-                MyApplication.getAppData().setPush(MyApplication.getAppData().getgPlayer().getPushData().get(index));
-            }
-        } else {
-            MyApplication.getAppData().setPush(MyApplication.getAppData().getgPlayer().getPushData().get(index - 1));
-        }*/
         if (MyApplication.getAppData().getPushBuffer() != null) {
             if (index == 0) {
                 MyApplication.getAppData().setPush(MyApplication.getAppData().getPushBuffer());
@@ -491,7 +481,6 @@ public class PPlayer implements IPPlayer {
         map.put("tubeid", MyApplication.getAppData().getMusicEntities().get(MyApplication.getAppData().getPlayingIndex()).getStid());
         map.put("riid", MyApplication.getAppData().getgPlayer().getRaData().get(indexOne).getData().get(index).getId());
         map.put("webid", MyApplication.getAppData().getMusicEntities().get(MyApplication.getAppData().getPlayingIndex()).getWebid());
-        Log.e("map", map.toString());
         mPlayer.sendReport(map);
     }
 

@@ -1,7 +1,5 @@
 package com.switube.www.landmark2018test.presenter;
 
-import android.util.Log;
-
 import com.google.gson.JsonObject;
 import com.switube.www.landmark2018test.MyApplication;
 import com.switube.www.landmark2018test.entity.EEditComment;
@@ -18,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 
 public class PPersonalSteaming implements IPPersonalSteaming {

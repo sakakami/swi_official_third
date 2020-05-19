@@ -2,11 +2,7 @@ package com.switube.www.landmark2018test.view;
 
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +10,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.switube.www.landmark2018test.MyApplication;
@@ -111,21 +111,18 @@ public class VMyCollection extends Fragment implements IVMyCollection, IAMyColle
                         getContext(),
                         view,
                         getString(R.string.global_ok),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                int size = aSaveList.getIsChecked().size();
-                                boolean canNext = false;
-                                for (int j = 0; j < size; j++) {
-                                    if (aSaveList.getIsChecked().get(j)) {
-                                        canNext = true;
-                                    }
+                        (dialogInterface, i) -> {
+                            int size = aSaveList.getIsChecked().size();
+                            boolean canNext = false;
+                            for (int j = 0; j < size; j++) {
+                                if (aSaveList.getIsChecked().get(j)) {
+                                    canNext = true;
                                 }
-                                if (canNext) {
-                                    pMyCollection.sendSaveData(gSaveList, aSaveList.getIsChecked(), spid);
-                                    AlertDialogUtil.getInstance().initDialogBuilder(getContext(), view1);
-                                    AlertDialogUtil.getInstance().showAlertDialog();
-                                }
+                            }
+                            if (canNext) {
+                                pMyCollection.sendSaveData(gSaveList, aSaveList.getIsChecked(), spid);
+                                AlertDialogUtil.getInstance().initDialogBuilder(getContext(), view1);
+                                AlertDialogUtil.getInstance().showAlertDialog();
                             }
                         }, true);
         AlertDialogUtil.getInstance().showAlertDialog();
@@ -148,10 +145,7 @@ public class VMyCollection extends Fragment implements IVMyCollection, IAMyColle
                                                 getContext(),
                                                 R.string.stroke_title_create_message,
                                                 R.string.global_ok,
-                                                new DialogInterface.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(DialogInterface dialogInterface, int i) { }
-                                                });
+                                                (dialogInterface, i) -> { });
                                 AlertDialogUtil.getInstance().showAlertDialog();
                             }
                         }
@@ -182,10 +176,7 @@ public class VMyCollection extends Fragment implements IVMyCollection, IAMyColle
                                                 getContext(),
                                                 R.string.stroke_title_create_message,
                                                 R.string.global_ok,
-                                                new DialogInterface.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(DialogInterface dialogInterface, int i) { }
-                                                });
+                                                (dialogInterface, i) -> { });
                                 AlertDialogUtil.getInstance().showAlertDialog();
                             }
                         }
@@ -214,7 +205,7 @@ public class VMyCollection extends Fragment implements IVMyCollection, IAMyColle
     public void handleToInfoPage(String spid) {
         iMainActivity.saveAttractionId(spid);
         MyApplication.getAppData().setFromMyCollection(true);
-        getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VInfo()).addToBackStack("MyCollection").commit();
+        getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VInfo()).addToBackStack("MyCollection").commit();
     }
 
     @Override
@@ -225,7 +216,7 @@ public class VMyCollection extends Fragment implements IVMyCollection, IAMyColle
 
     private IMainActivity iMainActivity;
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NotNull Context context) {
         super.onAttach(context);
         iMainActivity = (IMainActivity)context;
     }
@@ -239,9 +230,7 @@ public class VMyCollection extends Fragment implements IVMyCollection, IAMyColle
 
                     @Override
                     public void onNext(Object o) {
-                        if (getFragmentManager() != null) {
-                            getFragmentManager().popBackStack();
-                        }
+                        getParentFragmentManager().popBackStack();
                     }
 
                     @Override
@@ -259,7 +248,7 @@ public class VMyCollection extends Fragment implements IVMyCollection, IAMyColle
                     @Override
                     public void onNext(Object o) {
                         MyApplication.getAppData().setCollectionPage(true);
-                        getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VSwapStroke()).addToBackStack("myCollection").commit();
+                        getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VSwapStroke()).addToBackStack("myCollection").commit();
                     }
 
                     @Override
@@ -279,17 +268,9 @@ public class VMyCollection extends Fragment implements IVMyCollection, IAMyColle
                         view,
                         getString(R.string.stroke_create_title),
                         getString(R.string.global_ok),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                pMyCollection.handleNewStroke(editText.getText().toString());
-                            }
-                        },
+                        (dialogInterface, i) -> pMyCollection.handleNewStroke(editText.getText().toString()),
                         getString(R.string.global_cancel),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {}
-                        });
+                        (dialogInterface, i) -> {});
         AlertDialogUtil.getInstance().showAlertDialog();
     }
 }

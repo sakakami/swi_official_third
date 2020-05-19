@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.VExchangeItem"
+    android:background="@color/colorWhiteForFFFFFF">
+
+    <TextView
+        android:id="@+id/textTitleInExchangeItem"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="詳細內容"
+        android:gravity="center"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/textBackInExchangeItem"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text="@string/global_back"
+        android:gravity="center"
+        android:textSize="20sp"/>
+
+    <ImageView
+        android:id="@+id/imageHomeInExchangeItem"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:scaleType="centerInside"
+        android:padding="8dp"
+        app:srcCompat="@drawable/btn_home_2x" />
+
+    <ImageView
+        android:id="@+id/imagePhotoInExchangeItem"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below="@+id/textTitleInExchangeItem"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:scaleType="center"
+        app:srcCompat="@drawable/none_1" />
+
+    <TextView
+        android:id="@+id/textMessageInExchangeItem"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/imagePhotoInExchangeItem"
+        android:layout_marginTop="16dp"
+        android:text="限碳幣兌換"
+        android:gravity="center"
+        android:background="@color/colorWhiteForD0D0D0"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/textNameInExchangeItem"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/textMessageInExchangeItem"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center_vertical"
+        android:textSize="16sp"
+        android:text="Item A"/>
+    <TextView
+        android:id="@+id/textCostInExchangeItem"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/textNameInExchangeItem"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:gravity="center_vertical"
+        android:textSize="16sp"
+        android:text="40"/>
+
+    <TextView
+        android:id="@+id/textExchangeInExchangeItem"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/bg_green_full"
+        android:textSize="16sp"
+        android:textColor="@color/colorWhiteForFFFFFF"
+        android:text="兌換"
+        android:gravity="center"/>
+
+</RelativeLayout>

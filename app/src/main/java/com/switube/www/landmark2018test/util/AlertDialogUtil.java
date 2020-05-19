@@ -2,8 +2,9 @@ package com.switube.www.landmark2018test.util;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
+
+import androidx.appcompat.app.AlertDialog;
 
 import org.jetbrains.annotations.Contract;
 

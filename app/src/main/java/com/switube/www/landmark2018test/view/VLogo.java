@@ -1,15 +1,15 @@
 package com.switube.www.landmark2018test.view;
 
 
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.switube.www.landmark2018test.R;
 import com.switube.www.landmark2018test.presenter.PLogo;
@@ -43,18 +43,13 @@ public class VLogo extends Fragment {
                         getContext(),
                         R.string.network_error_message,
                         R.string.network_error_ok,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Objects.requireNonNull(getActivity()).onBackPressed();
-                            }
-                        }
+                        (dialog, which) -> Objects.requireNonNull(getActivity()).onBackPressed()
                 );
         AlertDialogUtil.getInstance().showAlertDialog();
     }
 
-    public void handleFinishUpdate() {
-        FragmentManager fragmentManager = getFragmentManager();
+    private void handleFinishUpdate() {
+        FragmentManager fragmentManager = getParentFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.layoutContainer, new VMap(), "Map").commit();
     }

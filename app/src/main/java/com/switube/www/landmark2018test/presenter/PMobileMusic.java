@@ -1,7 +1,5 @@
 package com.switube.www.landmark2018test.presenter;
 
-import android.util.Log;
-
 import com.switube.www.landmark2018test.MyApplication;
 import com.switube.www.landmark2018test.gson.GMusicRadio;
 import com.switube.www.landmark2018test.gson.GPushMusic;

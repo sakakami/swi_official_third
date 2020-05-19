@@ -4,36 +4,27 @@ package com.switube.www.landmark2018test.view;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.jakewharton.rxbinding2.view.RxView;
-import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.switube.www.landmark2018test.MyApplication;
 import com.switube.www.landmark2018test.R;
 import com.switube.www.landmark2018test.adapter.ALeaveCommnets;
-import com.switube.www.landmark2018test.adapter.ASpinner;
 import com.switube.www.landmark2018test.adapter.ATagSelected;
 import com.switube.www.landmark2018test.adapter.callback.IALeaveComments;
 import com.switube.www.landmark2018test.presenter.PLeaveComments;
-import com.switube.www.landmark2018test.util.AppConstant;
 import com.switube.www.landmark2018test.util.SharePreferencesUtil;
 import com.switube.www.landmark2018test.view.callback.IFragmentBackHandler;
 import com.switube.www.landmark2018test.view.callback.IMainActivity;
@@ -41,8 +32,8 @@ import com.switube.www.landmark2018test.view.callback.IVLeaveComments;
 import com.tbruyelle.rxpermissions2.Permission;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
-import java.io.File;
-import java.util.ArrayList;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -57,7 +48,7 @@ import io.reactivex.disposables.Disposable;
  * A simple {@link Fragment} subclass.
  */
 public class VLeaveComments extends Fragment implements IVLeaveComments, IALeaveComments, IFragmentBackHandler {
-    public static boolean IS_IN_MAP = false;
+    static boolean IS_IN_MAP = false;
     @BindViews({R.id.textPostInMessage, R.id.textBackInMessage})
     List<TextView> mTextViews;
     @BindView(R.id.layoutInMessage)
@@ -76,7 +67,6 @@ public class VLeaveComments extends Fragment implements IVLeaveComments, IALeave
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_v_leave_comments, container, false);
         mUnbinder = ButterKnife.bind(this, view);
         recyclerView.setLayoutManager(new LinearLayoutManager(container.getContext()));
@@ -93,9 +83,9 @@ public class VLeaveComments extends Fragment implements IVLeaveComments, IALeave
                     public void onNext(Object o) {
                         if (MyApplication.getAppData().isEditMode()) {
                             MyApplication.getAppData().geteEditComment().setMessage(aLeaveCommnets.getMessage());
-                            getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VTag()).commit();
+                            getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VTag()).commit();
                         } else {
-                            getFragmentManager().popBackStackImmediate();
+                            getParentFragmentManager().popBackStackImmediate();
                         }
                     }
 
@@ -161,16 +151,16 @@ public class VLeaveComments extends Fragment implements IVLeaveComments, IALeave
             MyApplication.getAppData().seteEditComment(null);
         }
         if (IS_IN_MAP) {
-            getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VInfo()).commit();
+            getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VInfo()).commit();
         } else {
             if (MyApplication.getAppData().isFromAttractionSteaming()) {
                 MyApplication.getAppData().setFromAttractionSteaming(false);
-                getFragmentManager().popBackStack();
+                getParentFragmentManager().popBackStack();
             } else if (MyApplication.getAppData().isFromPersonalSteaming()) {
                 MyApplication.getAppData().setFromPersonalSteaming(false);
-                getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VPersonalSteaming()).commit();
+                getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VPersonalSteaming()).commit();
             } else {
-                getFragmentManager().popBackStack("Info", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                getParentFragmentManager().popBackStack("Info", FragmentManager.POP_BACK_STACK_INCLUSIVE);
             }
         }
     }
@@ -182,7 +172,7 @@ public class VLeaveComments extends Fragment implements IVLeaveComments, IALeave
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NotNull Context context) {
         super.onAttach(context);
         mIMainActivity = (IMainActivity) context;
     }
@@ -205,10 +195,10 @@ public class VLeaveComments extends Fragment implements IVLeaveComments, IALeave
                                         if (aLeaveCommnets.getDeleteImage().size() > 0) {
                                             MyApplication.getAppData().geteEditComment().setImageDel(aLeaveCommnets.getDeleteImage());
                                         }
-                                        getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VPhotoList()).addToBackStack("LeaveComments").commit();
+                                        getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VPhotoList()).addToBackStack("LeaveComments").commit();
                                     }
                                 } else {
-                                    getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VPhotoList()).addToBackStack("LeaveComments").commit();
+                                    getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VPhotoList()).addToBackStack("LeaveComments").commit();
                                 }
                             }
                         }
@@ -227,10 +217,10 @@ public class VLeaveComments extends Fragment implements IVLeaveComments, IALeave
                     if (aLeaveCommnets.getDeleteImage().size() > 0) {
                         MyApplication.getAppData().geteEditComment().setImageDel(aLeaveCommnets.getDeleteImage());
                     }
-                    getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VPhotoList(), "photoFragment").addToBackStack("LeaveComments").commit();
+                    getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VPhotoList(), "photoFragment").addToBackStack("LeaveComments").commit();
                 }
             } else {
-                getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VPhotoList(), "photoFragment").addToBackStack("LeaveComments").commit();
+                getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VPhotoList(), "photoFragment").addToBackStack("LeaveComments").commit();
             }
         }
     }
@@ -239,9 +229,9 @@ public class VLeaveComments extends Fragment implements IVLeaveComments, IALeave
     public boolean onBackPressed() {
         if (MyApplication.getAppData().isEditMode()) {
             MyApplication.getAppData().geteEditComment().setMessage(aLeaveCommnets.getMessage());
-            getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VTag()).commit();
+            getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VTag()).commit();
         } else {
-            getFragmentManager().popBackStack();
+            getParentFragmentManager().popBackStack();
         }
         return true;
     }

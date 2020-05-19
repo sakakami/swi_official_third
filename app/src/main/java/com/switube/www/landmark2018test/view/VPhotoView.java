@@ -6,15 +6,16 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.jakewharton.rxbinding2.view.RxView;
@@ -27,6 +28,8 @@ import com.switube.www.landmark2018test.util.SignInUtil;
 import com.switube.www.landmark2018test.view.callback.IMainActivity;
 import com.tbruyelle.rxpermissions2.Permission;
 import com.tbruyelle.rxpermissions2.RxPermissions;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,7 +78,7 @@ public class VPhotoView extends Fragment {
                     @Override
                     public void onNext(Object o) {
                         MyApplication.getAppData().setFromPersonalSteaming(false);
-                        getFragmentManager().popBackStack();
+                        getParentFragmentManager().popBackStack();
                     }
 
                     @Override
@@ -106,7 +109,7 @@ public class VPhotoView extends Fragment {
                                                 if (SharePreferencesUtil.getInstance().getSharedPreferences().getString("userMaid", "null").equals("null")) {
                                                     new SignInUtil(getContext(), iMainActivity);
                                                 } else {
-                                                    getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VPhotoList()).addToBackStack("PhotoView").commit();
+                                                    getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VPhotoList()).addToBackStack("PhotoView").commit();
                                                 }
                                             }
                                         }
@@ -121,7 +124,7 @@ public class VPhotoView extends Fragment {
                             if (SharePreferencesUtil.getInstance().getSharedPreferences().getString("userMaid", "null").equals("null")) {
                                 new SignInUtil(getContext(), iMainActivity);
                             } else {
-                                getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VPhotoList()).addToBackStack("PhotoView").commit();
+                                getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VPhotoList()).addToBackStack("PhotoView").commit();
                             }
                         }
                     }
@@ -136,7 +139,7 @@ public class VPhotoView extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NotNull Context context) {
         super.onAttach(context);
         iMainActivity = (IMainActivity) context;
     }

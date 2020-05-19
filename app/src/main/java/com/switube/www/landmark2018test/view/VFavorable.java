@@ -2,13 +2,14 @@ package com.switube.www.landmark2018test.view;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.switube.www.landmark2018test.R;
@@ -22,7 +23,6 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.observers.DefaultObserver;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -66,7 +66,7 @@ public class VFavorable extends Fragment {
                     public void onSubscribe(Disposable d) {}
 
                     @Override
-                    public void onNext(Object o) { getFragmentManager().popBackStack(); }
+                    public void onNext(Object o) { getParentFragmentManager().popBackStack(); }
 
                     @Override
                     public void onError(Throwable e) {}

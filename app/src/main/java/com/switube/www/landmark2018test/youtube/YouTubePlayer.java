@@ -4,12 +4,13 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.annotation.IntDef;
-import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+
+import androidx.annotation.IntDef;
+import androidx.annotation.NonNull;
 
 import com.switube.www.landmark2018test.R;
 
@@ -18,6 +19,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -43,12 +45,7 @@ public class YouTubePlayer extends WebView {
     }
 
     protected void seekTo(final int time) {
-        mainThreadHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                loadUrl("javascript:seekTo(" + time + ")");
-            }
-        });
+        mainThreadHandler.post(() -> loadUrl("javascript:seekTo(" + time + ")"));
     }
 
     @NonNull
@@ -85,41 +82,26 @@ public class YouTubePlayer extends WebView {
     }
 
     protected void loadVideo(final String videoId, final float startSeconds) {
-        mainThreadHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                loadUrl("javascript:loadVideo('" + videoId + "'," + startSeconds + ")");
-            }
-        });
+        mainThreadHandler.post(() -> loadUrl("javascript:loadVideo('" + videoId + "'," + startSeconds + ")"));
     }
 
     protected void pause() {
-        mainThreadHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                loadUrl("javascript:pauseVideo()");
-            }
-        });
+        mainThreadHandler.post(() -> loadUrl("javascript:pauseVideo()"));
     }
 
     protected void play() {
-        mainThreadHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                loadUrl("javascript:playVideo()");
-            }
-        });
+        mainThreadHandler.post(() -> loadUrl("javascript:playVideo()"));
     }
 
     @NonNull
     private String getVideoPlayerHTML() {
         try {
             InputStream inputStream = getResources().openRawResource(R.raw.player);
-            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "utf-8");
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
             String read;
-            StringBuilder stringBuilder = new StringBuilder("");
+            StringBuilder stringBuilder = new StringBuilder();
 
             while ((read = bufferedReader.readLine()) != null) {
                 stringBuilder.append(read).append("\n");

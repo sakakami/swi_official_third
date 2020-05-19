@@ -1,9 +1,9 @@
 package com.switube.www.landmark2018test.database;
 
-import android.arch.persistence.room.Database;
-import android.arch.persistence.room.Room;
-import android.arch.persistence.room.RoomDatabase;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
+import androidx.room.Database;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
 
 import com.switube.www.landmark2018test.MyApplication;
 import com.switube.www.landmark2018test.database.dao.AttractionClassDao;
@@ -12,7 +12,6 @@ import com.switube.www.landmark2018test.database.dao.AttractionModeDao;
 import com.switube.www.landmark2018test.database.dao.AttractionStyleDao;
 import com.switube.www.landmark2018test.database.dao.AttractionTermDao;
 import com.switube.www.landmark2018test.database.dao.CarbonDao;
-import com.switube.www.landmark2018test.database.dao.CashFlowDao;
 import com.switube.www.landmark2018test.database.dao.EcoDao;
 import com.switube.www.landmark2018test.database.dao.MapPlaceBaseDataDao;
 import com.switube.www.landmark2018test.database.dao.MapPlaceBaseSubDataDao;
@@ -25,7 +24,6 @@ import com.switube.www.landmark2018test.database.entity.AttractionModeEntity;
 import com.switube.www.landmark2018test.database.entity.AttractionStyleEntity;
 import com.switube.www.landmark2018test.database.entity.AttractionTermEntity;
 import com.switube.www.landmark2018test.database.entity.CarbonEntity;
-import com.switube.www.landmark2018test.database.entity.CashFlowEntity;
 import com.switube.www.landmark2018test.database.entity.EcoEntity;
 import com.switube.www.landmark2018test.database.entity.MapPlaceBaseDataEntity;
 import com.switube.www.landmark2018test.database.entity.MapPlaceBaseSubDataEntity;
@@ -36,7 +34,7 @@ import com.switube.www.landmark2018test.database.entity.TagQBNEntity;
 @Database(entities = {AttractionClassEntity.class,
         AttractionItemEntity.class, AttractionModeEntity.class, AttractionTermEntity.class,
         AttractionStyleEntity.class, MapPlaceBaseDataEntity.class, MapPlaceBaseSubDataEntity.class,
-        TagQBNEntity.class, TagQBAEntity.class, MusicEntity.class, CashFlowEntity.class,
+        TagQBNEntity.class, TagQBAEntity.class, MusicEntity.class,
         CarbonEntity.class, EcoEntity.class},
         version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
@@ -53,7 +51,6 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract TagQBNDao tagQBNDao();
     public abstract TagQBADao tagQBADao();
     public abstract MusicDao musicDao();
-    public abstract CashFlowDao cashFlowDao();
     public abstract EcoDao ecoDao();
     public static AppDatabase getInstance() {
         if (sAppDatabase == null) {

@@ -2,8 +2,6 @@ package com.switube.www.landmark2018test.adapter;
 
 import android.graphics.Color;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
@@ -13,6 +11,9 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.jakewharton.rxbinding2.view.RxView;
@@ -194,7 +195,8 @@ public class ACreateAttraction extends RecyclerView.Adapter<ACreateAttraction.Vi
                 holder.mTextViews.get(6).setVisibility(View.GONE);
                 holder.mCheckBox.setVisibility(View.GONE);
                 holder.mView.setVisibility(View.GONE);
-                holder.mTextViews.get(4).setText("0/150");
+                String temp = "0/150";
+                holder.mTextViews.get(4).setText(temp);
                 break;
             case 8:
                 holder.mImageViews.get(0).setImageResource(R.drawable.camera_off_v11);
@@ -216,7 +218,7 @@ public class ACreateAttraction extends RecyclerView.Adapter<ACreateAttraction.Vi
                             .load(Uri.fromFile(file))
                             .into(holder.mImageViews.get(1));
                     holder.mTextViews.get(5).setVisibility(View.VISIBLE);
-                    String count = "+ " + String.valueOf(iaCreateAttraction.getPhotoSize() - 1) + " PHOTOS";
+                    String count = "+ " + (iaCreateAttraction.getPhotoSize() - 1) + " PHOTOS";
                     holder.mTextViews.get(5).setText(count);
                 } else {
                     holder.mTextViews.get(5).setVisibility(View.GONE);
@@ -448,7 +450,7 @@ public class ACreateAttraction extends RecyclerView.Adapter<ACreateAttraction.Vi
 
                         @Override
                         public void onNext(CharSequence charSequence) {
-                            String count = String.valueOf(charSequence.length()) + "/150";
+                            String count = charSequence.length() + "/150";
                             mTextViews.get(4).setText(count);
                             switch (getAdapterPosition()) {
                                 case 0:

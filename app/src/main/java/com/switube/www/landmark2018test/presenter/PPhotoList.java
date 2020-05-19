@@ -5,16 +5,18 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v4.content.FileProvider;
+
+import androidx.core.content.FileProvider;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.switube.www.landmark2018test.MyApplication;
 import com.switube.www.landmark2018test.gson.CheckInDataGson;
 import com.switube.www.landmark2018test.model.MPhotoList;
-import com.switube.www.landmark2018test.util.NetworkUtil;
-import com.switube.www.landmark2018test.view.callback.IVPhotoList;
 import com.switube.www.landmark2018test.presenter.callback.IPPhotoList;
+import com.switube.www.landmark2018test.util.NetworkUtil;
+import com.switube.www.landmark2018test.view.VPhotoList;
+import com.switube.www.landmark2018test.view.callback.IVPhotoList;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -27,7 +29,6 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -60,16 +61,13 @@ public class PPhotoList implements IPPhotoList {
 
     public void handleSavePhotoAndRefresh(final Context context) {
         Observable
-                .create(new ObservableOnSubscribe<String>() {
-                    @Override
-                    public void subscribe(ObservableEmitter<String> emitter) throws Exception {
-                        Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-                        File file = new File(com.switube.www.landmark2018test.view.VPhotoList.imagePath);
-                        Uri uri = Uri.fromFile(file);
-                        intent.setData(uri);
-                        context.sendBroadcast(intent);
-                        emitter.onNext("OK");
-                    }
+                .create((ObservableOnSubscribe<String>) emitter -> {
+                    Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+                    File file = new File(VPhotoList.imagePath);
+                    Uri uri = Uri.fromFile(file);
+                    intent.setData(uri);
+                    context.sendBroadcast(intent);
+                    emitter.onNext("OK");
                 })
                 .observeOn(Schedulers.io())
                 .subscribeOn(AndroidSchedulers.mainThread())

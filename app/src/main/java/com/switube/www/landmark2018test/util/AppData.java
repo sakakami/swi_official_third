@@ -11,11 +11,14 @@ import com.switube.www.landmark2018test.entity.EEco;
 import com.switube.www.landmark2018test.entity.EEcoList;
 import com.switube.www.landmark2018test.entity.EEditComment;
 import com.switube.www.landmark2018test.entity.EFeatures;
+import com.switube.www.landmark2018test.entity.EStoreList;
 import com.switube.www.landmark2018test.entity.ESwapData;
+import com.switube.www.landmark2018test.entity.ETransaction;
 import com.switube.www.landmark2018test.gson.GInfoData;
 import com.switube.www.landmark2018test.gson.GPlaceIdData;
 import com.switube.www.landmark2018test.gson.GPlayer;
 import com.switube.www.landmark2018test.gson.GStrokeList;
+import com.switube.www.landmark2018test.gson.GTicket;
 import com.switube.www.landmark2018test.service.callback.IFloatPlayerService;
 
 import java.util.ArrayList;
@@ -876,11 +879,6 @@ public class AppData {
         return mobileMusicMode;
     }
 
-    //是否從側邊選單點選快選模組
-    private boolean isSideMenu = false;
-    public void setSideMenu(boolean sideMenu) { isSideMenu = sideMenu; }
-    public boolean isSideMenu() { return isSideMenu; }
-
     //是否來自錢包
     private boolean isFromWallet = false;
     public void setFromWallet(boolean fromWallet) { isFromWallet = fromWallet; }
@@ -913,4 +911,98 @@ public class AppData {
     private EEcoList eEcoList = new EEcoList();
     public void seteEcoList(EEcoList eEcoList) { this.eEcoList = eEcoList; }
     public EEcoList geteEcoList() { return eEcoList; }
+
+    //所選商品
+    private EStoreList eStoreList = new EStoreList();
+    public void seteStoreList(EStoreList eStoreList) {
+        this.eStoreList = eStoreList;
+    }
+    public EStoreList geteStoreList() {
+        return eStoreList;
+    }
+
+    //exchange finish物理返回鍵用
+    private boolean isExchangeFinish = false;
+    public void setExchangeFinish(boolean exchangeFinish) {
+        isExchangeFinish = exchangeFinish;
+    }
+    public boolean isExchangeFinish() {
+        return isExchangeFinish;
+    }
+
+    //can show my code
+    private boolean showMyCode = true;
+    public void setShowMyCode(boolean showMyCode) {
+        this.showMyCode = showMyCode;
+    }
+    public boolean isShowMyCode() {
+        return showMyCode;
+    }
+
+    //selected store id
+    private String selectedStoreId = "";
+    public void setSelectedStoreId(String selectedStoreId) {
+        this.selectedStoreId = selectedStoreId;
+    }
+    public String getSelectedStoreId() {
+        return selectedStoreId;
+    }
+
+    private GTicket.Data ticketData = new GTicket.Data();
+
+    public void setTicketData(GTicket.Data ticketData) {
+        this.ticketData = ticketData;
+    }
+    public GTicket.Data getTicketData() {
+        return ticketData;
+    }
+
+    //selected transaction details
+    private ETransaction eTransaction = new ETransaction();
+    public void seteTransaction(ETransaction eTransaction) {
+        this.eTransaction = eTransaction;
+    }
+    public ETransaction geteTransaction() {
+        return eTransaction;
+    }
+
+    //碳幣金額
+    private String carbonCash = "0";
+    public void setCarbonCash(String carbonCash) {
+        this.carbonCash = carbonCash;
+    }
+    public String getCarbonCash() {
+        return carbonCash;
+    }
+
+    //掃碼內容
+    private String scannerResult = "";
+    public void setScannerResult(String scannerResult) {
+        this.scannerResult = scannerResult;
+    }
+    public String getScannerResult() {
+        return scannerResult;
+    }
+
+    //pay cash
+    private String payCash = "0";
+    public void setPayCash(String payCash) {
+        this.payCash = payCash;
+    }
+    public String getPayCash() {
+        return payCash;
+    }
+
+    //check id for pay
+    private String checkId = "";
+    public void setCheckId(String checkId) {
+        this.checkId = checkId;
+    }
+    public String getCheckId() {
+        return checkId;
+    }
+
+    public String getStoreMaid() {
+        return "sbUhP7d4qS";
+    }
 }

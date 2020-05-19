@@ -24,12 +24,9 @@ public class NetworkUtil {
     private INetwork mINetwork;
 
     private NetworkUtil() {
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
-            @Override
-            public void log(String message) {
-                Log.e("OKHttp:", message);
-                //LogToFile.e("OKHttp:", message);
-            }
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(message -> {
+            Log.e("OKHttp:", message);
+            //LogToFile.e("OKHttp:", message);
         });
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
@@ -40,8 +37,10 @@ public class NetworkUtil {
                 .retryOnConnectionFailure(true)
                 .build();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://www.switube.com/mobile_swimap/")
-                //.baseUrl("http://192.168.1.23/mobile_swimap/")
+                //.baseUrl("https://www.switube.com/mobile_swimap/")
+                //.baseUrl("http://192.168.1.12/mobile_swimap/")
+                .baseUrl("http://192.168.0.124/mobile_swimap/")
+                //.baseUrl("http://192.168.1.111/mobile_swimap/")
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

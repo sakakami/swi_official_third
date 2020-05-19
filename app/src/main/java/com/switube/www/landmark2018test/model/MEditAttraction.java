@@ -1,7 +1,5 @@
 package com.switube.www.landmark2018test.model;
 
-import android.util.Log;
-
 import com.switube.www.landmark2018test.gson.GAttractionDataGoogle;
 import com.switube.www.landmark2018test.gson.GPlaceIdData;
 import com.switube.www.landmark2018test.gson.GSendLove;
@@ -138,7 +136,6 @@ public class MEditAttraction {
 
                     @Override
                     public void onNext(GSendLove gSendLove) {
-                        Log.e("save", gSendLove.getSave());
                         ipEditAttraction.finishDelPlace(gSendLove);
                     }
 

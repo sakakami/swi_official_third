@@ -51,7 +51,7 @@
         android:text="@string/stroke_collect_type_place"
         android:gravity="center"
         android:textColor="@color/colorWhiteForFFFFFF"/>
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerInMyCollection"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

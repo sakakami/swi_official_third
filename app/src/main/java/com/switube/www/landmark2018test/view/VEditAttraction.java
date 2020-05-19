@@ -3,20 +3,19 @@ package com.switube.www.landmark2018test.view;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
@@ -84,7 +83,7 @@ public class VEditAttraction extends Fragment implements IVEditAttraction, IAEdi
 
     private IMainActivity iMainActivity;
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NotNull Context context) {
         super.onAttach(context);
         iMainActivity = (IMainActivity) context;
     }
@@ -119,7 +118,7 @@ public class VEditAttraction extends Fragment implements IVEditAttraction, IAEdi
                 break;
             case 2:
                 MyApplication.getAppData().setFromEditAttraction(true);
-                getFragmentManager().beginTransaction()
+                getParentFragmentManager().beginTransaction()
                         .replace(R.id.layoutContainer, new VEditTime()).addToBackStack("EditAttraction")
                         .commit();
                 break;
@@ -136,7 +135,7 @@ public class VEditAttraction extends Fragment implements IVEditAttraction, IAEdi
                                 public void onNext(Permission permission) {
                                     if (permission.granted) {
                                         MyApplication.getAppData().getIsEdit().set(8, true);
-                                        getFragmentManager().beginTransaction()
+                                        getParentFragmentManager().beginTransaction()
                                                 .replace(R.id.layoutContainer, new VPhotoList()).addToBackStack("EditAttraction")
                                                 .commit();
                                     }
@@ -152,7 +151,7 @@ public class VEditAttraction extends Fragment implements IVEditAttraction, IAEdi
                             });
                 } else {
                     MyApplication.getAppData().getIsEdit().set(8, true);
-                    getFragmentManager().beginTransaction()
+                    getParentFragmentManager().beginTransaction()
                             .replace(R.id.layoutContainer, new VPhotoList()).addToBackStack("CreateAttraction")
                             .commit();
                 }
@@ -166,10 +165,10 @@ public class VEditAttraction extends Fragment implements IVEditAttraction, IAEdi
     public void finishSend() {
         MyApplication.getAppData().setFormEditAttractionForType(false);
         MyApplication.getAppData().setFromEditAttraction(false);
-        MyApplication.getAppData().setIsEdit(new ArrayList<Boolean>());
+        MyApplication.getAppData().setIsEdit(new ArrayList<>());
         MyApplication.getAppData().getSelectedPhotos().clear();
         AlertDialogUtil.getInstance().clearAlertDialog();
-        getFragmentManager().popBackStack();
+        getParentFragmentManager().popBackStack();
     }
 
     @Override
@@ -194,17 +193,9 @@ public class VEditAttraction extends Fragment implements IVEditAttraction, IAEdi
         AlertDialogUtil.getInstance()
                 .initDialogBuilder(getContext(), R.string.edit_attraction_remove_message,
                         R.string.edit_attraction_remove_confirm,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                pEditAttraction.sendDelPlaceData(iMainActivity.getAttractionId());
-                            }
-                        },
+                        (dialogInterface, i) -> pEditAttraction.sendDelPlaceData(iMainActivity.getAttractionId()),
                         R.string.edit_attraction_remove_cancel,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {}
-                        });
+                        (dialogInterface, i) -> {});
         AlertDialogUtil.getInstance().showAlertDialog();
     }
 
@@ -212,9 +203,9 @@ public class VEditAttraction extends Fragment implements IVEditAttraction, IAEdi
     public void finishDelPlace() {
         if (MyApplication.getAppData().isFromSearchAttraction()) {
             MyApplication.getAppData().setFromSearchAttraction(false);
-            getFragmentManager().popBackStackImmediate("SearchAttraction", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            getParentFragmentManager().popBackStackImmediate("SearchAttraction", FragmentManager.POP_BACK_STACK_INCLUSIVE);
         } else {
-            getFragmentManager().popBackStackImmediate("Map", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            getParentFragmentManager().popBackStackImmediate("Map", FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
     }
 
@@ -229,7 +220,7 @@ public class VEditAttraction extends Fragment implements IVEditAttraction, IAEdi
                     public void onNext(Object o) {
                         MyApplication.getAppData().setFromEditAttraction(false);
                         MyApplication.getAppData().setFormEditAttractionForType(false);
-                        getFragmentManager().popBackStack();
+                        getParentFragmentManager().popBackStack();
                     }
 
                     @Override
@@ -248,7 +239,7 @@ public class VEditAttraction extends Fragment implements IVEditAttraction, IAEdi
                     public void onNext(Object o) {
                         if (MyApplication.getAppData().isFormEditAttractionForType()) {
                             MyApplication.getAppData().getIsEdit().set(2, true);
-                            getFragmentManager().beginTransaction()
+                            getParentFragmentManager().beginTransaction()
                                     .replace(R.id.layoutContainer, new VFeatures()).addToBackStack("EditAttraction")
                                     .commit();
                         } else {

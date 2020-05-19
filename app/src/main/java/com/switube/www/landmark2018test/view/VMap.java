@@ -11,21 +11,10 @@ import android.graphics.Color;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.content.PermissionChecker;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -34,6 +23,15 @@ import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.PermissionChecker;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -51,7 +49,6 @@ import com.google.maps.android.clustering.Cluster;
 import com.google.maps.android.clustering.ClusterManager;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxRadioGroup;
-import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.switube.www.landmark2018test.MyApplication;
 import com.switube.www.landmark2018test.R;
 import com.switube.www.landmark2018test.adapter.ACarbon;
@@ -82,6 +79,8 @@ import com.switube.www.landmark2018test.view.callback.IVMap;
 import com.tbruyelle.rxpermissions2.Permission;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -110,8 +109,8 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
         ClusterManager.OnClusterItemClickListener<EClusterItem>,
         ClusterManager.OnClusterInfoWindowClickListener<EClusterItem>, IACarbon, IAEco {
     public static boolean isCent = false;
-    public static boolean isLocked = false;
-    public static boolean isAttractionList = false;
+    private static boolean isLocked = false;
+    static boolean isAttractionList = false;
     @BindViews({R.id.textCheckInInMap, R.id.textSearchInMap, R.id.textTimerInMap,
             R.id.textStringInMap, R.id.textGpsStateInMap, R.id.textTitleGpsInMap,
             R.id.textCenterInMap, R.id.textCenterSubInMap, R.id.textRightInMap,
@@ -135,7 +134,7 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
     private Context mContext;
     private Unbinder mUnbinder;
     private boolean isCreditCard = false;
-    private boolean isWallet = false;
+    //private boolean isWallet = false;
     private boolean isNeedReturn = false;
     private boolean isCreate = true;
     private boolean canClick = true;
@@ -193,7 +192,7 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
     private String mMsid;
     private List<EClusterItem> eClusterItem = new ArrayList<>();
     private String location;
-    private int carCash = 0;
+    //private int carCash = 0;
 
     @Override
     public void onResume() {
@@ -416,7 +415,7 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
                                 if (MyApplication.getAppData().isDefaultHotKye()) {
                                     if (mIMainActivity.getNowGps() != null) {
                                         VLeaveComments.IS_IN_MAP = true;
-                                        getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VAttractionList()).addToBackStack("Map").commit();
+                                        getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VAttractionList()).addToBackStack("Map").commit();
                                         mIMainActivity.handleCleanGoogleMap();
                                     } else {
                                         showDialog();
@@ -425,11 +424,11 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
                                     switch (MyApplication.getAppData().getHotKeyMode()) {
                                         case 1:
                                             MyApplication.getAppData().setMusicMode(2);
-                                            getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VMobileMusic()).addToBackStack("Map").commit();
+                                            getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VMobileMusic()).addToBackStack("Map").commit();
                                             break;
                                         case 2:
                                             MyApplication.getAppData().setStrokeMode(2);
-                                            getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VStroke()).addToBackStack("Map").commit();
+                                            getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VStroke()).addToBackStack("Map").commit();
                                             break;
                                         default:
                                             break;
@@ -459,7 +458,7 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
                                 if (mIMainActivity.getNowGps() != null) {
                                     mEditSearch.setText("");
                                     VAttractionType.isClickHotKey = true;
-                                    getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VAttractionType()).addToBackStack("Map").commit();
+                                    getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VAttractionType()).addToBackStack("Map").commit();
                                 } else {
                                     showDialog();
                                 }
@@ -468,7 +467,7 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
                                     case 1:
                                         mEditSearch.setText("");
                                         MyApplication.getAppData().setMusicMode(0);
-                                        getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VMobileMusic()).addToBackStack("Map").commit();
+                                        getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VMobileMusic()).addToBackStack("Map").commit();
                                         break;
                                     case 2:
                                         MyApplication.getAppData().setStrokeMode(0);
@@ -505,7 +504,7 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
                                     case 1:
                                         mEditSearch.setText("");
                                         MyApplication.getAppData().setMusicMode(1);
-                                        getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VMobileMusic()).addToBackStack("Map").commit();
+                                        getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VMobileMusic()).addToBackStack("Map").commit();
                                         break;
                                     case 2:
                                         MyApplication.getAppData().setStrokeMode(1);
@@ -534,11 +533,8 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
                     @Override
                     public void onNext(Object o) {
                         if (canClick) {
-                            /*if (MyApplication.getAppData().isDefaultHotKye()) {
-                                MyApplication.getAppData().setDefaultHotKye(false);
-                            }*/
                             mEditSearch.setText("");
-                            getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VMore()).addToBackStack("Map").commit();
+                            getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VMore()).addToBackStack("Map").commit();
                         }
                     }
 
@@ -683,7 +679,7 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
                     public void onNext(Object o) {
                         canInit = false;
                         mEditSearch.setText("");
-                        getFragmentManager().popBackStackImmediate();
+                        getParentFragmentManager().popBackStackImmediate();
                     }
 
                     @Override
@@ -797,7 +793,7 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
                             }
                         } else {
                             mEditSearch.setText("");
-                            getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VFinishTour()).addToBackStack("Map").commit();
+                            getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VFinishTour()).addToBackStack("Map").commit();
                         }
                     }
 
@@ -818,7 +814,7 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
                     public void onNext(Object o) {
                         canInit = false;
                         mEditSearch.setText("");
-                        getFragmentManager().popBackStack();
+                        getParentFragmentManager().popBackStack();
                     }
 
                     @Override
@@ -837,7 +833,7 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
                     public void onNext(Object o) {
                         canInit = false;
                         mEditSearch.setText("");
-                        getFragmentManager().popBackStack();
+                        getParentFragmentManager().popBackStack();
                     }
 
                     @Override
@@ -856,7 +852,7 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
                     @Override
                     public void onNext(Object o) {
                         mEditSearch.setText("");
-                        getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VInfo()).addToBackStack("Map").commit();
+                        getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VInfo()).addToBackStack("Map").commit();
                     }
 
                     @Override
@@ -1171,16 +1167,17 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
                         if (isCreditCard) {
                             mEditSearch.setText("");
                             relativeLayouts.get(3).setVisibility(View.GONE);
-                            getFragmentManager().beginTransaction()
+                            getParentFragmentManager().beginTransaction()
                                     .replace(R.id.layoutContainer, new VCreditCard())
                                     .addToBackStack("Map")
                                     .commit();
-                        } else if (isWallet) {
+                        } /*else if (MyApplication.getAppData().isFromWallet()) {
+                            Log.e("map", "from wallet");
                             //VWallet.readyToCent = true;
                             //getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VWallet()).addToBackStack("Map").commit();
                             relativeLayouts.get(3).setVisibility(View.GONE);
                             pMap.handleCentBike(carCash);
-                        }
+                        }*/
                     }
 
                     @Override
@@ -1232,7 +1229,7 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
                     public void onNext(Object o) {
                         mIMainActivity.saveReturnPlace(mName);
                         mEditSearch.setText("");
-                        getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VFinishTour()).addToBackStack("Map").commit();
+                        getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VFinishTour()).addToBackStack("Map").commit();
                     }
 
                     @Override
@@ -1256,7 +1253,6 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
                                 mTextViewsInNine.get(3).setText(R.string.ebike_power_100);
                                 mTextViewsInNine.get(5).setText(R.string.ebike_cost_1);
                                 cost = 1 / (2.4 * 60);
-                                carCash = 500;
                                 mIMainActivity.saveSelectBikeNubmer("801");
                                 break;
                             case R.id.radioTwoInItemNineEbike:
@@ -1264,7 +1260,6 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
                                 mTextViewsInNine.get(3).setText(R.string.ebike_power_80);
                                 mTextViewsInNine.get(5).setText(R.string.ebike_cost_2);
                                 cost = 1 / (2.7 * 60);
-                                carCash = 400;
                                 mIMainActivity.saveSelectBikeNubmer("802");
                                 break;
                             case R.id.radioThreeInItemNineEbike:
@@ -1272,7 +1267,6 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
                                 mTextViewsInNine.get(3).setText(R.string.ebike_power_60);
                                 mTextViewsInNine.get(5).setText(R.string.ebike_cost_3);
                                 cost = 1 / (3 * 60);
-                                carCash = 300;
                                 mIMainActivity.saveSelectBikeNubmer("803");
                                 break;
                             default:
@@ -1303,12 +1297,10 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
                                 mTextViewsInThree.get(2).setText(R.string.global_next);
                                 break;
                             case R.id.radioThreeInItemThreeEbike:
-                                isWallet = true;
                                 mTextViewsInThree.get(2).setText(R.string.global_ok);
                                 break;
                             default:
                                 isCreditCard = false;
-                                isWallet = false;
                                 break;
                         }
                     }
@@ -1319,36 +1311,14 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
                     @Override
                     public void onComplete() {}
                 });
-        //search attractions
-        /*RxTextView.textChanges(mEditSearch)
-                .subscribe(new Observer<CharSequence>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {}
-
-                    @Override
-                    public void onNext(CharSequence charSequence) {
-                        if (charSequence.length() > 0) {
-                            pMap.getPlaceData(charSequence.toString(), eClusterItem);
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {}
-
-                    @Override
-                    public void onComplete() {}
-                });*/
-        mEditSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if (i == EditorInfo.IME_ACTION_SEARCH) {
-                    if (textView.getText().length() > 0) {
-                        pMap.getPlaceData(textView.getText().toString(), eClusterItem);
-                        return true;
-                    }
+        mEditSearch.setOnEditorActionListener((textView, i, keyEvent) -> {
+            if (i == EditorInfo.IME_ACTION_SEARCH) {
+                if (textView.getText().length() > 0) {
+                    pMap.getPlaceData(textView.getText().toString(), eClusterItem);
+                    return true;
                 }
-                return false;
             }
+            return false;
         });
         //切換回公版地圖頁
         RxView.clicks(mTextViews.get(24))
@@ -1392,7 +1362,7 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
                     public void onNext(Object o) {
                         if (canClick) {
                             mEditSearch.setText("");
-                            getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VStrokeAttractionList()).addToBackStack("Map").commit();
+                            getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VStrokeAttractionList()).addToBackStack("Map").commit();
                         }
                     }
 
@@ -1421,17 +1391,9 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
                                                     getContext(),
                                                     R.string.stroke_title_delete_message,
                                                     R.string.global_confirm,
-                                                    new DialogInterface.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                                            pMap.sendAddOrDel("del");
-                                                        }
-                                                    },
+                                                    (dialogInterface, i) -> pMap.sendAddOrDel("del"),
                                                     R.string.global_cancel,
-                                                    new DialogInterface.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(DialogInterface dialogInterface, int i) {}
-                                                    });
+                                                    (dialogInterface, i) -> {});
                                     AlertDialogUtil.getInstance().showAlertDialog();
                                 } else {
                                     pMap.sendAddToMyStroke();
@@ -1530,7 +1492,7 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
                                 MyApplication.getAppData().setPush(push);
                                 MyApplication.getAppData().setPush(false);
                                 MyApplication.getAppData().setPushBuffer(null);
-                                getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VPlayer(), "Player").addToBackStack("Map").commit();
+                                getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VPlayer(), "Player").addToBackStack("Map").commit();
                             }
                         }
                     }
@@ -1644,9 +1606,7 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
                     public void onSubscribe(Disposable d) {}
 
                     @Override
-                    public void onNext(Object o) {
-                        Log.e("clickBackground", "clicked");
-                    }
+                    public void onNext(Object o) {}
 
                     @Override
                     public void onError(Throwable e) {}
@@ -1674,15 +1634,7 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
                 mTextViews.get(23).setText(MyApplication.getAppData().getTitleForUrid());
             }
         }
-        /*if (MyApplication.getAppData().isMobileMusicMode()) {
-            pMap.getPushMusicData();
-        } else {
-            Log.e("map", "get menu data");
-            pMap.getMenuData();
-        }*/
-        Log.e("vmap", String.valueOf(MyApplication.getAppData().isNormalMap()));
 
-        //MyApplication.getAppData().setDefaultHotKye(true);
         if (supportMapFragment == null) {
             supportMapFragment = SupportMapFragment.newInstance();
             supportMapFragment.getMapAsync(this);
@@ -1719,31 +1671,14 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
                 MyApplication.getAppData().setMobileMusicMode(false);
                 MyApplication.getAppData().setDefaultHotKye(true);
                 handleHotKey();
-                Log.e("close", "start");
                 pMap.getSelectedAttractionDataByStyle(msid, gAttractionListData);
             }
 
             @Override
             public void onDrawerStateChanged(int newState) {}
         });
-        //Log.e("vmap", String.valueOf(MyApplication.getAppData().isNormalMap()));
         handleHotKey();
         pMap.getMenuData();
-
-        /*if (MyApplication.getAppData().isFromWallet()) {
-            MyApplication.getAppData().setFromWallet(false);
-            String spid = "";
-            String name = "";
-            mMsid = "ja";
-            if (isCent) {
-                spid = "0MXbFw59elbr";
-                name = "國立中興大學";
-            } else {
-                spid = "YkSdOu609nDn";
-                name = "E-bike 美和街站點";
-            }
-            pMap.getPlaceDetail(spid, name, mIMainActivity.getNowGps());
-        }*/
         return view;
     }
 
@@ -1779,47 +1714,40 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
         mClustermanager = null;
         mClustermanager = new ClusterManager<>(mContext, googleMap);
         mClustermanager.setRenderer(new ClusterRendererUtil(getContext(), googleMap, mClustermanager));
-        //googleMap.setOnCameraIdleListener(mClustermanager);
         googleMap.setOnMarkerClickListener(mClustermanager);
         googleMap.setOnInfoWindowClickListener(mClustermanager);
-        googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng latLng) {
-                mViews.get(4).setVisibility(View.GONE);
-                mTextViews.get(17).setVisibility(View.GONE);
-                mTextViews.get(18).setVisibility(View.GONE);
-                mTextViews.get(19).setVisibility(View.GONE);
-                mTextViews.get(20).setVisibility(View.GONE);
-                mTextViews.get(21).setVisibility(View.GONE);
-                mTextViews.get(22).setVisibility(View.GONE);
-                mImageViews.get(16).setVisibility(View.GONE);
-                mImageViews.get(19).setVisibility(View.GONE);
-                mRatingBar.setVisibility(View.GONE);
-            }
+        googleMap.setOnMapClickListener(latLng -> {
+            mViews.get(4).setVisibility(View.GONE);
+            mTextViews.get(17).setVisibility(View.GONE);
+            mTextViews.get(18).setVisibility(View.GONE);
+            mTextViews.get(19).setVisibility(View.GONE);
+            mTextViews.get(20).setVisibility(View.GONE);
+            mTextViews.get(21).setVisibility(View.GONE);
+            mTextViews.get(22).setVisibility(View.GONE);
+            mImageViews.get(16).setVisibility(View.GONE);
+            mImageViews.get(19).setVisibility(View.GONE);
+            mRatingBar.setVisibility(View.GONE);
         });
-        googleMap.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
-            @Override
-            public void onCameraIdle() {
-                if (MyApplication.getAppData().isMobileMusicMode()) {
-                    if (googleMap.getCameraPosition().target.latitude > 0 && googleMap.getCameraPosition().target.longitude > 0 && mIMainActivity.getNowGps() != null) {
-                        float[] distance = new float[1];
-                        if (MyApplication.getAppData().isManualMode()) {
-                            Location.distanceBetween(MyApplication.getAppData().getManualGPS().latitude, MyApplication.getAppData().getManualGPS().longitude, googleMap.getCameraPosition().target.latitude, googleMap.getCameraPosition().target.longitude, distance);
-                        } else {
-                            Location.distanceBetween(mIMainActivity.getNowGps().latitude, mIMainActivity.getNowGps().longitude, googleMap.getCameraPosition().target.latitude, googleMap.getCameraPosition().target.longitude, distance);
-                        }
-                        if (distance[0] > 3000) {
-                            MyApplication.getAppData().setManualMode(true);
-                            MyApplication.getAppData().setManualGPS(new LatLng(googleMap.getCameraPosition().target.latitude, googleMap.getCameraPosition().target.longitude));
-                            pMap.getPushMusicData();
-                        }
+        googleMap.setOnCameraIdleListener(() -> {
+            if (MyApplication.getAppData().isMobileMusicMode()) {
+                if (googleMap.getCameraPosition().target.latitude > 0 && googleMap.getCameraPosition().target.longitude > 0 && mIMainActivity.getNowGps() != null) {
+                    float[] distance = new float[1];
+                    if (MyApplication.getAppData().isManualMode()) {
+                        Location.distanceBetween(MyApplication.getAppData().getManualGPS().latitude, MyApplication.getAppData().getManualGPS().longitude, googleMap.getCameraPosition().target.latitude, googleMap.getCameraPosition().target.longitude, distance);
+                    } else {
+                        Location.distanceBetween(mIMainActivity.getNowGps().latitude, mIMainActivity.getNowGps().longitude, googleMap.getCameraPosition().target.latitude, googleMap.getCameraPosition().target.longitude, distance);
+                    }
+                    if (distance[0] > 3000) {
+                        MyApplication.getAppData().setManualMode(true);
+                        MyApplication.getAppData().setManualGPS(new LatLng(googleMap.getCameraPosition().target.latitude, googleMap.getCameraPosition().target.longitude));
+                        pMap.getPushMusicData();
                     }
                 }
-                CameraPosition position = googleMap.getCameraPosition();
-                if (cameraPositions[0] == null || cameraPositions[0].zoom != position.zoom) {
-                    cameraPositions[0] = googleMap.getCameraPosition();
-                    mClustermanager.cluster();
-                }
+            }
+            CameraPosition position = googleMap.getCameraPosition();
+            if (cameraPositions[0] == null || cameraPositions[0].zoom != position.zoom) {
+                cameraPositions[0] = googleMap.getCameraPosition();
+                mClustermanager.cluster();
             }
         });
         mClustermanager.setOnClusterClickListener(this);
@@ -1882,7 +1810,6 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
         mClustermanager.addItems(eClusterItem);
         mClustermanager.cluster();
         canClick = true;
-        Log.e("update", "finish" + MyApplication.getAppData().isDefaultHotKye());
         if (MyApplication.getAppData().isCreateNewAttractionFailure()) {
             for (int i = 0; i < list.size(); i++) {
                 if (list.get(i).getSpid().equals(mIMainActivity.getAttractionId())) {
@@ -1911,9 +1838,9 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
         mIMainActivity.setPlaceId(id);
         mEditSearch.setText("");
         if (isCreate) {
-            getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VCreateAttraction()).addToBackStack("Map").commit();
+            getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VCreateAttraction()).addToBackStack("Map").commit();
         } else {
-            getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VStroke()).addToBackStack("Map").commit();
+            getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VStroke()).addToBackStack("Map").commit();
         }
     }
 
@@ -1927,7 +1854,6 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
     @Override
     public void initDrawer(final List<AttractionModeEntity> modeEntities, final List<AttractionStyleEntity> styleEntities, final GAttractionListData gAttractionListData) {
         if (canInit) {
-            //Log.e("init drawer start -> ", String.valueOf(MyApplication.getAppData().isDefaultHotKye()));
             this.styleEntities = styleEntities;
             this.gAttractionListData = gAttractionListData;
             View view = inflater.inflate(R.layout.navigation_view_item_header, mListView, false);
@@ -1956,7 +1882,6 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
             isChecked.clear();
             String maid = SharePreferencesUtil.getInstance().getSharedPreferences().getString("userMaid", "null");
             if (maid.equals("null")) {
-                Log.e("init drawer null -> ", String.valueOf(MyApplication.getAppData().isMobileMusicMode()));
                 List<String> selectedMsid = new ArrayList<>();
                 if (MyApplication.getAppData().getSelectedMsid().size() > 0) {
                     for (int i = 0; i < styleEntities.size(); i++) {
@@ -1990,7 +1915,6 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
                     }
                 }
             } else {
-                Log.e("init drawer -> ", String.valueOf(MyApplication.getAppData().isMobileMusicMode()));
                 String checkData = SharePreferencesUtil.getInstance().getSharedPreferences().getString(maid, "null");
                 if (checkData.equals("null")) {
                     for (int i = 0; i < styleEntities.size(); i++) {
@@ -2084,121 +2008,111 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
             if (mListView != null) {
                 mListView.addHeaderView(view);
                 mListView.setAdapter(aSlideMenu);
-                mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        ESlideMenu eSlideMenu = (ESlideMenu) aSlideMenu.getItem(i - 1);
+                mListView.setOnItemClickListener((adapterView, view1, i, l) -> {
+                    ESlideMenu eSlideMenu = (ESlideMenu) aSlideMenu.getItem(i - 1);
 
-                        if (eSlideMenu != null && eSlideMenu.isHasSub()) {
-                            imageViewInDrawer.setVisibility(View.GONE);
-                            textArea.setVisibility(View.GONE);
-                            textViewInDrawer.setVisibility(View.GONE);
-                            textTitleInDrawer.setVisibility(View.VISIBLE);
-                            textBackInDrawer.setVisibility(View.VISIBLE);
-                            textTitleInDrawer.setText(eSlideMenu.getTitle());
-                            aSlideMenu.handleSwitch(false, eSlideMenu.getOpenId(), isChecked);
+                    if (eSlideMenu != null && eSlideMenu.isHasSub()) {
+                        imageViewInDrawer.setVisibility(View.GONE);
+                        textArea.setVisibility(View.GONE);
+                        textViewInDrawer.setVisibility(View.GONE);
+                        textTitleInDrawer.setVisibility(View.VISIBLE);
+                        textBackInDrawer.setVisibility(View.VISIBLE);
+                        textTitleInDrawer.setText(eSlideMenu.getTitle());
+                        aSlideMenu.handleSwitch(false, eSlideMenu.getOpenId(), isChecked);
+                    }
+
+                    if (eSlideMenu != null && eSlideMenu.isSub()) {
+                        int index = msid.indexOf(eSlideMenu.getMsid());
+                        if (index != -1) {
+                            if (isChecked.get(index)) {
+                                isChecked.set(index, false);
+                            } else {
+                                isChecked.set(index, true);
+                            }
+                            aSlideMenu.handleCheckBox(eSlideMenu.getOpenId(), isChecked);
                         }
+                    }
 
-                        if (eSlideMenu != null && eSlideMenu.isSub()) {
-                            int index = msid.indexOf(eSlideMenu.getMsid());
-                            if (index != -1) {
-                                if (isChecked.get(index)) {
-                                    isChecked.set(index, false);
+                    if (eSlideMenu != null && eSlideMenu.getOpenId().equals("default")) {
+                        switch (i - 1) {
+                            case 0:
+                                getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VFavorable()).addToBackStack("Map").commit();
+                                break;
+                            case 4:
+                                if (SharePreferencesUtil.getInstance().getSharedPreferences().getString("userMaid", "null").equals("null")) {
+                                    new SignInUtil(getContext(), mIMainActivity);
                                 } else {
-                                    isChecked.set(index, true);
+                                    mEditSearch.setText("");
+                                    MyApplication.getAppData().setPersonalData(SharePreferencesUtil.getInstance().getSharedPreferences().getString("userMaid", "null"),
+                                            SharePreferencesUtil.getInstance().getSharedPreferences().getString("userWsid", "null"),
+                                            "me", "");
+                                    getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VPersonalSteaming()).addToBackStack("Map").commit();
                                 }
-                                aSlideMenu.handleCheckBox(eSlideMenu.getOpenId(), isChecked);
-                            }
-                        }
-
-                        if (eSlideMenu != null && eSlideMenu.getOpenId().equals("default")) {
-                            switch (i - 1) {
-                                case 0:
-                                    Log.e("click", "優惠活動");
-                                    getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VFavorable()).addToBackStack("Map").commit();
-                                    break;
-                                case 4:
-                                    if (SharePreferencesUtil.getInstance().getSharedPreferences().getString("userMaid", "null").equals("null")) {
-                                        new SignInUtil(getContext(), mIMainActivity);
-                                    } else {
-                                        mEditSearch.setText("");
-                                        MyApplication.getAppData().setPersonalData(SharePreferencesUtil.getInstance().getSharedPreferences().getString("userMaid", "null"),
-                                                SharePreferencesUtil.getInstance().getSharedPreferences().getString("userWsid", "null"),
-                                                "me", "");
-                                        getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VPersonalSteaming()).addToBackStack("Map").commit();
+                                break;
+                            case 5:
+                                if (SharePreferencesUtil.getInstance().getSharedPreferences().getString("userMaid", "null").equals("null")) {
+                                    new SignInUtil(getContext(), mIMainActivity);
+                                } else {
+                                    mEditSearch.setText("");
+                                    if (mIMainActivity.getNowGps() != null) {
+                                        getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VMyCollection()).addToBackStack("Map").commit();
                                     }
-                                    break;
-                                case 5:
-                                    if (SharePreferencesUtil.getInstance().getSharedPreferences().getString("userMaid", "null").equals("null")) {
-                                        new SignInUtil(getContext(), mIMainActivity);
-                                    } else {
-                                        mEditSearch.setText("");
-                                        if (mIMainActivity.getNowGps() != null) {
-                                            getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VMyCollection()).addToBackStack("Map").commit();
-                                        }
-                                    }
-                                    break;
-                                case 6:
-                                    if (MyApplication.getAppData().isDefaultHotKye()) {
-                                        MyApplication.getAppData().setDefaultHotKye(false);
-                                        handleHotKey();
-                                    }
-                                    mDrawerLayout.closeDrawer(mListView);
-                                    break;
-                                case 7:
-                                    if (SharePreferencesUtil.getInstance().getSharedPreferences().getString("userMaid", "null").equals("null")) {
-                                        new SignInUtil(getContext(), mIMainActivity);
-                                    } else {
-                                        mIMainActivity.setCreateData(null);
-                                        MyApplication.getAppData().getSelectedPhotos().clear();
-                                        mIMainActivity.setSelectedAttractionType(null);
-                                        PlacePicker.IntentBuilder intentBuilder = new PlacePicker.IntentBuilder();
-                                        try {
-                                            mDrawerLayout.closeDrawer(mListView);
-                                            startActivityForResult(intentBuilder.build(getActivity()), 4000);
-                                        } catch (GooglePlayServicesRepairableException | GooglePlayServicesNotAvailableException e) {
-                                            e.printStackTrace();
-                                        }
-                                    }
-                                    break;
-                                case 8:
-                                case 15:
-                                    Toast.makeText(getContext(), R.string.float_message_coming_soon, Toast.LENGTH_SHORT).show();
-                                    break;
-                                case 1:
-                                    String maid = SharePreferencesUtil.getInstance().getSharedPreferences().getString("userMaid", "null");
-                                    if (maid.equals("gplZ37q2qo") || maid.equals("gpErQr46Rr") || maid.equals("sbUhP7d4qS")) {
-                                        getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VWallet()).addToBackStack("map").commit();
-                                    } else {
-                                        Toast.makeText(getContext(), R.string.float_message_coming_soon, Toast.LENGTH_SHORT).show();
-                                    }
-                                    break;
-                                case 2:
-                                    mDrawerLayout.closeDrawer(mListView);
-                                    handleCarbonFootprint();
-                                    break;
-                                case 3:
-                                    mDrawerLayout.closeDrawer(mListView);
-                                    handleEco();
-                                    break;
-                                default:
-                                    if (i == aSlideMenu.getCount()) {
-                                        mIMainActivity.saveSlideMenuUnits(textViewInDrawer, imageViewInDrawer, aSlideMenu, true);
-                                        if (SharePreferencesUtil.getInstance().getSharedPreferences().getString("userMaid", "null").equals("null")) {
-                                            new SignInUtil(getContext(), mIMainActivity);
-                                        } else {
-                                            MyApplication.getAppData().getSelectedMsid().clear();
-                                            mIMainActivity.handleSignOut();
-                                        }
+                                }
+                                break;
+                            case 6:
+                                if (MyApplication.getAppData().isDefaultHotKye()) {
+                                    MyApplication.getAppData().setDefaultHotKye(false);
+                                    handleHotKey();
+                                }
+                                mDrawerLayout.closeDrawer(mListView);
+                                break;
+                            case 7:
+                                if (SharePreferencesUtil.getInstance().getSharedPreferences().getString("userMaid", "null").equals("null")) {
+                                    new SignInUtil(getContext(), mIMainActivity);
+                                } else {
+                                    mIMainActivity.setCreateData(null);
+                                    MyApplication.getAppData().getSelectedPhotos().clear();
+                                    mIMainActivity.setSelectedAttractionType(null);
+                                    PlacePicker.IntentBuilder intentBuilder = new PlacePicker.IntentBuilder();
+                                    try {
                                         mDrawerLayout.closeDrawer(mListView);
+                                        startActivityForResult(intentBuilder.build(getActivity()), 4000);
+                                    } catch (GooglePlayServicesRepairableException | GooglePlayServicesNotAvailableException e) {
+                                        e.printStackTrace();
                                     }
-                                    break;
-                            }
+                                }
+                                break;
+                            case 8:
+                            case 15:
+                                Toast.makeText(getContext(), R.string.float_message_coming_soon, Toast.LENGTH_SHORT).show();
+                                break;
+                            case 1:
+                                getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VWallet()).addToBackStack("map").commit();
+                                break;
+                            case 2:
+                                mDrawerLayout.closeDrawer(mListView);
+                                handleCarbonFootprint();
+                                break;
+                            case 3:
+                                mDrawerLayout.closeDrawer(mListView);
+                                handleEco();
+                                break;
+                            default:
+                                if (i == aSlideMenu.getCount()) {
+                                    mIMainActivity.saveSlideMenuUnits(textViewInDrawer, imageViewInDrawer, aSlideMenu, true);
+                                    if (SharePreferencesUtil.getInstance().getSharedPreferences().getString("userMaid", "null").equals("null")) {
+                                        new SignInUtil(getContext(), mIMainActivity);
+                                    } else {
+                                        MyApplication.getAppData().getSelectedMsid().clear();
+                                        mIMainActivity.handleSignOut();
+                                    }
+                                    mDrawerLayout.closeDrawer(mListView);
+                                }
+                                break;
                         }
                     }
                 });
             }
-            Log.e("init drawer end ->", String.valueOf(MyApplication.getAppData().isDefaultHotKye()));
         }
         if (googleMap != null) {
             mIMainActivity.setGoogleMap(googleMap);
@@ -2268,21 +2182,14 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
             mName = gSearchAttractionDetail.getData().get(0).getPlace();
             mTextViewsInFive.get(0).setText(gSearchAttractionDetail.getData().get(0).getPlace());
             mTextViewsInFive.get(1).setText(gSearchAttractionDetail.getData().get(0).getAddr());
-            StringBuilder stringBuilder = new StringBuilder("geo:");
-            stringBuilder.append("0,0");
-            stringBuilder.append("?q=");
-            stringBuilder.append(gSearchAttractionDetail.getData().get(0).getLat());
-            stringBuilder.append(",");
-            stringBuilder.append(gSearchAttractionDetail.getData().get(0).getLng());
-            stringBuilder.append("(");
-            stringBuilder.append(gSearchAttractionDetail.getData().get(0).getPlace());
-            stringBuilder.append(")");
-            location = stringBuilder.toString();
-            /*if (MyApplication.getAppData().isFromWallet()) {
-                Log.e("is wallet", "on show");
-                MyApplication.getAppData().setFromWallet(false);
-                pMap.getMenuData();
-            }*/
+            location = "geo:" + "0,0" +
+                    "?q=" +
+                    gSearchAttractionDetail.getData().get(0).getLat() +
+                    "," +
+                    gSearchAttractionDetail.getData().get(0).getLng() +
+                    "(" +
+                    gSearchAttractionDetail.getData().get(0).getPlace() +
+                    ")";
         } else {
             relativeLayouts.get(1).setVisibility(View.GONE);
             mViews.get(4).setVisibility(View.VISIBLE);
@@ -2369,7 +2276,6 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
 
     @Override
     public void finishInsertCarbon() {
-        Log.e("Vmap", "finish insert carbon");
         carbon = false;
         mTextViews.get(13).setVisibility(View.GONE);
         mTextViews.get(14).setVisibility(View.GONE);
@@ -2405,7 +2311,7 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
 
     private IMainActivity mIMainActivity;
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NotNull Context context) {
         super.onAttach(context);
         mIMainActivity = (IMainActivity)context;
     }
@@ -2467,21 +2373,19 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
                         getContext(),
                         view,
                         getString(R.string.global_ok),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                int size = aSaveList.getIsChecked().size();
-                                boolean canNext = false;
-                                for (int j = 0; j < size; j++) {
-                                    if (aSaveList.getIsChecked().get(j)) {
-                                        canNext = true;
-                                    }
+                        (dialogInterface, i) -> {
+                            int size = aSaveList.getIsChecked().size();
+                            boolean canNext = false;
+                            for (int j = 0; j < size; j++) {
+                                if (aSaveList.getIsChecked().get(j)) {
+                                    canNext = true;
+                                    break;
                                 }
-                                if (canNext) {
-                                    pMap.sendSaveData(gSaveList, aSaveList.getIsChecked(), mIMainActivity.getAttractionId());
-                                    AlertDialogUtil.getInstance().initDialogBuilder(getContext(), view1);
-                                    AlertDialogUtil.getInstance().showAlertDialog();
-                                }
+                            }
+                            if (canNext) {
+                                pMap.sendSaveData(gSaveList, aSaveList.getIsChecked(), mIMainActivity.getAttractionId());
+                                AlertDialogUtil.getInstance().initDialogBuilder(getContext(), view1);
+                                AlertDialogUtil.getInstance().showAlertDialog();
                             }
                         }, true);
         AlertDialogUtil.getInstance().showAlertDialog();
@@ -2504,10 +2408,7 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
                                                 getContext(),
                                                 R.string.stroke_title_create_message,
                                                 R.string.global_ok,
-                                                new DialogInterface.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(DialogInterface dialogInterface, int i) { }
-                                                });
+                                                (dialogInterface, i) -> { });
                                 AlertDialogUtil.getInstance().showAlertDialog();
                             }
                         }
@@ -2538,10 +2439,7 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
                                                 getContext(),
                                                 R.string.stroke_title_create_message,
                                                 R.string.global_ok,
-                                                new DialogInterface.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(DialogInterface dialogInterface, int i) { }
-                                                });
+                                                (dialogInterface, i) -> { });
                                 AlertDialogUtil.getInstance().showAlertDialog();
                             }
                         }
@@ -2634,7 +2532,6 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
 
     @Override
     public void handleMobileMusic(List<EMobileMusic> mobileMusicList) {
-        //Log.e("zoom", String.valueOf(googleMap.getCameraPosition().zoom));
         if (googleMap != null) {
             if (MyApplication.getAppData().isManualMode()) {
                 pMap.handleFivePoints(mobileMusicList, MyApplication.getAppData().getManualGPS(), googleMap.getCameraPosition().zoom);
@@ -2691,10 +2588,7 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
             resources = R.string.map_search_caution;
         }
         AlertDialogUtil.getInstance()
-                .initDialogBuilder(getContext(), resources, R.string.global_ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {}
-                });
+                .initDialogBuilder(getContext(), resources, R.string.global_ok, (dialogInterface, i) -> {});
         AlertDialogUtil.getInstance().showAlertDialog();
     }
 
@@ -2705,10 +2599,7 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
                         getContext(),
                         R.string.stroke_title_create_message,
                         R.string.global_ok,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) { }
-                        });
+                        (dialogInterface, i) -> { });
         AlertDialogUtil.getInstance().showAlertDialog();
     }
 
@@ -2716,15 +2607,7 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
     public void finishCashFlowInsert() {
         isCent = true;
         mIMainActivity.handleStartTimer(false);
-        getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VWallet()).addToBackStack("Map").commit();
-        //mTextViews.get(13).setVisibility(View.VISIBLE);
-        //mTextViews.get(14).setVisibility(View.VISIBLE);
-        //mImageViews.get(14).setVisibility(View.VISIBLE);
-        //mTextViews.get(12).setVisibility(View.VISIBLE);
-        //mViews.get(2).setVisibility(View.VISIBLE);
-        //mViews.get(3).setVisibility(View.VISIBLE);
-        //mIMainActivity.handleBikeTextViews(mTextViews.get(13), mTextViews.get(14));
-        //mTextViews.get(12).setText(R.string.map_ebike_lock);
+        getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VWallet()).addToBackStack("Map").commit();
     }
 
     @Override
@@ -2752,22 +2635,14 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
         recyclerView.setAdapter(new AEco(list, this));
         AlertDialogUtil
                 .getInstance()
-                .initDialogBuilder(getContext(), view, "節能清單", "確認", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        AlertDialogUtil.getInstance().clearAlertDialog();
+                .initDialogBuilder(getContext(), view, "節能清單", "確認", (dialogInterface, i) -> AlertDialogUtil.getInstance().clearAlertDialog(), "匯出", (dialogInterface, i) -> {
+                    if (PermissionChecker.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PermissionChecker.PERMISSION_GRANTED) {
+                        pMap.handleToFile();
+                    } else {
+                        String[] permission = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+                        requestPermissions(permission, 1000);
                     }
-                }, "匯出", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        if (PermissionChecker.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PermissionChecker.PERMISSION_GRANTED) {
-                            pMap.handleToFile();
-                        } else {
-                            String[] permission = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
-                            requestPermissions(permission, 1000);
-                        }
-                        AlertDialogUtil.getInstance().clearAlertDialog();
-                    }
+                    AlertDialogUtil.getInstance().clearAlertDialog();
                 });
         AlertDialogUtil.getInstance().showAlertDialog();
     }
@@ -2776,7 +2651,7 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
     public void handleItemClick(ECarBonList eCarBonList) {
         AlertDialogUtil.getInstance().clearAlertDialog();
         MyApplication.getAppData().seteCarBonList(eCarBonList);
-        FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = getParentFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.layoutContainer, new VCarbon(), "Carbon").addToBackStack("Vmap").commit();
     }
 
@@ -2784,7 +2659,7 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
     public void handleItemClick(EEcoList eEcoList) {
         AlertDialogUtil.getInstance().clearAlertDialog();
         MyApplication.getAppData().seteEcoList(eEcoList);
-        FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = getParentFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.layoutContainer, new VEco(), "Eco").addToBackStack("Vmap").commit();
     }
 
@@ -2817,10 +2692,7 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
     }
 
     private void showDialog() {
-        AlertDialogUtil.getInstance().initDialogBuilder(getContext(), R.string.map_gps, R.string.global_ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {}
-        });
+        AlertDialogUtil.getInstance().initDialogBuilder(getContext(), R.string.map_gps, R.string.global_ok, (dialogInterface, i) -> {});
     }
 
     private void handleHotKey() {
@@ -2869,23 +2741,16 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
                         view,
                         "行程標題",
                         getString(R.string.global_ok),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                pMap.handleNewStroke(editText.getText().toString());
-                            }
-                        },
+                        (dialogInterface, i) -> pMap.handleNewStroke(editText.getText().toString()),
                         getString(R.string.global_cancel),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {}
-                        });
+                        (dialogInterface, i) -> {});
         AlertDialogUtil.getInstance().showAlertDialog();
     }
 
     private boolean carbon = false;
     private void handleCarbonFootprint() {
         carbon = true;
+        eco = false;
         mViews.get(4).setVisibility(View.GONE);
         mTextViews.get(17).setVisibility(View.GONE);
         mTextViews.get(18).setVisibility(View.GONE);
@@ -2910,6 +2775,7 @@ public class VMap extends Fragment implements IVMap, OnMapReadyCallback,
     private boolean eco = false;
     private void handleEco() {
         eco = true;
+        carbon = false;
         mViews.get(4).setVisibility(View.GONE);
         mTextViews.get(17).setVisibility(View.GONE);
         mTextViews.get(18).setVisibility(View.GONE);

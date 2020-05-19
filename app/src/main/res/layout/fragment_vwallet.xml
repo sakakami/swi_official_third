@@ -1,135 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.VWallet">
+    tools:context=".view.VWallet"
+    android:background="@color/colorWhiteForFFFFFF">
 
     <TextView
-        android:id="@+id/textTitleWallet"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:text="電子錢包"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textBackWallet"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:text="@string/global_back"
-        android:gravity="center"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imageHeadWallet"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textTitleWallet" />
-
-    <ImageView
-        android:id="@+id/imageQRCodeWallet"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textTitleWallet" />
-
-    <TextView
-        android:id="@+id/textBalanceWallet"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="32dp"
-        android:paddingStart="32dp"
-        android:paddingEnd="32dp"
-        android:gravity="center"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        android:background="@color/colorYellowFFFF00"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageHeadWallet" />
-
-    <TextView
-        android:id="@+id/textMultipleOneWallet"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="64dp"
-        android:background="@drawable/bg_blue_full"
-        android:gravity="center"
-        android:textColor="@color/colorWhiteForFFFFFF"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textBalanceWallet" />
-
-    <TextView
-        android:id="@+id/textPayDetailWallet"
+        android:id="@+id/textTitleInWallet"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="64dp"
-        android:background="@drawable/bg_blue_full"
-        android:textColor="@color/colorWhiteForFFFFFF"
-        android:gravity="center"
-        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textMultipleOneWallet" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="電子錢包"
+        android:gravity="center_vertical"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"/>
+
+    <View
+        android:id="@+id/viewLineInWallet"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorGrayForB5B5B5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textTitleInWallet" />
+
+    <View
+        android:id="@+id/viewSquareInWallet"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_marginTop="64dp"
+        android:background="@color/colorBlueFor4DACC7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewLineInWallet" />
 
     <TextView
-        android:id="@+id/textScannerWallet"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="98dp"
-        android:layout_marginEnd="64dp"
-        android:background="@drawable/bg_blue_full"
-        android:textSize="16sp"
+        android:id="@+id/textTitleCashInWallet"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="碳幣金額"
+        android:textSize="20sp"
+        android:textStyle="bold"
         android:textColor="@color/colorWhiteForFFFFFF"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textMultipleOneWallet" />
-
-    <EditText
-        android:id="@+id/editCashWallet"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:inputType="number"
-        app:layout_constraintEnd_toStartOf="@+id/textShowWallet"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textMultipleOneWallet" />
+        android:gravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/viewSquareInWallet"
+        app:layout_constraintEnd_toEndOf="@+id/viewSquareInWallet"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toStartOf="@+id/viewSquareInWallet"
+        app:layout_constraintTop_toTopOf="@+id/viewSquareInWallet"
+        app:layout_constraintVertical_bias="0.25" />
 
     <TextView
-        android:id="@+id/textShowWallet"
-        android:layout_width="80dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="64dp"
+        android:id="@+id/textCashInWallet"
+        android:layout_width="wrap_content"
+        android:layout_height="30sp"
+        android:layout_marginTop="8dp"
+        android:text="0"
+        android:textSize="20sp"
+        android:textStyle="bold"
         android:textColor="@color/colorWhiteForFFFFFF"
-        android:textSize="16sp"
-        android:gravity="center"
-        android:background="@drawable/bg_blue_full"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textMultipleOneWallet" />
+        android:gravity="center_vertical"
+        app:layout_constraintEnd_toEndOf="@+id/textTitleCashInWallet"
+        app:layout_constraintStart_toStartOf="@+id/textTitleCashInWallet"
+        app:layout_constraintTop_toBottomOf="@+id/textTitleCashInWallet" />
 
-</android.support.constraint.ConstraintLayout>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageHeadInWallet"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/person_unlogin"
+        app:layout_constraintBottom_toBottomOf="@+id/viewSquareInWallet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.85"
+        app:layout_constraintStart_toStartOf="@+id/viewSquareInWallet"
+        app:layout_constraintTop_toTopOf="@+id/viewSquareInWallet"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerInWallet"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewSquareInWallet" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,5 @@
 package com.switube.www.landmark2018test.presenter;
 
-import android.util.Log;
-
 import com.google.gson.Gson;
 import com.switube.www.landmark2018test.MyApplication;
 import com.switube.www.landmark2018test.R;
@@ -359,7 +357,7 @@ public class PStroke implements IPStroke {
             }
             index = msid.indexOf(gStrokeList.getData().get(i).getMsid());
             String d = String.format(Locale.TAIWAN, "%.1f", dis[0] / 1000);
-            String selectedStyle = "";
+            String selectedStyle;
             switch (MyApplication.getLanguageIndex()) {
                 case 1:
                     selectedStyle = attractionStyleEntities.get(index).getMstitle_tw();
@@ -375,23 +373,14 @@ public class PStroke implements IPStroke {
                     break;
             }
             style.add(selectedStyle + " · " + d + " km");
-            switch (isOpen.get(i)) {
-                case "0":
-                    if (open.get(timeIndex).equals("24")) {
-                        time.add(MyApplication.getInstance().getString(R.string.global_center) + " " + open.get(timeIndex) + MyApplication.getInstance().getString(R.string.open_24) + " " + week);
-                    } else {
-                        time.add(MyApplication.getInstance().getString(R.string.global_center) + " " + open.get(timeIndex) + " " + week);
-                    }
-                    break;
-                case "1":
-                    time.add("");
-                    break;
-                case "2":
-                    time.add("");
-                    break;
-                default:
-                    time.add("");
-                    break;
+            if ("0".equals(isOpen.get(i))) {
+                if (open.get(timeIndex).equals("24")) {
+                    time.add(MyApplication.getInstance().getString(R.string.global_center) + " " + open.get(timeIndex) + MyApplication.getInstance().getString(R.string.open_24) + " " + week);
+                } else {
+                    time.add(MyApplication.getInstance().getString(R.string.global_center) + " " + open.get(timeIndex) + " " + week);
+                }
+            } else {
+                time.add("");
             }
         }
         ivStroke.init(gStrokeList, style, time, isOpen);

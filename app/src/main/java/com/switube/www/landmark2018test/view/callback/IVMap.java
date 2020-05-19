@@ -10,7 +10,6 @@ import com.switube.www.landmark2018test.entity.EMobileMusic;
 import com.switube.www.landmark2018test.gson.GAttractionListData;
 import com.switube.www.landmark2018test.gson.GSaveList;
 import com.switube.www.landmark2018test.gson.GSearchAttractionDetail;
-import com.switube.www.landmark2018test.gson.GSendLove;
 
 import java.util.ArrayList;
 import java.util.List;

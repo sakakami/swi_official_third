@@ -231,7 +231,8 @@ public class VSlide extends RelativeLayout implements ScaleGestureDetector.OnSca
         } else {
             canScale = false;
             textSlide.setBackgroundResource(R.drawable.btn_play_all_v1);
-            textSlide.setText("All");
+            String temp = "All";
+            textSlide.setText(temp);
             textSlide.setPadding(10, 50, 0, 0);
             MyApplication.getAppData().setSlideMode(0);
             handleZoom("zoomOut");

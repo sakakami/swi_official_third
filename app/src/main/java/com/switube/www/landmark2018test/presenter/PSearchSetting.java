@@ -43,7 +43,7 @@ public class PSearchSetting implements IPSearchSetting {
             stringBuilder.append("%");
             mSearchSetting.getDataThree(stringBuilder.toString());
         } else {
-            iVSearchSetting.init(mClassList, mTermList, new ArrayList<AttractionItemEntity>());
+            iVSearchSetting.init(mClassList, mTermList, new ArrayList<>());
         }
     }
 

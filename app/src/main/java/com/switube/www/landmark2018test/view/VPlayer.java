@@ -2,17 +2,10 @@ package com.switube.www.landmark2018test.view;
 
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -22,6 +15,13 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.switube.www.landmark2018test.MyApplication;
@@ -40,6 +40,8 @@ import com.switube.www.landmark2018test.view.callback.IFragmentBackHandler;
 import com.switube.www.landmark2018test.view.callback.IMainActivity;
 import com.switube.www.landmark2018test.view.callback.IVPlayer;
 import com.switube.www.landmark2018test.youtube.YouTubePlayerController;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -144,10 +146,10 @@ public class VPlayer extends Fragment implements IVPlayer, IAPlaylist, IAPushDat
                         MyApplication.getAppData().setCanRefreshList(false);
                         MyApplication.getAppData().setPlayerPage(false);
                         MyApplication.getAppData().getiFloatPlayerService().showSmallMode();
-                        if (getFragmentManager().getBackStackEntryCount() > 0) {
-                            getFragmentManager().popBackStackImmediate("Map", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                        if (getParentFragmentManager().getBackStackEntryCount() > 0) {
+                            getParentFragmentManager().popBackStackImmediate("Map", FragmentManager.POP_BACK_STACK_INCLUSIVE);
                         } else {
-                            getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VMap()).commit();
+                            getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VMap()).commit();
                         }
                     }
 
@@ -169,7 +171,7 @@ public class VPlayer extends Fragment implements IVPlayer, IAPlaylist, IAPushDat
                             MyApplication.getAppData().getiFloatPlayerService().showSmallMode();
                             new SignInUtil(getContext(), iMainActivity);
                         } else {
-                            String type = "";
+                            String type;
                             if (MyApplication.getAppData().isLove()) {
                                 type = "del";
                             } else {
@@ -306,7 +308,7 @@ public class VPlayer extends Fragment implements IVPlayer, IAPlaylist, IAPushDat
                         MyApplication.getAppData().setPlayerPage(false);
                         MyApplication.getAppData().setPlaylist(true);
                         MyApplication.getAppData().getiFloatPlayerService().showSmallMode();
-                        getFragmentManager().beginTransaction()
+                        getParentFragmentManager().beginTransaction()
                                 .replace(R.id.layoutContainer, new VPlaylist(), "Playlist")
                                 .addToBackStack("Player")
                                 .commit();
@@ -593,8 +595,6 @@ public class VPlayer extends Fragment implements IVPlayer, IAPlaylist, IAPushDat
         aPushData.refreshAdapter(name, img, count, love);
         vSlide.setVisibility(View.INVISIBLE);
         recyclerView.setVisibility(VISIBLE);
-        //MyApplication.getAppData().setLove(MyApplication.getAppData().getPush().getLove().equals("0"));
-        //handleLove(false);
     }
 
     @Override
@@ -702,19 +702,9 @@ public class VPlayer extends Fragment implements IVPlayer, IAPlaylist, IAPushDat
         AlertDialogUtil.getInstance().initDialogBuilder(getContext(),
                 view,
                 getString(R.string.global_next),
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        showReportTwo(aReportList.getIndex());
-                    }
-                },
+                (dialogInterface, i) -> showReportTwo(aReportList.getIndex()),
                 getString(R.string.global_cancel),
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        MyApplication.getAppData().getiFloatPlayerService().showBigMode();
-                    }
-                });
+                (dialogInterface, i) -> MyApplication.getAppData().getiFloatPlayerService().showBigMode());
         AlertDialogUtil.getInstance().showAlertDialog();
     }
 
@@ -725,20 +715,12 @@ public class VPlayer extends Fragment implements IVPlayer, IAPlaylist, IAPushDat
         AlertDialogUtil.getInstance().initDialogBuilder(getContext(),
                 view,
                 getString(R.string.global_confirm),
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        MyApplication.getAppData().getiFloatPlayerService().showBigMode();
-                        pPlayer.sendReportData(aReportList.getIndex(), index);
-                    }
+                (dialogInterface, i) -> {
+                    MyApplication.getAppData().getiFloatPlayerService().showBigMode();
+                    pPlayer.sendReportData(aReportList.getIndex(), index);
                 },
                 getString(R.string.global_cancel),
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        MyApplication.getAppData().getiFloatPlayerService().showBigMode();
-                    }
-                });
+                (dialogInterface, i) -> MyApplication.getAppData().getiFloatPlayerService().showBigMode());
         AlertDialogUtil.getInstance().showAlertDialog();
     }
 
@@ -759,7 +741,7 @@ public class VPlayer extends Fragment implements IVPlayer, IAPlaylist, IAPushDat
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NotNull Context context) {
         super.onAttach(context);
         iMainActivity = (IMainActivity) context;
     }
@@ -769,7 +751,7 @@ public class VPlayer extends Fragment implements IVPlayer, IAPlaylist, IAPushDat
         if (MyApplication.getAppData().isFromSearchAttraction()) {
             MyApplication.getAppData().setFromSearchAttraction(false);
             MyApplication.getAppData().setPlayerPage(false);
-            getFragmentManager().popBackStack();
+            getParentFragmentManager().popBackStack();
         } else {
             if (MyApplication.getAppData().getiFloatPlayerService().getIsFullScreenMode()) {
                 iMainActivity.switchScreenOrientation();
@@ -777,9 +759,7 @@ public class VPlayer extends Fragment implements IVPlayer, IAPlaylist, IAPushDat
                 MyApplication.getAppData().setCanRefreshList(false);
                 MyApplication.getAppData().setPlayerPage(false);
                 MyApplication.getAppData().getiFloatPlayerService().showSmallMode();
-                if (getFragmentManager() != null) {
-                    getFragmentManager().popBackStackImmediate("Map", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                }
+                getParentFragmentManager().popBackStackImmediate("Map", FragmentManager.POP_BACK_STACK_INCLUSIVE);
             }
         }
         return true;

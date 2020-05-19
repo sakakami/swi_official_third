@@ -36,7 +36,7 @@ public class PSearchAttraction implements IPSearchAttraction {
 
     public void getAllAttractionData(String msid, LatLng latLng) {
         List<String> mscid = new ArrayList<>();
-        SearchPlaceDataGson searchPlaceDataGson = new SearchPlaceDataGson(msid, mscid, new ArrayList<String>());
+        SearchPlaceDataGson searchPlaceDataGson = new SearchPlaceDataGson(msid, mscid, new ArrayList<>());
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
         String value = gson.toJson(searchPlaceDataGson);
         Map<String, String> map = NetworkUtil.getInstance().getMap();
@@ -386,7 +386,7 @@ public class PSearchAttraction implements IPSearchAttraction {
                 }
                 index = msid.indexOf(gSearchAttractionDetail.getData().get(i).getMsid());
                 String d = String.format(Locale.TAIWAN, "%.1f", dis[0] / 1000);
-                String selectedStyle = "";
+                String selectedStyle;
                 switch (MyApplication.getLanguageIndex()) {
                     case 1:
                         selectedStyle = attractionStyleEntities.get(index).getMstitle_tw();
@@ -402,23 +402,14 @@ public class PSearchAttraction implements IPSearchAttraction {
                         break;
                 }
                 style.add(selectedStyle + " · " + d + " km");
-                switch (isOpen.get(i)) {
-                    case "0":
-                        if (open.get(timeIndex).equals("24")) {
-                            time.add(MyApplication.getInstance().getString(R.string.global_center) + " " + open.get(timeIndex) + MyApplication.getInstance().getString(R.string.open_24) + " " + week);
-                        } else {
-                            time.add(MyApplication.getInstance().getString(R.string.global_center) + " " + open.get(timeIndex) + " " + week);
-                        }
-                        break;
-                    case "1":
-                        time.add("");
-                        break;
-                    case "2":
-                        time.add("");
-                        break;
-                    default:
-                        time.add("");
-                        break;
+                if ("0".equals(isOpen.get(i))) {
+                    if (open.get(timeIndex).equals("24")) {
+                        time.add(MyApplication.getInstance().getString(R.string.global_center) + " " + open.get(timeIndex) + MyApplication.getInstance().getString(R.string.open_24) + " " + week);
+                    } else {
+                        time.add(MyApplication.getInstance().getString(R.string.global_center) + " " + open.get(timeIndex) + " " + week);
+                    }
+                } else {
+                    time.add("");
                 }
             }
         }

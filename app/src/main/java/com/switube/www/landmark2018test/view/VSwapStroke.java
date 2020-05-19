@@ -3,14 +3,15 @@ package com.switube.www.landmark2018test.view;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.switube.www.landmark2018test.MyApplication;
@@ -26,7 +27,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
@@ -66,12 +66,12 @@ public class VSwapStroke extends Fragment implements IVSwapStroke {
         recyclerView.setAdapter(aSwapStroke);
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.Callback() {
             @Override
-            public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+            public int getMovementFlags(@NotNull RecyclerView recyclerView, @NotNull RecyclerView.ViewHolder viewHolder) {
                 return makeMovementFlags(ItemTouchHelper.UP | ItemTouchHelper.DOWN, 0);
             }
 
             @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+            public boolean onMove(@NotNull RecyclerView recyclerView, @NotNull RecyclerView.ViewHolder viewHolder, @NotNull RecyclerView.ViewHolder target) {
                 int fromPosition = viewHolder.getAdapterPosition();
                 int toPosition = target.getAdapterPosition();
                 fromPositionList.add(fromPosition);
@@ -82,7 +82,7 @@ public class VSwapStroke extends Fragment implements IVSwapStroke {
             }
 
             @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {}
+            public void onSwiped(@NotNull RecyclerView.ViewHolder viewHolder, int direction) {}
 
             @Override
             public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
@@ -98,7 +98,7 @@ public class VSwapStroke extends Fragment implements IVSwapStroke {
             }
 
             @Override
-            public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+            public void clearView(@NotNull RecyclerView recyclerView, @NotNull RecyclerView.ViewHolder viewHolder) {
                 super.clearView(recyclerView, viewHolder);
                 viewHolder.itemView.setBackgroundColor(0);
             }
@@ -114,7 +114,7 @@ public class VSwapStroke extends Fragment implements IVSwapStroke {
                     @Override
                     public void onNext(Object o) {
                         MyApplication.getAppData().setCollectionPage(false);
-                        getFragmentManager().popBackStack();
+                        getParentFragmentManager().popBackStack();
                     }
 
                     @Override
@@ -134,7 +134,7 @@ public class VSwapStroke extends Fragment implements IVSwapStroke {
                         if (aSwapStroke.getItemCount() > 0) {
                             pSwapStroke.sendMovedData(aSwapStroke.getgStrokeList(), MyApplication.getAppData().getUrid(), fromPositionList, toPositionList);
                         } else {
-                            getFragmentManager().popBackStackImmediate();
+                            getParentFragmentManager().popBackStackImmediate();
                         }
                     }
 
@@ -155,9 +155,7 @@ public class VSwapStroke extends Fragment implements IVSwapStroke {
     @Override
     public void handleFinishSave() {
         MyApplication.getAppData().setCollectionPage(false);
-        if (getFragmentManager() != null) {
-            getFragmentManager().popBackStackImmediate();
-        }
+        getParentFragmentManager().popBackStackImmediate();
     }
 
     @Override

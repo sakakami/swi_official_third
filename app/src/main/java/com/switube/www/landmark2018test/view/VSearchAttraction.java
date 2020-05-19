@@ -2,14 +2,8 @@ package com.switube.www.landmark2018test.view;
 
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +11,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.switube.www.landmark2018test.MyApplication;
@@ -35,6 +34,8 @@ import com.switube.www.landmark2018test.util.SignInUtil;
 import com.switube.www.landmark2018test.view.callback.IFragmentBackHandler;
 import com.switube.www.landmark2018test.view.callback.IMainActivity;
 import com.switube.www.landmark2018test.view.callback.IVSearchAttraction;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -125,7 +126,7 @@ public class VSearchAttraction extends Fragment implements IVSearchAttraction, I
                         if (canClick) {
                             VAttractionType.isClickHotKey = true;
                             listMode = -1;
-                            getFragmentManager().popBackStack();
+                            getParentFragmentManager().popBackStack();
                         }
                     }
 
@@ -144,7 +145,7 @@ public class VSearchAttraction extends Fragment implements IVSearchAttraction, I
                     @Override
                     public void onNext(Object o) {
                         if (canClick) {
-                            getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VSearchSetting()).addToBackStack("SearchAttraction").commit();
+                            getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VSearchSetting()).addToBackStack("SearchAttraction").commit();
                         }
                     }
 
@@ -164,7 +165,7 @@ public class VSearchAttraction extends Fragment implements IVSearchAttraction, I
                     public void onNext(Object o) {
                         if (canClick) {
                             VAttractionType.isClickHotKey = true;
-                            getFragmentManager().popBackStack();
+                            getParentFragmentManager().popBackStack();
                         }
                     }
 
@@ -185,7 +186,7 @@ public class VSearchAttraction extends Fragment implements IVSearchAttraction, I
                         if (canClick) {
                             VMap.isAttractionList = true;
                             mIMainActivity.saveSelectedAttractionId(mSpid);
-                            getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VMap()).addToBackStack("SearchAttraction").commit();
+                            getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VMap()).addToBackStack("SearchAttraction").commit();
                         }
                     }
 
@@ -279,7 +280,7 @@ public class VSearchAttraction extends Fragment implements IVSearchAttraction, I
         mIMainActivity.saveAttractionId(spid);
         MyApplication.getAppData().setFromSearchAttraction(true);
         VMap.isAttractionList = true;
-        getFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VInfo()).addToBackStack("SearchAttraction").commit();
+        getParentFragmentManager().beginTransaction().replace(R.id.layoutContainer, new VInfo()).addToBackStack("SearchAttraction").commit();
     }
 
     @Override
@@ -291,9 +292,6 @@ public class VSearchAttraction extends Fragment implements IVSearchAttraction, I
                 MyApplication.getAppData().setRaid("WebSite");
             }
             pSearchAttraction.sendAddToCollect(spid, saved, index);
-            /*if (MyApplication.getAppData().getRaid().length() > 0) {
-                pSearchAttraction.sendAddToCollect(spid, saved, index);
-            }*/
         }
     }
 
@@ -306,9 +304,6 @@ public class VSearchAttraction extends Fragment implements IVSearchAttraction, I
                 MyApplication.getAppData().setRaid("WebSite");
             }
             pSearchAttraction.getSaveList(spid);
-            /*if (MyApplication.getAppData().getRaid().length() > 0) {
-                pSearchAttraction.getSaveList(spid);
-            }*/
         }
     }
 
@@ -332,21 +327,18 @@ public class VSearchAttraction extends Fragment implements IVSearchAttraction, I
                         getContext(),
                         view,
                         getString(R.string.global_ok),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                int size = aSaveList.getIsChecked().size();
-                                boolean canNext = false;
-                                for (int j = 0; j < size; j++) {
-                                    if (aSaveList.getIsChecked().get(j)) {
-                                        canNext = true;
-                                    }
+                        (dialogInterface, i) -> {
+                            int size = aSaveList.getIsChecked().size();
+                            boolean canNext = false;
+                            for (int j = 0; j < size; j++) {
+                                if (aSaveList.getIsChecked().get(j)) {
+                                    canNext = true;
                                 }
-                                if (canNext) {
-                                    pSearchAttraction.sendSaveData(gSaveList, aSaveList.getIsChecked(), spid);
-                                    AlertDialogUtil.getInstance().initDialogBuilder(getContext(), view1);
-                                    AlertDialogUtil.getInstance().showAlertDialog();
-                                }
+                            }
+                            if (canNext) {
+                                pSearchAttraction.sendSaveData(gSaveList, aSaveList.getIsChecked(), spid);
+                                AlertDialogUtil.getInstance().initDialogBuilder(getContext(), view1);
+                                AlertDialogUtil.getInstance().showAlertDialog();
                             }
                         }, true);
         AlertDialogUtil.getInstance().showAlertDialog();
@@ -369,10 +361,7 @@ public class VSearchAttraction extends Fragment implements IVSearchAttraction, I
                                                 getContext(),
                                                 R.string.stroke_title_create_message,
                                                 R.string.global_ok,
-                                                new DialogInterface.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(DialogInterface dialogInterface, int i) { }
-                                                });
+                                                (dialogInterface, i) -> { });
                                 AlertDialogUtil.getInstance().showAlertDialog();
                             }
                         }
@@ -403,10 +392,7 @@ public class VSearchAttraction extends Fragment implements IVSearchAttraction, I
                                                 getContext(),
                                                 R.string.stroke_title_create_message,
                                                 R.string.global_ok,
-                                                new DialogInterface.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(DialogInterface dialogInterface, int i) { }
-                                                });
+                                                (dialogInterface, i) -> { });
                                 AlertDialogUtil.getInstance().showAlertDialog();
                             }
                         }
@@ -447,7 +433,7 @@ public class VSearchAttraction extends Fragment implements IVSearchAttraction, I
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NotNull Context context) {
         super.onAttach(context);
         mIMainActivity = (IMainActivity) context;
     }
@@ -462,7 +448,7 @@ public class VSearchAttraction extends Fragment implements IVSearchAttraction, I
     public boolean onBackPressed() {
         VAttractionType.isClickHotKey = true;
         listMode = -1;
-        getFragmentManager().popBackStack();
+        getParentFragmentManager().popBackStack();
         return true;
     }
 
@@ -512,17 +498,9 @@ public class VSearchAttraction extends Fragment implements IVSearchAttraction, I
                         view,
                         "行程標題",
                         getString(R.string.global_ok),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                pSearchAttraction.handleNewStroke(editText.getText().toString());
-                            }
-                        },
+                        (dialogInterface, i) -> pSearchAttraction.handleNewStroke(editText.getText().toString()),
                         getString(R.string.global_cancel),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {}
-                        });
+                        (dialogInterface, i) -> {});
         AlertDialogUtil.getInstance().showAlertDialog();
     }
 }

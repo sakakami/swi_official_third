@@ -47,12 +47,12 @@
         android:layout_below="@+id/viewBarTopInTag"
         android:gravity="center"
         android:textSize="20sp"/>
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerSelectedInTag"
         android:layout_width="match_parent"
         android:layout_height="114dp"
         android:layout_below="@+id/textNameInTag" />
-    <android.support.v7.widget.SearchView
+    <androidx.appcompat.widget.SearchView
         android:id="@+id/searchInTag"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
         android:layout_marginTop="12dp"
         android:layout_below="@+id/searchInTag"
         android:background="@color/colorWhiteForD0D0D0"/>
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerTypeInTag"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -75,7 +75,7 @@
         android:layout_height="2dp"
         android:layout_below="@+id/recyclerTypeInTag"
         android:background="@color/colorWhiteForD0D0D0" />
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerTagInTag"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
